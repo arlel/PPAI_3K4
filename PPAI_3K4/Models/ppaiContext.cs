@@ -17,6 +17,7 @@ namespace PPAI_3K4.Models
         public ppaiContext(DbContextOptions<ppaiContext> options)
             : base(options)
         {
+            Database.EnsureCreated();
         }
 
         public virtual DbSet<CambioEstadoReservaVisita> CambioEstadoReservaVisita { get; set; }
