@@ -19,6 +19,7 @@ namespace PPAI_3K4.Models
         public string Nombre { get; set; }
         public string TelefCelular { get; set; }
         public string TelefFijo { get; set; }
+        public string Mail { get; set; }
         public string Domicilio { get; set; }
 
         public virtual ICollection<ReservaVisita> ReservaVisita { get; set; }
