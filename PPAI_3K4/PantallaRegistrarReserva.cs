@@ -20,7 +20,7 @@ namespace PPAI_3K4
         public void opcionRegistrarReservaDeVisitasGuiadas()
         {
             this.habilitarPantalla();
-
+            mostrarPanel(panelSelEscuela);
             oGestor = new GestorRegistrarReserva();
             oGestor.nuevaReservaGuiada(this);
         }
@@ -104,6 +104,14 @@ namespace PPAI_3K4
             TipoVisita tipoVisitaSel = (TipoVisita)dgTipoVisita.SelectedRows[0].DataBoundItem;
             ocultarPanel(pnlTipoVisita);
             oGestor.tomarSeleccionTipoVisita(tipoVisitaSel);
+        }
+
+        public void mostrarExposiciones(IList<Exposicion> exposicion)
+        {
+            mostrarPanel(pnlExposiciones);
+
+            dgExposiciones.AutoGenerateColumns = false;
+            dgExposiciones.DataSource = exposicion;
         }
     }
 }

@@ -28,5 +28,17 @@ namespace PPAI_3K4.Models
         public virtual Sede IdSedeNavigation { get; set; }
         public virtual TipoExposicion IdTipoExposicionNavigation { get; set; }
         public virtual ICollection<PublicoDestino> PublicoDestino { get; set; }
+
+        public bool sosTemporal()
+        {
+            return this.IdTipoExposicionNavigation.esTemporal();
+        }
+
+        public bool sosVigente()
+        {
+            DateTime fechaActual = DateTime.Now;
+            return FechaInicio <= fechaActual && FechaFin >= fechaActual;
+        }
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using PPAI_3K4.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using PPAI_3K4.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,7 @@ namespace PPAI_3K4
         Sede sedeSeleccionada { get; set; }
         TipoVisita tipoVisitaSeleccionada { get; set; }
         int cantidadParticipantes { get; set; }
+        DateTime horaFechaActual { get; set; }
 
         public void nuevaReservaGuiada(PantallaRegistrarReserva pantallaRegistrarReserva)
         {
@@ -84,7 +86,35 @@ namespace PPAI_3K4
 
         public void tomarSeleccionTipoVisita(TipoVisita tipoVisita)
         {
+            setTipoVisitaSeleccionada(tipoVisita);
+            this.horaFechaActual = obtenerFechaHoraActual();
+            IList<Exposicion> exposiciones = buscarExposicionesTemporalesVigentes();
+
+            pantallaRegistrarReserva.mostrarExposiciones(exposiciones);
+        }
+
+        public IList<Exposicion> buscarExposicionesTemporalesVigentes()
+        {
+            obtenerExposicionesPorSede(sedeSeleccionada);
+            return sedeSeleccionada.mostrarExposicionesTemporalesVigentes();
+        }
+
+        public void obtenerExposicionesPorSede(Sede sede)
+        {
+            using(ppaiContext context = new ppaiContext())
+            {
+                sede.Exposicion = context.Exposicion.Include(e => e.IdTipoExposicionNavigation).Include("PublicoDestino").Where(e => e.IdSede == sede.Id).ToList();
+            }
+        }
+
+        public void setTipoVisitaSeleccionada(TipoVisita tipoVisita)
+        {
             this.tipoVisitaSeleccionada = tipoVisita;
+        }
+
+        public DateTime obtenerFechaHoraActual()
+        {
+            return DateTime.Now;
         }
     }
  

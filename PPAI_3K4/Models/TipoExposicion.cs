@@ -19,5 +19,10 @@ namespace PPAI_3K4.Models
         public string Nombre { get; set; }
 
         public virtual ICollection<Exposicion> Exposicion { get; set; }
+
+        public bool esTemporal()
+        {
+            return Nombre == "Temporal";
+        }
     }
 }

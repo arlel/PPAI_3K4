@@ -22,5 +22,22 @@ namespace PPAI_3K4.Models
 
         public virtual ICollection<Exposicion> Exposicion { get; set; }
         public virtual ICollection<ReservaVisita> ReservaVisita { get; set; }
+
+        public IList<Exposicion> mostrarExposicionesTemporalesVigentes()
+        {
+            IList<Exposicion> expocionesTemporalesVigentes = new List<Exposicion>() { };
+            foreach (Exposicion exposicion in this.Exposicion)
+            {
+                if(exposicion.sosTemporal() && exposicion.sosVigente())
+                {
+                    expocionesTemporalesVigentes.Add(exposicion);
+                }
+            }
+
+            return expocionesTemporalesVigentes;
+        } 
+
+
+
     }
 }

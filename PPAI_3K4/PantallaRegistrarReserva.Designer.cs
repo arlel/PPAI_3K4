@@ -55,6 +55,18 @@ namespace PPAI_3K4
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button3 = new System.Windows.Forms.Button();
+            this.pnlExposiciones = new System.Windows.Forms.Panel();
+            this.dgExposiciones = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FechaInicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FechaFin = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.HoraApertura = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.HoraCierre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label5 = new System.Windows.Forms.Label();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnSelExposicion = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgEscuelas)).BeginInit();
             this.panelSelEscuela.SuspendLayout();
             this.pnlCantidadVisitantes.SuspendLayout();
@@ -62,6 +74,8 @@ namespace PPAI_3K4
             ((System.ComponentModel.ISupportInitialize)(this.dgTipoVisita)).BeginInit();
             this.pnlSelSedes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgSedes)).BeginInit();
+            this.pnlExposiciones.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgExposiciones)).BeginInit();
             this.SuspendLayout();
             // 
             // dgEscuelas
@@ -140,9 +154,9 @@ namespace PPAI_3K4
             this.panelSelEscuela.Controls.Add(this.dgEscuelas);
             this.panelSelEscuela.Controls.Add(this.button1);
             this.panelSelEscuela.Controls.Add(this.label1);
-            this.panelSelEscuela.Location = new System.Drawing.Point(6, 12);
+            this.panelSelEscuela.Location = new System.Drawing.Point(3, 12);
             this.panelSelEscuela.Name = "panelSelEscuela";
-            this.panelSelEscuela.Size = new System.Drawing.Size(683, 406);
+            this.panelSelEscuela.Size = new System.Drawing.Size(39, 29);
             this.panelSelEscuela.TabIndex = 3;
             // 
             // pnlCantidadVisitantes
@@ -150,9 +164,9 @@ namespace PPAI_3K4
             this.pnlCantidadVisitantes.Controls.Add(this.btnSiguienteCantVisitantes);
             this.pnlCantidadVisitantes.Controls.Add(this.label2);
             this.pnlCantidadVisitantes.Controls.Add(this.txtCantVisitantes);
-            this.pnlCantidadVisitantes.Location = new System.Drawing.Point(34, 424);
+            this.pnlCantidadVisitantes.Location = new System.Drawing.Point(72, 12);
             this.pnlCantidadVisitantes.Name = "pnlCantidadVisitantes";
-            this.pnlCantidadVisitantes.Size = new System.Drawing.Size(78, 66);
+            this.pnlCantidadVisitantes.Size = new System.Drawing.Size(19, 15);
             this.pnlCantidadVisitantes.TabIndex = 3;
             this.pnlCantidadVisitantes.Visible = false;
             // 
@@ -189,17 +203,17 @@ namespace PPAI_3K4
             this.pnlTipoVisita.Controls.Add(this.btnSigTipoVisita);
             this.pnlTipoVisita.Controls.Add(this.dgTipoVisita);
             this.pnlTipoVisita.Controls.Add(this.label3);
-            this.pnlTipoVisita.Location = new System.Drawing.Point(254, 424);
+            this.pnlTipoVisita.Location = new System.Drawing.Point(158, 12);
             this.pnlTipoVisita.Name = "pnlTipoVisita";
-            this.pnlTipoVisita.Size = new System.Drawing.Size(46, 42);
+            this.pnlTipoVisita.Size = new System.Drawing.Size(43, 29);
             this.pnlTipoVisita.TabIndex = 3;
             this.pnlTipoVisita.Visible = false;
             // 
             // btnSigTipoVisita
             // 
-            this.btnSigTipoVisita.Location = new System.Drawing.Point(174, 242);
+            this.btnSigTipoVisita.Location = new System.Drawing.Point(285, 251);
             this.btnSigTipoVisita.Name = "btnSigTipoVisita";
-            this.btnSigTipoVisita.Size = new System.Drawing.Size(91, 28);
+            this.btnSigTipoVisita.Size = new System.Drawing.Size(100, 32);
             this.btnSigTipoVisita.TabIndex = 4;
             this.btnSigTipoVisita.Text = "Siguiente";
             this.btnSigTipoVisita.UseVisualStyleBackColor = true;
@@ -210,7 +224,7 @@ namespace PPAI_3K4
             this.dgTipoVisita.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgTipoVisita.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn1});
-            this.dgTipoVisita.Location = new System.Drawing.Point(47, 73);
+            this.dgTipoVisita.Location = new System.Drawing.Point(224, 108);
             this.dgTipoVisita.MultiSelect = false;
             this.dgTipoVisita.Name = "dgTipoVisita";
             this.dgTipoVisita.RowTemplate.Height = 25;
@@ -228,7 +242,7 @@ namespace PPAI_3K4
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(27, 25);
+            this.label3.Location = new System.Drawing.Point(204, 60);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(272, 28);
             this.label3.TabIndex = 3;
@@ -239,9 +253,9 @@ namespace PPAI_3K4
             this.pnlSelSedes.Controls.Add(this.label4);
             this.pnlSelSedes.Controls.Add(this.dgSedes);
             this.pnlSelSedes.Controls.Add(this.button3);
-            this.pnlSelSedes.Location = new System.Drawing.Point(139, 424);
+            this.pnlSelSedes.Location = new System.Drawing.Point(115, 12);
             this.pnlSelSedes.Name = "pnlSelSedes";
-            this.pnlSelSedes.Size = new System.Drawing.Size(83, 63);
+            this.pnlSelSedes.Size = new System.Drawing.Size(15, 15);
             this.pnlSelSedes.TabIndex = 4;
             this.pnlSelSedes.Visible = false;
             // 
@@ -308,11 +322,113 @@ namespace PPAI_3K4
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.seleccionarSede);
             // 
+            // pnlExposiciones
+            // 
+            this.pnlExposiciones.Controls.Add(this.btnSelExposicion);
+            this.pnlExposiciones.Controls.Add(this.dgExposiciones);
+            this.pnlExposiciones.Controls.Add(this.label5);
+            this.pnlExposiciones.Location = new System.Drawing.Point(250, 12);
+            this.pnlExposiciones.Name = "pnlExposiciones";
+            this.pnlExposiciones.Size = new System.Drawing.Size(39, 25);
+            this.pnlExposiciones.TabIndex = 5;
+            // 
+            // dgExposiciones
+            // 
+            this.dgExposiciones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgExposiciones.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn3,
+            this.dataGridViewTextBoxColumn4,
+            this.FechaInicio,
+            this.FechaFin,
+            this.HoraApertura,
+            this.HoraCierre});
+            this.dgExposiciones.Location = new System.Drawing.Point(19, 59);
+            this.dgExposiciones.Name = "dgExposiciones";
+            this.dgExposiciones.RowTemplate.Height = 25;
+            this.dgExposiciones.Size = new System.Drawing.Size(644, 103);
+            this.dgExposiciones.TabIndex = 4;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "Id";
+            this.dataGridViewTextBoxColumn3.HeaderText = "Id";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.DataPropertyName = "Nombre";
+            this.dataGridViewTextBoxColumn4.HeaderText = "Nombre";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            // 
+            // FechaInicio
+            // 
+            this.FechaInicio.DataPropertyName = "FechaInicio";
+            this.FechaInicio.HeaderText = "Fecha Inicio";
+            this.FechaInicio.Name = "FechaInicio";
+            this.FechaInicio.ReadOnly = true;
+            // 
+            // FechaFin
+            // 
+            this.FechaFin.DataPropertyName = "FechaFin";
+            this.FechaFin.HeaderText = "Fecha Fin";
+            this.FechaFin.Name = "FechaFin";
+            this.FechaFin.ReadOnly = true;
+            // 
+            // HoraApertura
+            // 
+            this.HoraApertura.DataPropertyName = "HoraApertura";
+            this.HoraApertura.HeaderText = "Hora Apertura";
+            this.HoraApertura.Name = "HoraApertura";
+            this.HoraApertura.ReadOnly = true;
+            // 
+            // HoraCierre
+            // 
+            this.HoraCierre.DataPropertyName = "HoraCierre";
+            this.HoraCierre.HeaderText = "Hora Cierre";
+            this.HoraCierre.Name = "HoraCierre";
+            this.HoraCierre.ReadOnly = true;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label5.Location = new System.Drawing.Point(19, 16);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(260, 28);
+            this.label5.TabIndex = 3;
+            this.label5.Text = "Seleccione una exposicion";
+            // 
+            // Id
+            // 
+            this.Id.DataPropertyName = "Id";
+            this.Id.HeaderText = "Id";
+            this.Id.Name = "Id";
+            this.Id.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "Nombre";
+            this.dataGridViewTextBoxColumn2.HeaderText = "Nombre";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            // 
+            // btnSelExposicion
+            // 
+            this.btnSelExposicion.Location = new System.Drawing.Point(512, 328);
+            this.btnSelExposicion.Name = "btnSelExposicion";
+            this.btnSelExposicion.Size = new System.Drawing.Size(119, 36);
+            this.btnSelExposicion.TabIndex = 5;
+            this.btnSelExposicion.Text = "Siguiente";
+            this.btnSelExposicion.UseVisualStyleBackColor = true;
+            // 
             // PantallaRegistrarReserva
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(696, 430);
+            this.Controls.Add(this.pnlExposiciones);
             this.Controls.Add(this.pnlCantidadVisitantes);
             this.Controls.Add(this.pnlTipoVisita);
             this.Controls.Add(this.pnlSelSedes);
@@ -330,6 +446,9 @@ namespace PPAI_3K4
             this.pnlSelSedes.ResumeLayout(false);
             this.pnlSelSedes.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgSedes)).EndInit();
+            this.pnlExposiciones.ResumeLayout(false);
+            this.pnlExposiciones.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgExposiciones)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -362,5 +481,17 @@ namespace PPAI_3K4
         private System.Windows.Forms.DataGridView dgTipoVisita;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Panel pnlExposiciones;
+        private System.Windows.Forms.DataGridView dgExposiciones;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FechaInicio;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FechaFin;
+        private System.Windows.Forms.DataGridViewTextBoxColumn HoraApertura;
+        private System.Windows.Forms.DataGridViewTextBoxColumn HoraCierre;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.Button btnSelExposicion;
     }
 }
