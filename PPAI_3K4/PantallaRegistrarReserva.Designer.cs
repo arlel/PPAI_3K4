@@ -38,6 +38,10 @@ namespace PPAI_3K4
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.panelSelEscuela = new System.Windows.Forms.Panel();
+            this.pnlCantidadVisitantes = new System.Windows.Forms.Panel();
+            this.btnSiguienteCantVisitantes = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtCantVisitantes = new System.Windows.Forms.TextBox();
             this.pnlTipoVisita = new System.Windows.Forms.Panel();
             this.btnSigTipoVisita = new System.Windows.Forms.Button();
             this.dgTipoVisita = new System.Windows.Forms.DataGridView();
@@ -51,17 +55,13 @@ namespace PPAI_3K4
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button3 = new System.Windows.Forms.Button();
-            this.pnlCantidadVisitantes = new System.Windows.Forms.Panel();
-            this.btnSiguienteCantVisitantes = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtCantVisitantes = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgEscuelas)).BeginInit();
             this.panelSelEscuela.SuspendLayout();
+            this.pnlCantidadVisitantes.SuspendLayout();
             this.pnlTipoVisita.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgTipoVisita)).BeginInit();
             this.pnlSelSedes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgSedes)).BeginInit();
-            this.pnlCantidadVisitantes.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgEscuelas
@@ -145,6 +145,45 @@ namespace PPAI_3K4
             this.panelSelEscuela.Size = new System.Drawing.Size(683, 406);
             this.panelSelEscuela.TabIndex = 3;
             // 
+            // pnlCantidadVisitantes
+            // 
+            this.pnlCantidadVisitantes.Controls.Add(this.btnSiguienteCantVisitantes);
+            this.pnlCantidadVisitantes.Controls.Add(this.label2);
+            this.pnlCantidadVisitantes.Controls.Add(this.txtCantVisitantes);
+            this.pnlCantidadVisitantes.Location = new System.Drawing.Point(34, 424);
+            this.pnlCantidadVisitantes.Name = "pnlCantidadVisitantes";
+            this.pnlCantidadVisitantes.Size = new System.Drawing.Size(78, 66);
+            this.pnlCantidadVisitantes.TabIndex = 3;
+            this.pnlCantidadVisitantes.Visible = false;
+            // 
+            // btnSiguienteCantVisitantes
+            // 
+            this.btnSiguienteCantVisitantes.Location = new System.Drawing.Point(271, 184);
+            this.btnSiguienteCantVisitantes.Name = "btnSiguienteCantVisitantes";
+            this.btnSiguienteCantVisitantes.Size = new System.Drawing.Size(126, 35);
+            this.btnSiguienteCantVisitantes.TabIndex = 4;
+            this.btnSiguienteCantVisitantes.Text = "Siguiente";
+            this.btnSiguienteCantVisitantes.UseVisualStyleBackColor = true;
+            this.btnSiguienteCantVisitantes.Click += new System.EventHandler(this.tomarCantidadParticipantes);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label2.Location = new System.Drawing.Point(220, 98);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(230, 21);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Ingrese la cantidad de visitantes";
+            // 
+            // txtCantVisitantes
+            // 
+            this.txtCantVisitantes.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.txtCantVisitantes.Location = new System.Drawing.Point(220, 132);
+            this.txtCantVisitantes.Name = "txtCantVisitantes";
+            this.txtCantVisitantes.Size = new System.Drawing.Size(240, 35);
+            this.txtCantVisitantes.TabIndex = 0;
+            // 
             // pnlTipoVisita
             // 
             this.pnlTipoVisita.Controls.Add(this.btnSigTipoVisita);
@@ -200,7 +239,7 @@ namespace PPAI_3K4
             this.pnlSelSedes.Controls.Add(this.label4);
             this.pnlSelSedes.Controls.Add(this.dgSedes);
             this.pnlSelSedes.Controls.Add(this.button3);
-            this.pnlSelSedes.Location = new System.Drawing.Point(134, 424);
+            this.pnlSelSedes.Location = new System.Drawing.Point(139, 424);
             this.pnlSelSedes.Name = "pnlSelSedes";
             this.pnlSelSedes.Size = new System.Drawing.Size(83, 63);
             this.pnlSelSedes.TabIndex = 4;
@@ -269,67 +308,28 @@ namespace PPAI_3K4
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.seleccionarSede);
             // 
-            // pnlCantidadVisitantes
-            // 
-            this.pnlCantidadVisitantes.Controls.Add(this.btnSiguienteCantVisitantes);
-            this.pnlCantidadVisitantes.Controls.Add(this.label2);
-            this.pnlCantidadVisitantes.Controls.Add(this.txtCantVisitantes);
-            this.pnlCantidadVisitantes.Location = new System.Drawing.Point(34, 424);
-            this.pnlCantidadVisitantes.Name = "pnlCantidadVisitantes";
-            this.pnlCantidadVisitantes.Size = new System.Drawing.Size(78, 72);
-            this.pnlCantidadVisitantes.TabIndex = 3;
-            this.pnlCantidadVisitantes.Visible = false;
-            // 
-            // btnSiguienteCantVisitantes
-            // 
-            this.btnSiguienteCantVisitantes.Location = new System.Drawing.Point(271, 184);
-            this.btnSiguienteCantVisitantes.Name = "btnSiguienteCantVisitantes";
-            this.btnSiguienteCantVisitantes.Size = new System.Drawing.Size(126, 35);
-            this.btnSiguienteCantVisitantes.TabIndex = 4;
-            this.btnSiguienteCantVisitantes.Text = "Siguiente";
-            this.btnSiguienteCantVisitantes.UseVisualStyleBackColor = true;
-            this.btnSiguienteCantVisitantes.Click += new System.EventHandler(this.tomarCantidadParticipantes);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(220, 98);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(230, 21);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Ingrese la cantidad de visitantes";
-            // 
-            // txtCantVisitantes
-            // 
-            this.txtCantVisitantes.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtCantVisitantes.Location = new System.Drawing.Point(220, 132);
-            this.txtCantVisitantes.Name = "txtCantVisitantes";
-            this.txtCantVisitantes.Size = new System.Drawing.Size(240, 35);
-            this.txtCantVisitantes.TabIndex = 0;
-            // 
             // PantallaRegistrarReserva
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(696, 430);
+            this.Controls.Add(this.pnlCantidadVisitantes);
             this.Controls.Add(this.pnlTipoVisita);
             this.Controls.Add(this.pnlSelSedes);
-            this.Controls.Add(this.pnlCantidadVisitantes);
             this.Controls.Add(this.panelSelEscuela);
             this.Name = "PantallaRegistrarReserva";
             this.Text = "PantallaRegistrarReserva";
             ((System.ComponentModel.ISupportInitialize)(this.dgEscuelas)).EndInit();
             this.panelSelEscuela.ResumeLayout(false);
             this.panelSelEscuela.PerformLayout();
+            this.pnlCantidadVisitantes.ResumeLayout(false);
+            this.pnlCantidadVisitantes.PerformLayout();
             this.pnlTipoVisita.ResumeLayout(false);
             this.pnlTipoVisita.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgTipoVisita)).EndInit();
             this.pnlSelSedes.ResumeLayout(false);
             this.pnlSelSedes.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgSedes)).EndInit();
-            this.pnlCantidadVisitantes.ResumeLayout(false);
-            this.pnlCantidadVisitantes.PerformLayout();
             this.ResumeLayout(false);
 
         }
