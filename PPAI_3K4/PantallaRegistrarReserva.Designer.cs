@@ -38,6 +38,11 @@ namespace PPAI_3K4
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.panelSelEscuela = new System.Windows.Forms.Panel();
+            this.pnlTipoVisita = new System.Windows.Forms.Panel();
+            this.btnSigTipoVisita = new System.Windows.Forms.Button();
+            this.dgTipoVisita = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label3 = new System.Windows.Forms.Label();
             this.pnlSelSedes = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
             this.dgSedes = new System.Windows.Forms.DataGridView();
@@ -52,6 +57,8 @@ namespace PPAI_3K4
             this.txtCantVisitantes = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgEscuelas)).BeginInit();
             this.panelSelEscuela.SuspendLayout();
+            this.pnlTipoVisita.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgTipoVisita)).BeginInit();
             this.pnlSelSedes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgSedes)).BeginInit();
             this.pnlCantidadVisitantes.SuspendLayout();
@@ -138,14 +145,64 @@ namespace PPAI_3K4
             this.panelSelEscuela.Size = new System.Drawing.Size(683, 406);
             this.panelSelEscuela.TabIndex = 3;
             // 
+            // pnlTipoVisita
+            // 
+            this.pnlTipoVisita.Controls.Add(this.btnSigTipoVisita);
+            this.pnlTipoVisita.Controls.Add(this.dgTipoVisita);
+            this.pnlTipoVisita.Controls.Add(this.label3);
+            this.pnlTipoVisita.Location = new System.Drawing.Point(254, 424);
+            this.pnlTipoVisita.Name = "pnlTipoVisita";
+            this.pnlTipoVisita.Size = new System.Drawing.Size(46, 42);
+            this.pnlTipoVisita.TabIndex = 3;
+            this.pnlTipoVisita.Visible = false;
+            // 
+            // btnSigTipoVisita
+            // 
+            this.btnSigTipoVisita.Location = new System.Drawing.Point(174, 242);
+            this.btnSigTipoVisita.Name = "btnSigTipoVisita";
+            this.btnSigTipoVisita.Size = new System.Drawing.Size(91, 28);
+            this.btnSigTipoVisita.TabIndex = 4;
+            this.btnSigTipoVisita.Text = "Siguiente";
+            this.btnSigTipoVisita.UseVisualStyleBackColor = true;
+            this.btnSigTipoVisita.Click += new System.EventHandler(this.btnSigTipoVisita_Click);
+            // 
+            // dgTipoVisita
+            // 
+            this.dgTipoVisita.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgTipoVisita.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1});
+            this.dgTipoVisita.Location = new System.Drawing.Point(47, 73);
+            this.dgTipoVisita.MultiSelect = false;
+            this.dgTipoVisita.Name = "dgTipoVisita";
+            this.dgTipoVisita.RowTemplate.Height = 25;
+            this.dgTipoVisita.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgTipoVisita.Size = new System.Drawing.Size(218, 108);
+            this.dgTipoVisita.TabIndex = 4;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "Nombre";
+            this.dataGridViewTextBoxColumn1.HeaderText = "Nombre";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label3.Location = new System.Drawing.Point(27, 25);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(272, 28);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "Seleccione un tipo de visita";
+            // 
             // pnlSelSedes
             // 
             this.pnlSelSedes.Controls.Add(this.label4);
             this.pnlSelSedes.Controls.Add(this.dgSedes);
             this.pnlSelSedes.Controls.Add(this.button3);
-            this.pnlSelSedes.Location = new System.Drawing.Point(141, 424);
+            this.pnlSelSedes.Location = new System.Drawing.Point(134, 424);
             this.pnlSelSedes.Name = "pnlSelSedes";
-            this.pnlSelSedes.Size = new System.Drawing.Size(60, 56);
+            this.pnlSelSedes.Size = new System.Drawing.Size(83, 63);
             this.pnlSelSedes.TabIndex = 4;
             this.pnlSelSedes.Visible = false;
             // 
@@ -210,6 +267,7 @@ namespace PPAI_3K4
             this.button3.TabIndex = 1;
             this.button3.Text = "Siguiente";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.seleccionarSede);
             // 
             // pnlCantidadVisitantes
             // 
@@ -255,6 +313,7 @@ namespace PPAI_3K4
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(696, 430);
+            this.Controls.Add(this.pnlTipoVisita);
             this.Controls.Add(this.pnlSelSedes);
             this.Controls.Add(this.pnlCantidadVisitantes);
             this.Controls.Add(this.panelSelEscuela);
@@ -263,6 +322,9 @@ namespace PPAI_3K4
             ((System.ComponentModel.ISupportInitialize)(this.dgEscuelas)).EndInit();
             this.panelSelEscuela.ResumeLayout(false);
             this.panelSelEscuela.PerformLayout();
+            this.pnlTipoVisita.ResumeLayout(false);
+            this.pnlTipoVisita.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgTipoVisita)).EndInit();
             this.pnlSelSedes.ResumeLayout(false);
             this.pnlSelSedes.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgSedes)).EndInit();
@@ -295,5 +357,10 @@ namespace PPAI_3K4
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Panel pnlTipoVisita;
+        private System.Windows.Forms.Button btnSigTipoVisita;
+        private System.Windows.Forms.DataGridView dgTipoVisita;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.Label label3;
     }
 }

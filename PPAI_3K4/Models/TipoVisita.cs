@@ -11,5 +11,10 @@ namespace PPAI_3K4.Models
     {
         public long Id { get; set; }
         public string Nombre { get; set; }
+
+        public string mostrarNombre()
+        {
+            return Nombre;
+        }
     }
 }

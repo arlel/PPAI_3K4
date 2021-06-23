@@ -10,9 +10,11 @@ namespace PPAI_3K4
     {
         PantallaRegistrarReserva pantallaRegistrarReserva { get; set; }
         Escuela escuelaSeleccionada { get; set; }
+        Sede sedeSeleccionada { get; set; }
+        TipoVisita tipoVisitaSeleccionada { get; set; }
         int cantidadParticipantes { get; set; }
 
-        public void nuevaReservaGuiada(PantallaRegistrarReserva pantallaRegistrarReserva) 
+        public void nuevaReservaGuiada(PantallaRegistrarReserva pantallaRegistrarReserva)
         {
             this.pantallaRegistrarReserva = pantallaRegistrarReserva;
 
@@ -23,7 +25,7 @@ namespace PPAI_3K4
 
         public IList<Escuela> obtenerEscuelas()
         {
-            using(ppaiContext context = new ppaiContext())
+            using (ppaiContext context = new ppaiContext())
             {
                 return context.Escuela.ToList();
             }
@@ -61,5 +63,29 @@ namespace PPAI_3K4
         {
             this.cantidadParticipantes = cantidadParticipantes;
         }
+
+        public void tomarSeleccionSede(Sede sedeSel)
+        {
+            this.sedeSeleccionada = sedeSel;
+
+            IList<TipoVisita> tipoVisitas = obtenerTipoVisita();
+
+            this.pantallaRegistrarReserva.mostrarTipoVisita(tipoVisitas);
+
+        }
+
+        public IList<TipoVisita> obtenerTipoVisita()
+        {
+            using(ppaiContext context = new ppaiContext())
+            {
+                return context.TipoVisita.ToList();
+            }
+        }
+
+        public void tomarSeleccionTipoVisita(TipoVisita tipoVisita)
+        {
+            this.tipoVisitaSeleccionada = tipoVisita;
+        }
     }
+ 
 }
