@@ -56,6 +56,7 @@ namespace PPAI_3K4
             this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button3 = new System.Windows.Forms.Button();
             this.pnlExposiciones = new System.Windows.Forms.Panel();
+            this.btnSelExposicion = new System.Windows.Forms.Button();
             this.dgExposiciones = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -66,7 +67,11 @@ namespace PPAI_3K4
             this.label5 = new System.Windows.Forms.Label();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnSelExposicion = new System.Windows.Forms.Button();
+            this.pnlFechaHoraReserva = new System.Windows.Forms.Panel();
+            this.dtpHoraReserva = new System.Windows.Forms.DateTimePicker();
+            this.btnSigSelFechaYHora = new System.Windows.Forms.Button();
+            this.dtpFechaReserva = new System.Windows.Forms.DateTimePicker();
+            this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgEscuelas)).BeginInit();
             this.panelSelEscuela.SuspendLayout();
             this.pnlCantidadVisitantes.SuspendLayout();
@@ -76,6 +81,7 @@ namespace PPAI_3K4
             ((System.ComponentModel.ISupportInitialize)(this.dgSedes)).BeginInit();
             this.pnlExposiciones.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgExposiciones)).BeginInit();
+            this.pnlFechaHoraReserva.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgEscuelas
@@ -327,10 +333,21 @@ namespace PPAI_3K4
             this.pnlExposiciones.Controls.Add(this.btnSelExposicion);
             this.pnlExposiciones.Controls.Add(this.dgExposiciones);
             this.pnlExposiciones.Controls.Add(this.label5);
-            this.pnlExposiciones.Location = new System.Drawing.Point(250, 12);
+            this.pnlExposiciones.Location = new System.Drawing.Point(226, 15);
             this.pnlExposiciones.Name = "pnlExposiciones";
-            this.pnlExposiciones.Size = new System.Drawing.Size(39, 25);
+            this.pnlExposiciones.Size = new System.Drawing.Size(34, 26);
             this.pnlExposiciones.TabIndex = 5;
+            this.pnlExposiciones.Visible = false;
+            // 
+            // btnSelExposicion
+            // 
+            this.btnSelExposicion.Location = new System.Drawing.Point(512, 328);
+            this.btnSelExposicion.Name = "btnSelExposicion";
+            this.btnSelExposicion.Size = new System.Drawing.Size(119, 36);
+            this.btnSelExposicion.TabIndex = 5;
+            this.btnSelExposicion.Text = "Siguiente";
+            this.btnSelExposicion.UseVisualStyleBackColor = true;
+            this.btnSelExposicion.Click += new System.EventHandler(this.seleccionarExposiciones);
             // 
             // dgExposiciones
             // 
@@ -414,20 +431,63 @@ namespace PPAI_3K4
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             this.dataGridViewTextBoxColumn2.ReadOnly = true;
             // 
-            // btnSelExposicion
+            // pnlFechaHoraReserva
             // 
-            this.btnSelExposicion.Location = new System.Drawing.Point(512, 328);
-            this.btnSelExposicion.Name = "btnSelExposicion";
-            this.btnSelExposicion.Size = new System.Drawing.Size(119, 36);
-            this.btnSelExposicion.TabIndex = 5;
-            this.btnSelExposicion.Text = "Siguiente";
-            this.btnSelExposicion.UseVisualStyleBackColor = true;
+            this.pnlFechaHoraReserva.Controls.Add(this.dtpHoraReserva);
+            this.pnlFechaHoraReserva.Controls.Add(this.btnSigSelFechaYHora);
+            this.pnlFechaHoraReserva.Controls.Add(this.dtpFechaReserva);
+            this.pnlFechaHoraReserva.Controls.Add(this.label6);
+            this.pnlFechaHoraReserva.Location = new System.Drawing.Point(3, 1);
+            this.pnlFechaHoraReserva.Name = "pnlFechaHoraReserva";
+            this.pnlFechaHoraReserva.Size = new System.Drawing.Size(681, 417);
+            this.pnlFechaHoraReserva.TabIndex = 6;
+            this.pnlFechaHoraReserva.Visible = false;
+            // 
+            // dtpHoraReserva
+            // 
+            this.dtpHoraReserva.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.dtpHoraReserva.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.dtpHoraReserva.Location = new System.Drawing.Point(349, 149);
+            this.dtpHoraReserva.Name = "dtpHoraReserva";
+            this.dtpHoraReserva.Size = new System.Drawing.Size(153, 35);
+            this.dtpHoraReserva.TabIndex = 9;
+            // 
+            // btnSigSelFechaYHora
+            // 
+            this.btnSigSelFechaYHora.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnSigSelFechaYHora.Location = new System.Drawing.Point(261, 206);
+            this.btnSigSelFechaYHora.Name = "btnSigSelFechaYHora";
+            this.btnSigSelFechaYHora.Size = new System.Drawing.Size(157, 39);
+            this.btnSigSelFechaYHora.TabIndex = 8;
+            this.btnSigSelFechaYHora.Text = "Siguiente";
+            this.btnSigSelFechaYHora.UseVisualStyleBackColor = true;
+            this.btnSigSelFechaYHora.Click += new System.EventHandler(this.seleccionarFechaYHora);
+            // 
+            // dtpFechaReserva
+            // 
+            this.dtpFechaReserva.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.dtpFechaReserva.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpFechaReserva.Location = new System.Drawing.Point(180, 149);
+            this.dtpFechaReserva.Name = "dtpFechaReserva";
+            this.dtpFechaReserva.Size = new System.Drawing.Size(153, 35);
+            this.dtpFechaReserva.TabIndex = 7;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label6.Location = new System.Drawing.Point(180, 109);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(333, 28);
+            this.label6.TabIndex = 6;
+            this.label6.Text = "Ingrese fecha y hora de la reserva";
             // 
             // PantallaRegistrarReserva
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(696, 430);
+            this.Controls.Add(this.pnlFechaHoraReserva);
             this.Controls.Add(this.pnlExposiciones);
             this.Controls.Add(this.pnlCantidadVisitantes);
             this.Controls.Add(this.pnlTipoVisita);
@@ -449,6 +509,8 @@ namespace PPAI_3K4
             this.pnlExposiciones.ResumeLayout(false);
             this.pnlExposiciones.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgExposiciones)).EndInit();
+            this.pnlFechaHoraReserva.ResumeLayout(false);
+            this.pnlFechaHoraReserva.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -493,5 +555,10 @@ namespace PPAI_3K4
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.Button btnSelExposicion;
+        private System.Windows.Forms.Panel pnlFechaHoraReserva;
+        private System.Windows.Forms.Button btnSigSelFechaYHora;
+        private System.Windows.Forms.DateTimePicker dtpFechaReserva;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.DateTimePicker dtpHoraReserva;
     }
 }

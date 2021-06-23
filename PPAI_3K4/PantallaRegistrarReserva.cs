@@ -113,5 +113,30 @@ namespace PPAI_3K4
             dgExposiciones.AutoGenerateColumns = false;
             dgExposiciones.DataSource = exposicion;
         }
+
+        private void seleccionarExposiciones(object sender, EventArgs e)
+        {
+            IList<Exposicion> exposicionesSeleccionadas = new List<Exposicion>();
+
+            foreach(DataGridViewRow row in dgExposiciones.SelectedRows)
+            {
+                exposicionesSeleccionadas.Add((Exposicion)row.DataBoundItem);
+            }
+            ocultarPanel(pnlExposiciones);
+            oGestor.tomarSeleccionExposiciones(exposicionesSeleccionadas);
+        }
+
+        public void solicitarFechaHoraReserva()
+        {
+            mostrarPanel(pnlFechaHoraReserva);
+        }
+
+        private void seleccionarFechaYHora(object sender, EventArgs e)
+        {
+            DateTime fechaHoraReserva = dtpFechaReserva.Value.Date + dtpHoraReserva.Value.TimeOfDay;
+
+            ocultarPanel(pnlFechaHoraReserva);
+            oGestor.tomarSeleccionFechaHora(fechaHoraReserva);
+        }
     }
 }

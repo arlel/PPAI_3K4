@@ -15,6 +15,8 @@ namespace PPAI_3K4
         TipoVisita tipoVisitaSeleccionada { get; set; }
         int cantidadParticipantes { get; set; }
         DateTime horaFechaActual { get; set; }
+        IList<Exposicion> exposicionesSeleccionada { get; set; }
+        DateTime fechaHoraReserva { get; set; }
 
         public void nuevaReservaGuiada(PantallaRegistrarReserva pantallaRegistrarReserva)
         {
@@ -116,6 +118,22 @@ namespace PPAI_3K4
         {
             return DateTime.Now;
         }
+
+        public void tomarSeleccionExposiciones(IList<Exposicion> exposicionesSel)
+        {
+            setExposicionSeleccionada(exposicionesSel);
+            pantallaRegistrarReserva.solicitarFechaHoraReserva();
+        }
+
+        public void setExposicionSeleccionada(IList<Exposicion> exposicionesSel)
+        {
+            exposicionesSeleccionada = exposicionesSel;
+        }
+
+        public void tomarSeleccionFechaHora(DateTime fechaHoraReserva)
+        {
+            this.fechaHoraReserva = fechaHoraReserva;
+            }
     }
  
 }
