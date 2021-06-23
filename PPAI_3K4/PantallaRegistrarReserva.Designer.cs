@@ -73,7 +73,6 @@ namespace PPAI_3K4
             this.dgEscuelas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgEscuelas.Size = new System.Drawing.Size(643, 287);
             this.dgEscuelas.TabIndex = 0;
-            this.dgEscuelas.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.seleccionarEscuela);
             // 
             // Nombre
             // 
@@ -117,7 +116,7 @@ namespace PPAI_3K4
             this.button1.TabIndex = 1;
             this.button1.Text = "Siguiente";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.tomarSeleccionEscuela);
+            this.button1.Click += new System.EventHandler(this.seleccionarEscuela);
             // 
             // label1
             // 

@@ -15,8 +15,6 @@ namespace PPAI_3K4
         {
             InitializeComponent();
         }
-
-        Escuela escuelaSeleccionada { get; set; }
         GestorRegistrarReserva oGestor { get; set; }
 
         public void opcionRegistrarReservaDeVisitasGuiadas()
@@ -43,13 +41,9 @@ namespace PPAI_3K4
             this.Show();
         }
 
-        private void seleccionarEscuela(object sender, DataGridViewCellEventArgs e)
+        private void seleccionarEscuela(object sender, EventArgs e)
         {
-            escuelaSeleccionada = (Escuela)dgEscuelas.Rows[e.RowIndex].DataBoundItem;
-        }
-
-        private void tomarSeleccionEscuela(object sender, EventArgs e)
-        {
+            Escuela escuelaSeleccionada = (Escuela)dgEscuelas.SelectedRows[0].DataBoundItem;
             oGestor.tomarSeleccionEscuela(escuelaSeleccionada);
         }
 
@@ -82,5 +76,6 @@ namespace PPAI_3K4
             dgSedes.AutoGenerateColumns = false;
             dgSedes.DataSource = sede;
         }
+
     }
 }
