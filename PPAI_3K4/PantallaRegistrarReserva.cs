@@ -99,7 +99,7 @@ namespace PPAI_3K4
             panel.Visible = false;
         }
 
-        private void btnSigTipoVisita_Click(object sender, EventArgs e)
+        private void seleccionarTipoVisita(object sender, EventArgs e)
         {
             TipoVisita tipoVisitaSel = (TipoVisita)dgTipoVisita.SelectedRows[0].DataBoundItem;
             ocultarPanel(pnlTipoVisita);

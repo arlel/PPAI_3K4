@@ -22,7 +22,7 @@ namespace PPAI_3K4.Models
 
         public bool esTemporal()
         {
-            return Nombre == "Temporal";
+            return Nombre.Equals("Temporal", StringComparison.OrdinalIgnoreCase);
         }
     }
 }

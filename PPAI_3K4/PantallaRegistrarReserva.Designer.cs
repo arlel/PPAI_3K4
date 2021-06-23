@@ -162,7 +162,7 @@ namespace PPAI_3K4
             this.panelSelEscuela.Controls.Add(this.label1);
             this.panelSelEscuela.Location = new System.Drawing.Point(3, 12);
             this.panelSelEscuela.Name = "panelSelEscuela";
-            this.panelSelEscuela.Size = new System.Drawing.Size(39, 29);
+            this.panelSelEscuela.Size = new System.Drawing.Size(707, 406);
             this.panelSelEscuela.TabIndex = 3;
             // 
             // pnlCantidadVisitantes
@@ -172,7 +172,7 @@ namespace PPAI_3K4
             this.pnlCantidadVisitantes.Controls.Add(this.txtCantVisitantes);
             this.pnlCantidadVisitantes.Location = new System.Drawing.Point(72, 12);
             this.pnlCantidadVisitantes.Name = "pnlCantidadVisitantes";
-            this.pnlCantidadVisitantes.Size = new System.Drawing.Size(19, 15);
+            this.pnlCantidadVisitantes.Size = new System.Drawing.Size(25, 29);
             this.pnlCantidadVisitantes.TabIndex = 3;
             this.pnlCantidadVisitantes.Visible = false;
             // 
@@ -211,7 +211,7 @@ namespace PPAI_3K4
             this.pnlTipoVisita.Controls.Add(this.label3);
             this.pnlTipoVisita.Location = new System.Drawing.Point(158, 12);
             this.pnlTipoVisita.Name = "pnlTipoVisita";
-            this.pnlTipoVisita.Size = new System.Drawing.Size(43, 29);
+            this.pnlTipoVisita.Size = new System.Drawing.Size(22, 29);
             this.pnlTipoVisita.TabIndex = 3;
             this.pnlTipoVisita.Visible = false;
             // 
@@ -223,7 +223,7 @@ namespace PPAI_3K4
             this.btnSigTipoVisita.TabIndex = 4;
             this.btnSigTipoVisita.Text = "Siguiente";
             this.btnSigTipoVisita.UseVisualStyleBackColor = true;
-            this.btnSigTipoVisita.Click += new System.EventHandler(this.btnSigTipoVisita_Click);
+            this.btnSigTipoVisita.Click += new System.EventHandler(this.seleccionarTipoVisita);
             // 
             // dgTipoVisita
             // 
@@ -261,7 +261,7 @@ namespace PPAI_3K4
             this.pnlSelSedes.Controls.Add(this.button3);
             this.pnlSelSedes.Location = new System.Drawing.Point(115, 12);
             this.pnlSelSedes.Name = "pnlSelSedes";
-            this.pnlSelSedes.Size = new System.Drawing.Size(15, 15);
+            this.pnlSelSedes.Size = new System.Drawing.Size(20, 29);
             this.pnlSelSedes.TabIndex = 4;
             this.pnlSelSedes.Visible = false;
             // 
@@ -437,9 +437,9 @@ namespace PPAI_3K4
             this.pnlFechaHoraReserva.Controls.Add(this.btnSigSelFechaYHora);
             this.pnlFechaHoraReserva.Controls.Add(this.dtpFechaReserva);
             this.pnlFechaHoraReserva.Controls.Add(this.label6);
-            this.pnlFechaHoraReserva.Location = new System.Drawing.Point(3, 1);
+            this.pnlFechaHoraReserva.Location = new System.Drawing.Point(292, 15);
             this.pnlFechaHoraReserva.Name = "pnlFechaHoraReserva";
-            this.pnlFechaHoraReserva.Size = new System.Drawing.Size(681, 417);
+            this.pnlFechaHoraReserva.Size = new System.Drawing.Size(53, 40);
             this.pnlFechaHoraReserva.TabIndex = 6;
             this.pnlFechaHoraReserva.Visible = false;
             // 

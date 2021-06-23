@@ -37,19 +37,15 @@ namespace PPAI_3K4
 
         public void tomarSeleccionEscuela(Escuela escuela)
         {
-            this.setEscuelaSeleccionada(escuela);
+            this.escuelaSeleccionada = escuela;
 
             pantallaRegistrarReserva.solicitarCantidadVisitantes();
         }
 
-        public void setEscuelaSeleccionada(Escuela escuela)
-        {
-            this.escuelaSeleccionada = escuela;
-        }
 
         public void tomarCantidadParticipantes(int cantidadParticipantes)
         {
-            setCantidadParticipantes(cantidadParticipantes);
+            this.cantidadParticipantes = cantidadParticipantes;
             IList<Sede> sede = obtenerSedes();
 
             pantallaRegistrarReserva.mostrarSedes(sede);
@@ -63,10 +59,7 @@ namespace PPAI_3K4
             }
         }
 
-        public void setCantidadParticipantes(int cantidadParticipantes)
-        {
-            this.cantidadParticipantes = cantidadParticipantes;
-        }
+
 
         public void tomarSeleccionSede(Sede sedeSel)
         {
@@ -88,7 +81,7 @@ namespace PPAI_3K4
 
         public void tomarSeleccionTipoVisita(TipoVisita tipoVisita)
         {
-            setTipoVisitaSeleccionada(tipoVisita);
+            this.tipoVisitaSeleccionada = tipoVisita;
             this.horaFechaActual = obtenerFechaHoraActual();
             IList<Exposicion> exposiciones = buscarExposicionesTemporalesVigentes();
 
@@ -109,10 +102,6 @@ namespace PPAI_3K4
             }
         }
 
-        public void setTipoVisitaSeleccionada(TipoVisita tipoVisita)
-        {
-            this.tipoVisitaSeleccionada = tipoVisita;
-        }
 
         public DateTime obtenerFechaHoraActual()
         {
@@ -133,7 +122,15 @@ namespace PPAI_3K4
         public void tomarSeleccionFechaHora(DateTime fechaHoraReserva)
         {
             this.fechaHoraReserva = fechaHoraReserva;
+        }
+
+        public void calculadarDuracionEstimadaReserva()
+        {
+            if (tipoVisitaSeleccionada.esPorExposicion())
+            {
+
             }
+        }
     }
  
 }
