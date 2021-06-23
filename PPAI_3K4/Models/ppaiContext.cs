@@ -155,6 +155,11 @@ namespace PPAI_3K4.Models
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
+                entity.Property(e => e.Mail)
+                    .HasColumnName("mail")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Nombre)
                     .HasColumnName("nombre")
                     .HasMaxLength(50)
@@ -213,12 +218,19 @@ namespace PPAI_3K4.Models
 
                 entity.Property(e => e.HoraCierre).HasColumnName("horaCierre");
 
+                entity.Property(e => e.IdSede).HasColumnName("idSede");
+
                 entity.Property(e => e.IdTipoExposicion).HasColumnName("idTipoExposicion");
 
                 entity.Property(e => e.Nombre)
                     .HasColumnName("nombre")
                     .HasMaxLength(50)
                     .IsUnicode(false);
+
+                entity.HasOne(d => d.IdSedeNavigation)
+                    .WithMany(p => p.Exposicion)
+                    .HasForeignKey(d => d.IdSede)
+                    .HasConstraintName("FK_Exposicion_Sede");
 
                 entity.HasOne(d => d.IdTipoExposicionNavigation)
                     .WithMany(p => p.Exposicion)

@@ -23,7 +23,9 @@ namespace PPAI_3K4.Models
         public TimeSpan? HoraCierre { get; set; }
         public string Nombre { get; set; }
         public long? IdTipoExposicion { get; set; }
+        public long? IdSede { get; set; }
 
+        public virtual Sede IdSedeNavigation { get; set; }
         public virtual TipoExposicion IdTipoExposicionNavigation { get; set; }
         public virtual ICollection<PublicoDestino> PublicoDestino { get; set; }
     }
