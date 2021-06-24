@@ -37,7 +37,7 @@ namespace PPAI_3K4.Models
 
         public bool sosGuia()
         {
-            this.IdCargoNavigation.
+            return this.IdCargoNavigation.esGuia();
         }
     }
 }

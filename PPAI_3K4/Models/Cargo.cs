@@ -22,7 +22,7 @@ namespace PPAI_3K4.Models
 
         public bool esGuia()
         {
-
+            return Nombre.Equals("Guia", StringComparison.OrdinalIgnoreCase);
         }
     }
 }

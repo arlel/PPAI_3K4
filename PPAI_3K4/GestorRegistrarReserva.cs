@@ -138,7 +138,15 @@ namespace PPAI_3K4
                 List<Empleado> guias = new List<Empleado>();
                 foreach(Empleado empleado in empleados)
                 {
-                    if(empleado.)
+                    if(empleado.sosGuia())
+                    {
+                        // buscaremos todas las instancias de asignaciones de reserva y verificaremos si es de nuestro empleado
+                        // si lo es: verifico si la asignacion NO ES durante el tiempo de nuestra reserva, de ser el caso
+                        // guias.add(empleado)
+
+                        // O hacemos que el empleado conozca sus asignaciones?????
+                        // en ese caso deberiamos explicitarlo en el diagrama de clases
+                    }
                 }
                 
             }
