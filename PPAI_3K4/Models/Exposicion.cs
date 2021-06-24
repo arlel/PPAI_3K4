@@ -11,6 +11,7 @@ namespace PPAI_3K4.Models
     {
         public Exposicion()
         {
+            DetalleExposicion = new HashSet<DetalleExposicion>();
             PublicoDestino = new HashSet<PublicoDestino>();
         }
 
@@ -27,6 +28,7 @@ namespace PPAI_3K4.Models
 
         public virtual Sede IdSedeNavigation { get; set; }
         public virtual TipoExposicion IdTipoExposicionNavigation { get; set; }
+        public virtual ICollection<DetalleExposicion> DetalleExposicion { get; set; }
         public virtual ICollection<PublicoDestino> PublicoDestino { get; set; }
 
         public bool sosTemporal()
@@ -39,6 +41,19 @@ namespace PPAI_3K4.Models
             DateTime fechaActual = DateTime.Now;
             return FechaInicio <= fechaActual && FechaFin >= fechaActual;
         }
+
+        public TimeSpan calcularDuracionObrasExpuestas()
+        {
+            TimeSpan duracionSumada = new TimeSpan();
+
+            foreach(DetalleExposicion detalle in DetalleExposicion)
+            {
+                duracionSumada = duracionSumada.Add(detalle.buscarDuracExtObra());
+            }
+
+            return duracionSumada;
+        }
+
 
     }
 }

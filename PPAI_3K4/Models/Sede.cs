@@ -11,7 +11,9 @@ namespace PPAI_3K4.Models
     {
         public Sede()
         {
+            Empleado = new HashSet<Empleado>();
             Exposicion = new HashSet<Exposicion>();
+            HorarioSede = new HashSet<HorarioSede>();
             ReservaVisita = new HashSet<ReservaVisita>();
         }
 
@@ -20,7 +22,9 @@ namespace PPAI_3K4.Models
         public int? CantMaxPorGuia { get; set; }
         public string Nombre { get; set; }
 
+        public virtual ICollection<Empleado> Empleado { get; set; }
         public virtual ICollection<Exposicion> Exposicion { get; set; }
+        public virtual ICollection<HorarioSede> HorarioSede { get; set; }
         public virtual ICollection<ReservaVisita> ReservaVisita { get; set; }
 
         public IList<Exposicion> mostrarExposicionesTemporalesVigentes()
@@ -35,9 +39,13 @@ namespace PPAI_3K4.Models
             }
 
             return expocionesTemporalesVigentes;
-        } 
+        }
 
 
+        public bool verificarCapacidadMaxima(int visitantes) 
+        {
+            return CantMaximaVisitantes >= visitantes;
+        }
 
     }
 }

@@ -7,19 +7,14 @@ using System.Collections.Generic;
 
 namespace PPAI_3K4.Models
 {
-    public partial class TipoVisita
+    public partial class DiaSemana
     {
         public long Id { get; set; }
         public string Nombre { get; set; }
+        public long? IdHorarioSede { get; set; }
+        public long? IdHorarioEmpleado { get; set; }
 
-        public bool esPorExposicion()
-        {
-            return Nombre.Equals("Por exposicion", StringComparison.OrdinalIgnoreCase);
-        }
-
-        public bool esCompleta()
-        {
-            return Nombre.Equals("Completa", StringComparison.OrdinalIgnoreCase);
-        }
+        public virtual HorarioEmpleado IdHorarioEmpleadoNavigation { get; set; }
+        public virtual HorarioSede IdHorarioSedeNavigation { get; set; }
     }
 }

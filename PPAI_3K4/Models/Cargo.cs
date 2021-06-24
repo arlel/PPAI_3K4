@@ -19,5 +19,10 @@ namespace PPAI_3K4.Models
         public string Nombre { get; set; }
 
         public virtual ICollection<Empleado> Empleado { get; set; }
+
+        public bool esGuia()
+        {
+
+        }
     }
 }

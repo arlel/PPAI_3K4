@@ -22,11 +22,15 @@ namespace PPAI_3K4.Models
 
         public virtual DbSet<CambioEstadoReservaVisita> CambioEstadoReservaVisita { get; set; }
         public virtual DbSet<Cargo> Cargo { get; set; }
+        public virtual DbSet<DetalleExposicion> DetalleExposicion { get; set; }
+        public virtual DbSet<DiaSemana> DiaSemana { get; set; }
         public virtual DbSet<Empleado> Empleado { get; set; }
         public virtual DbSet<Escuela> Escuela { get; set; }
         public virtual DbSet<Estado> Estado { get; set; }
         public virtual DbSet<Exposicion> Exposicion { get; set; }
         public virtual DbSet<HorarioEmpleado> HorarioEmpleado { get; set; }
+        public virtual DbSet<HorarioSede> HorarioSede { get; set; }
+        public virtual DbSet<Obra> Obra { get; set; }
         public virtual DbSet<PublicoDestino> PublicoDestino { get; set; }
         public virtual DbSet<ReservaVisita> ReservaVisita { get; set; }
         public virtual DbSet<Sede> Sede { get; set; }
@@ -86,6 +90,50 @@ namespace PPAI_3K4.Models
                     .IsUnicode(false);
             });
 
+            modelBuilder.Entity<DetalleExposicion>(entity =>
+            {
+                entity.Property(e => e.IdExposicion).HasColumnName("idExposicion");
+
+                entity.Property(e => e.IdObra).HasColumnName("idObra");
+
+                entity.Property(e => e.LugarAsignacion)
+                    .HasColumnName("lugarAsignacion")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.HasOne(d => d.IdExposicionNavigation)
+                    .WithMany(p => p.DetalleExposicion)
+                    .HasForeignKey(d => d.IdExposicion)
+                    .HasConstraintName("FK_DetalleExposicion_Exposicion");
+
+                entity.HasOne(d => d.IdObraNavigation)
+                    .WithMany(p => p.DetalleExposicion)
+                    .HasForeignKey(d => d.IdObra)
+                    .HasConstraintName("FK_DetalleExposicion_Obra");
+            });
+
+            modelBuilder.Entity<DiaSemana>(entity =>
+            {
+                entity.Property(e => e.IdHorarioEmpleado).HasColumnName("idHorarioEmpleado");
+
+                entity.Property(e => e.IdHorarioSede).HasColumnName("idHorarioSede");
+
+                entity.Property(e => e.Nombre)
+                    .HasColumnName("nombre")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.HasOne(d => d.IdHorarioEmpleadoNavigation)
+                    .WithMany(p => p.DiaSemana)
+                    .HasForeignKey(d => d.IdHorarioEmpleado)
+                    .HasConstraintName("FK_DiaSemana_HorarioEmpleado");
+
+                entity.HasOne(d => d.IdHorarioSedeNavigation)
+                    .WithMany(p => p.DiaSemana)
+                    .HasForeignKey(d => d.IdHorarioSede)
+                    .HasConstraintName("FK_DiaSemana_HorarioSede");
+            });
+
             modelBuilder.Entity<Empleado>(entity =>
             {
                 entity.Property(e => e.Id).HasColumnName("id");
@@ -122,6 +170,8 @@ namespace PPAI_3K4.Models
 
                 entity.Property(e => e.IdCargo).HasColumnName("idCargo");
 
+                entity.Property(e => e.IdSede).HasColumnName("idSede");
+
                 entity.Property(e => e.Mail)
                     .HasColumnName("mail")
                     .HasMaxLength(50)
@@ -146,6 +196,11 @@ namespace PPAI_3K4.Models
                     .WithMany(p => p.Empleado)
                     .HasForeignKey(d => d.IdCargo)
                     .HasConstraintName("FK_Empleado_Cargo");
+
+                entity.HasOne(d => d.IdSedeNavigation)
+                    .WithMany(p => p.Empleado)
+                    .HasForeignKey(d => d.IdSede)
+                    .HasConstraintName("FK_Empleado_Sede");
             });
 
             modelBuilder.Entity<Escuela>(entity =>
@@ -252,6 +307,59 @@ namespace PPAI_3K4.Models
                     .WithMany(p => p.HorarioEmpleado)
                     .HasForeignKey(d => d.IdEmpleado)
                     .HasConstraintName("FK_HorarioEmpleado_Empleado");
+            });
+
+            modelBuilder.Entity<HorarioSede>(entity =>
+            {
+                entity.Property(e => e.HoraApertura).HasColumnName("horaApertura");
+
+                entity.Property(e => e.HoraCierre).HasColumnName("horaCierre");
+
+                entity.Property(e => e.IdSede).HasColumnName("idSede");
+
+                entity.HasOne(d => d.IdSedeNavigation)
+                    .WithMany(p => p.HorarioSede)
+                    .HasForeignKey(d => d.IdSede)
+                    .HasConstraintName("FK_HorarioSede_Sede");
+            });
+
+            modelBuilder.Entity<Obra>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.Property(e => e.Alto).HasColumnName("alto");
+
+                entity.Property(e => e.Ancho).HasColumnName("ancho");
+
+                entity.Property(e => e.CodigoSensor).HasColumnName("codigoSensor");
+
+                entity.Property(e => e.Descripcion)
+                    .HasColumnName("descripcion")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.DuracionExtendida).HasColumnName("duracionExtendida");
+
+                entity.Property(e => e.DuracionResumida).HasColumnName("duracionResumida");
+
+                entity.Property(e => e.FechaCreacion)
+                    .HasColumnName("fechaCreacion")
+                    .HasColumnType("date");
+
+                entity.Property(e => e.FechaPrimerIngreso)
+                    .HasColumnName("fechaPrimerIngreso")
+                    .HasColumnType("date");
+
+                entity.Property(e => e.NombreObra)
+                    .HasColumnName("nombreObra")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Peso).HasColumnName("peso");
+
+                entity.Property(e => e.Valuacion)
+                    .HasColumnName("valuacion")
+                    .HasColumnType("money");
             });
 
             modelBuilder.Entity<PublicoDestino>(entity =>

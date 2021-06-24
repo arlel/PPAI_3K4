@@ -28,9 +28,16 @@ namespace PPAI_3K4.Models
         public string Sexo { get; set; }
         public string Telefono { get; set; }
         public long? IdCargo { get; set; }
+        public long? IdSede { get; set; }
 
         public virtual Cargo IdCargoNavigation { get; set; }
+        public virtual Sede IdSedeNavigation { get; set; }
         public virtual ICollection<HorarioEmpleado> HorarioEmpleado { get; set; }
         public virtual ICollection<ReservaVisita> ReservaVisita { get; set; }
+
+        public bool sosGuia()
+        {
+            this.IdCargoNavigation.
+        }
     }
 }

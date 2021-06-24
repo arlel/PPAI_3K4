@@ -7,19 +7,19 @@ using System.Collections.Generic;
 
 namespace PPAI_3K4.Models
 {
-    public partial class HorarioEmpleado
+    public partial class HorarioSede
     {
-        public HorarioEmpleado()
+        public HorarioSede()
         {
             DiaSemana = new HashSet<DiaSemana>();
         }
 
         public long Id { get; set; }
-        public TimeSpan? HoraIngreso { get; set; }
-        public TimeSpan? HoraSalida { get; set; }
-        public long? IdEmpleado { get; set; }
+        public TimeSpan? HoraApertura { get; set; }
+        public TimeSpan? HoraCierre { get; set; }
+        public long? IdSede { get; set; }
 
-        public virtual Empleado IdEmpleadoNavigation { get; set; }
+        public virtual Sede IdSedeNavigation { get; set; }
         public virtual ICollection<DiaSemana> DiaSemana { get; set; }
     }
 }

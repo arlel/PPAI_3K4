@@ -18,6 +18,8 @@ namespace PPAI_3K4
         IList<Exposicion> exposicionesSeleccionada { get; set; }
         DateTime fechaHoraReserva { get; set; }
 
+        TimeSpan duracionReserva { get; set; }
+
         public void nuevaReservaGuiada(PantallaRegistrarReserva pantallaRegistrarReserva)
         {
             this.pantallaRegistrarReserva = pantallaRegistrarReserva;
@@ -98,7 +100,15 @@ namespace PPAI_3K4
         {
             using(ppaiContext context = new ppaiContext())
             {
-                sede.Exposicion = context.Exposicion.Include(e => e.IdTipoExposicionNavigation).Include("PublicoDestino").Where(e => e.IdSede == sede.Id).ToList();
+                sede.Exposicion = context.Exposicion.Include(e => e.IdTipoExposicionNavigation).Include(e => e.DetalleExposicion).Include("PublicoDestino").Where(e => e.IdSede == sede.Id).ToList();
+
+                foreach(Exposicion expo in sede.Exposicion)
+                {
+                    foreach(DetalleExposicion detalle in expo.DetalleExposicion)
+                    {
+                        detalle.IdObraNavigation = context.Obra.Where(o => o.Id == detalle.IdObra).FirstOrDefault();
+                    }
+                }
             }
         }
 
@@ -110,26 +120,54 @@ namespace PPAI_3K4
 
         public void tomarSeleccionExposiciones(IList<Exposicion> exposicionesSel)
         {
-            setExposicionSeleccionada(exposicionesSel);
+            exposicionesSeleccionada = exposicionesSel;
+
             pantallaRegistrarReserva.solicitarFechaHoraReserva();
         }
 
-        public void setExposicionSeleccionada(IList<Exposicion> exposicionesSel)
-        {
-            exposicionesSeleccionada = exposicionesSel;
-        }
 
         public void tomarSeleccionFechaHora(DateTime fechaHoraReserva)
         {
             this.fechaHoraReserva = fechaHoraReserva;
+
+            duracionReserva = calcularDuracionEstimadaReserva();
+
+            if (sedeSeleccionada.verificarCapacidadMaxima(cantidadParticipantes)) // revisar paso 15
+            {
+                List<Empleado> empleados = obtenerGuiasSedeSeleccionada(sedeSeleccionada);
+                List<Empleado> guias = new List<Empleado>();
+                foreach(Empleado empleado in empleados)
+                {
+                    if(empleado.)
+                }
+                
+            }
+
         }
 
-        public void calculadarDuracionEstimadaReserva()
+        public List<Empleado> obtenerGuiasSedeSeleccionada(Sede sede)
         {
+            using(ppaiContext context = new ppaiContext())
+            {
+                List<Empleado> empleados = context.Empleado.Include(e => e.IdCargoNavigation).Where(e => e.IdSede == sede.Id).ToList();
+
+                return empleados;
+            }
+        }
+
+
+        public TimeSpan calcularDuracionEstimadaReserva()
+        {
+            TimeSpan duracionReserva = new TimeSpan();
             if (tipoVisitaSeleccionada.esPorExposicion())
             {
+                foreach(Exposicion exposicion in exposicionesSeleccionada)
+                {
+                    duracionReserva = duracionReserva.Add(exposicion.calcularDuracionObrasExpuestas());
+                }
+            } 
 
-            }
+            return duracionReserva;
         }
     }
  
