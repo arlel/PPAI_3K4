@@ -11,6 +11,7 @@ namespace PPAI_3K4.Models
     {
         public Empleado()
         {
+            AsignacionVisita = new HashSet<AsignacionVisita>();
             HorarioEmpleado = new HashSet<HorarioEmpleado>();
             ReservaVisita = new HashSet<ReservaVisita>();
         }
@@ -32,6 +33,7 @@ namespace PPAI_3K4.Models
 
         public virtual Cargo IdCargoNavigation { get; set; }
         public virtual Sede IdSedeNavigation { get; set; }
+        public virtual ICollection<AsignacionVisita> AsignacionVisita { get; set; }
         public virtual ICollection<HorarioEmpleado> HorarioEmpleado { get; set; }
         public virtual ICollection<ReservaVisita> ReservaVisita { get; set; }
 

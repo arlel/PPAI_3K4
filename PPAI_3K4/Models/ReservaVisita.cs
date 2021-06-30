@@ -11,6 +11,7 @@ namespace PPAI_3K4.Models
     {
         public ReservaVisita()
         {
+            AsignacionVisita = new HashSet<AsignacionVisita>();
             CambioEstadoReservaVisita = new HashSet<CambioEstadoReservaVisita>();
         }
 
@@ -30,6 +31,7 @@ namespace PPAI_3K4.Models
         public virtual Empleado IdEmpleadoNavigation { get; set; }
         public virtual Escuela IdEscuelaNavigation { get; set; }
         public virtual Sede IdSedeNavigation { get; set; }
+        public virtual ICollection<AsignacionVisita> AsignacionVisita { get; set; }
         public virtual ICollection<CambioEstadoReservaVisita> CambioEstadoReservaVisita { get; set; }
     }
 }

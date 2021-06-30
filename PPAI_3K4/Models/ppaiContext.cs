@@ -20,6 +20,7 @@ namespace PPAI_3K4.Models
             Database.EnsureCreated();
         }
 
+        public virtual DbSet<AsignacionVisita> AsignacionVisita { get; set; }
         public virtual DbSet<CambioEstadoReservaVisita> CambioEstadoReservaVisita { get; set; }
         public virtual DbSet<Cargo> Cargo { get; set; }
         public virtual DbSet<DetalleExposicion> DetalleExposicion { get; set; }
@@ -42,12 +43,37 @@ namespace PPAI_3K4.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=localhost;Database=ppai;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server=localhost;Database=ppai;Trusted_Connection=True; ");
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<AsignacionVisita>(entity =>
+            {
+                entity.Property(e => e.FechaHoraFin)
+                    .HasColumnName("fechaHoraFin")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.FechaHoraInicio)
+                    .HasColumnName("fechaHoraInicio")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.IdEmpleado).HasColumnName("idEmpleado");
+
+                entity.Property(e => e.IdReserva).HasColumnName("idReserva");
+
+                entity.HasOne(d => d.IdEmpleadoNavigation)
+                    .WithMany(p => p.AsignacionVisita)
+                    .HasForeignKey(d => d.IdEmpleado)
+                    .HasConstraintName("FK_AsignacionVisita_Empleado");
+
+                entity.HasOne(d => d.IdReservaNavigation)
+                    .WithMany(p => p.AsignacionVisita)
+                    .HasForeignKey(d => d.IdReserva)
+                    .HasConstraintName("FK_AsignacionVisita_ReservaVisita");
+            });
+
             modelBuilder.Entity<CambioEstadoReservaVisita>(entity =>
             {
                 entity.Property(e => e.Id).HasColumnName("id");
@@ -325,8 +351,6 @@ namespace PPAI_3K4.Models
 
             modelBuilder.Entity<Obra>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
                 entity.Property(e => e.Alto).HasColumnName("alto");
 
                 entity.Property(e => e.Ancho).HasColumnName("ancho");
