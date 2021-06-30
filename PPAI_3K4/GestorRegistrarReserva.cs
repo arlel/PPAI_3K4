@@ -12,6 +12,11 @@ namespace PPAI_3K4
         PantallaRegistrarReserva pantallaRegistrarReserva { get; set; }
         Escuela escuelaSeleccionada { get; set; }
         Sede sedeSeleccionada { get; set; }
+        IList<Escuela> escuelas { get; set; }
+        IList<Sede> sede { get; set; }
+        IList<TipoVisita> tipoVisitas { get; set; }
+        IList<Exposicion> exposiciones { get; set; }
+        List<Empleado> empleados { get; set; }
         TipoVisita tipoVisitaSeleccionada { get; set; }
         int cantidadParticipantes { get; set; }
         DateTime horaFechaActual { get; set; }
@@ -24,13 +29,15 @@ namespace PPAI_3K4
         {
             this.pantallaRegistrarReserva = pantallaRegistrarReserva;
 
-            IList<Escuela> escuelas = obtenerEscuelas();
+            // Obtenemos una lista de escuelas de la base de datos
+            this.escuelas = obtenerEscuelas();
 
             this.pantallaRegistrarReserva.mostrarEscuelas(escuelas);
         }
 
         public IList<Escuela> obtenerEscuelas()
         {
+            // Mediante entity framework se obtienen todos los objetos de clase Escuela
             using (ppaiContext context = new ppaiContext())
             {
                 return context.Escuela.ToList();
@@ -48,7 +55,7 @@ namespace PPAI_3K4
         public void tomarCantidadParticipantes(int cantidadParticipantes)
         {
             this.cantidadParticipantes = cantidadParticipantes;
-            IList<Sede> sede = obtenerSedes();
+            sede = obtenerSedes();
 
             pantallaRegistrarReserva.mostrarSedes(sede);
         }
@@ -67,13 +74,13 @@ namespace PPAI_3K4
         {
             this.sedeSeleccionada = sedeSel;
 
-            IList<TipoVisita> tipoVisitas = obtenerTipoVisita();
+            tipoVisitas = obtenerTiposVisita();
 
             this.pantallaRegistrarReserva.mostrarTipoVisita(tipoVisitas);
 
         }
 
-        public IList<TipoVisita> obtenerTipoVisita()
+        public IList<TipoVisita> obtenerTiposVisita()
         {
             using(ppaiContext context = new ppaiContext())
             {
@@ -85,7 +92,7 @@ namespace PPAI_3K4
         {
             this.tipoVisitaSeleccionada = tipoVisita;
             this.horaFechaActual = obtenerFechaHoraActual();
-            IList<Exposicion> exposiciones = buscarExposicionesTemporalesVigentes();
+            exposiciones = buscarExposicionesTemporalesVigentes();
 
             pantallaRegistrarReserva.mostrarExposiciones(exposiciones);
         }
@@ -157,7 +164,7 @@ namespace PPAI_3K4
         {
             using(ppaiContext context = new ppaiContext())
             {
-                List<Empleado> empleados = context.Empleado.Include(e => e.IdCargoNavigation).Where(e => e.IdSede == sede.Id).ToList();
+                empleados = context.Empleado.Include(e => e.IdCargoNavigation).Where(e => e.IdSede == sede.Id).ToList();
 
                 return empleados;
             }

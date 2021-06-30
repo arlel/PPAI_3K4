@@ -27,12 +27,10 @@ namespace PPAI_3K4
 
         public void mostrarEscuelas(IList<Escuela> escuelas)
         {
-
             dgEscuelas.AutoGenerateColumns = false;
             dgEscuelas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgEscuelas.DataSource = escuelas;
             dgEscuelas.Refresh();
-
         }
 
         public void habilitarPantalla()

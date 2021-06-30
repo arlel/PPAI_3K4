@@ -162,7 +162,7 @@ namespace PPAI_3K4
             this.panelSelEscuela.Controls.Add(this.label1);
             this.panelSelEscuela.Location = new System.Drawing.Point(3, 12);
             this.panelSelEscuela.Name = "panelSelEscuela";
-            this.panelSelEscuela.Size = new System.Drawing.Size(707, 406);
+            this.panelSelEscuela.Size = new System.Drawing.Size(29, 29);
             this.panelSelEscuela.TabIndex = 3;
             // 
             // pnlCantidadVisitantes
@@ -170,9 +170,9 @@ namespace PPAI_3K4
             this.pnlCantidadVisitantes.Controls.Add(this.btnSiguienteCantVisitantes);
             this.pnlCantidadVisitantes.Controls.Add(this.label2);
             this.pnlCantidadVisitantes.Controls.Add(this.txtCantVisitantes);
-            this.pnlCantidadVisitantes.Location = new System.Drawing.Point(72, 12);
+            this.pnlCantidadVisitantes.Location = new System.Drawing.Point(51, 12);
             this.pnlCantidadVisitantes.Name = "pnlCantidadVisitantes";
-            this.pnlCantidadVisitantes.Size = new System.Drawing.Size(25, 29);
+            this.pnlCantidadVisitantes.Size = new System.Drawing.Size(39, 26);
             this.pnlCantidadVisitantes.TabIndex = 3;
             this.pnlCantidadVisitantes.Visible = false;
             // 
