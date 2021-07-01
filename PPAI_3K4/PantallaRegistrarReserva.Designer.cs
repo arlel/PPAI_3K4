@@ -609,7 +609,7 @@ namespace PPAI_3K4
             this.pnlConfirmacion.Controls.Add(this.button4);
             this.pnlConfirmacion.Location = new System.Drawing.Point(80, 79);
             this.pnlConfirmacion.Name = "pnlConfirmacion";
-            this.pnlConfirmacion.Size = new System.Drawing.Size(368, 380);
+            this.pnlConfirmacion.Size = new System.Drawing.Size(574, 340);
             this.pnlConfirmacion.TabIndex = 8;
             this.pnlConfirmacion.Visible = false;
             // 

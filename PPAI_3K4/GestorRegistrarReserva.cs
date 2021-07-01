@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 
 namespace PPAI_3K4
 {
@@ -154,13 +155,19 @@ namespace PPAI_3K4
                 {
                     if(empleado.sosGuia())
                     {
+                        bool esValido = true;
+
                         foreach(ReservaVisita reservaVisita in reservaVisitas)
                         {
-                            if(!reservaVisita.tenesUnGuiaEntreHorarios(empleado, fechaHoraReserva, fechaFinEstimada)) {
-                                guias.Add(empleado);
+                            if(reservaVisita.tenesUnGuiaEntreHorarios(empleado, fechaHoraReserva, fechaFinEstimada)) {
+                                esValido = false;
                             }
 
                         }
+
+                        if(esValido)
+                            guias.Add(empleado);
+
                     }
                 }
 
@@ -245,9 +252,19 @@ namespace PPAI_3K4
 
                         context.Add(cambioEstadoReservaVisita);
                         context.SaveChanges();
+
+                        break;
                     }
                 }
+
+                finCU();
             }
+        }
+
+        public void finCU()
+        {
+            MessageBox.Show("La reserva ha sido creada con exito", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            pantallaRegistrarReserva.ocultarPantalla();
         }
 
         public List<Estado> obtenerEstados()

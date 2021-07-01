@@ -38,6 +38,11 @@ namespace PPAI_3K4
             this.Show();
         }
 
+        public void ocultarPantalla()
+        {
+            this.Dispose();
+        }
+
         private void seleccionarEscuela(object sender, EventArgs e)
         {
             Escuela escuelaSeleccionada = (Escuela)dgEscuelas.SelectedRows[0].DataBoundItem;
