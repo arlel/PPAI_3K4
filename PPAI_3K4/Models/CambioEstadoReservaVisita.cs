@@ -9,6 +9,19 @@ namespace PPAI_3K4.Models
 {
     public partial class CambioEstadoReservaVisita
     {
+        public CambioEstadoReservaVisita()
+        {
+
+        }
+
+        public CambioEstadoReservaVisita(DateTime? fechaHoraFin, DateTime? fechaHoraInicio, ReservaVisita reserva, Estado estado)
+        {
+            FechaHoraFin = fechaHoraFin;
+            FechaHoraInicio = fechaHoraInicio;
+            IdReserva = reserva.Id;
+            IdEstado = estado.Id;
+        }
+
         public long Id { get; set; }
         public DateTime? FechaHoraFin { get; set; }
         public DateTime? FechaHoraInicio { get; set; }

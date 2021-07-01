@@ -15,6 +15,21 @@ namespace PPAI_3K4.Models
             CambioEstadoReservaVisita = new HashSet<CambioEstadoReservaVisita>();
         }
 
+        public ReservaVisita(int? cantidadAlumnos, int? cantidadAlumnosConfirmada, TimeSpan? duracionEstimada, DateTime? fechaHoraCreacion, DateTime? fechaHoraReserva, TimeSpan? horaFinReal, TimeSpan? horaInicioReal, long? numeroReserva, Escuela escuela, Sede sede, Empleado empleado)
+        {
+            CantidadAlumnos = cantidadAlumnos;
+            CantidadAlumnosConfirmada = cantidadAlumnosConfirmada;
+            DuracionEstimada = duracionEstimada;
+            FechaHoraCreacion = fechaHoraCreacion;
+            FechaHoraReserva = fechaHoraReserva;
+            HoraFinReal = horaFinReal;
+            HoraInicioReal = horaInicioReal;
+            NumeroReserva = numeroReserva;
+            IdEscuela = escuela.Id;
+            IdSede = sede.Id;
+            IdEmpleado = 1;
+        }
+
         public long Id { get; set; }
         public int? CantidadAlumnos { get; set; }
         public int? CantidadAlumnosConfirmada { get; set; }

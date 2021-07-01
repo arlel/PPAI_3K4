@@ -20,5 +20,15 @@ namespace PPAI_3K4.Models
         public string Nombre { get; set; }
 
         public virtual ICollection<CambioEstadoReservaVisita> CambioEstadoReservaVisita { get; set; }
+
+        public bool esAmbitoReserva()
+        {
+            return Ambito.Equals("Reserva", StringComparison.OrdinalIgnoreCase);
+        }
+
+        public bool esPendienteConfirmacion()
+        {
+            return Nombre.Equals("PendienteConfirmacion", StringComparison.OrdinalIgnoreCase);
+        }
     }
 }

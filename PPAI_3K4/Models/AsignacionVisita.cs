@@ -9,6 +9,18 @@ namespace PPAI_3K4.Models
 {
     public partial class AsignacionVisita
     {
+        public AsignacionVisita()
+        {
+
+        }
+        public AsignacionVisita(DateTime? fechaHoraInicio, DateTime? fechaHoraFin, Empleado empleado, ReservaVisita reserva)
+        {
+            FechaHoraInicio = fechaHoraInicio;
+            FechaHoraFin = fechaHoraFin;
+            IdEmpleado = empleado.Id;
+            IdReserva = reserva.Id;
+        }
+
         public long Id { get; set; }
         public DateTime? FechaHoraInicio { get; set; }
         public DateTime? FechaHoraFin { get; set; }

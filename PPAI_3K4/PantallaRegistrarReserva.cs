@@ -58,7 +58,7 @@ namespace PPAI_3K4
 
         public void mostrarSedes(IList<Sede> sede)
         {
-         
+
             dgSedes.AutoGenerateColumns = false;
             dgSedes.DataSource = sede;
             mostrarPanel(pnlSelSedes);
@@ -116,7 +116,7 @@ namespace PPAI_3K4
         {
             IList<Exposicion> exposicionesSeleccionadas = new List<Exposicion>();
 
-            foreach(DataGridViewRow row in dgExposiciones.SelectedRows)
+            foreach (DataGridViewRow row in dgExposiciones.SelectedRows)
             {
                 exposicionesSeleccionadas.Add((Exposicion)row.DataBoundItem);
             }
@@ -137,12 +137,41 @@ namespace PPAI_3K4
             oGestor.tomarSeleccionFechaHora(fechaHoraReserva);
         }
 
+        public void mostrarCantidadGuiasNecesarias(int cantidadGuiasNecesarios)
+        {
+            lblCantidadGuiasNecesarios.Text = cantidadGuiasNecesarios.ToString();
+        }
+
         public void mostrarGuias(List<Empleado> guias)
         {
             mostrarPanel(pnlSelGuias);
 
             dgGuias.AutoGenerateColumns = false;
             dgGuias.DataSource = guias;
+        }
+
+        private void tomarSeleccionGuia(object sender, EventArgs e)
+        {
+            ocultarPanel(pnlSelGuias);
+
+            IList<Empleado> guiasSeleccionados = new List<Empleado>();
+
+            foreach (DataGridViewRow row in dgGuias.SelectedRows)
+            {
+                guiasSeleccionados.Add((Empleado)row.DataBoundItem);
+            }
+
+            oGestor.tomarSeleccionGuias(guiasSeleccionados);
+        }
+
+        public void solicitarConfirmacion()
+        {
+            mostrarPanel(pnlConfirmacion);
+        }
+
+        private void tomarConfirmacion(object sender, EventArgs e)
+        {
+            oGestor.tomarConfirmacion();
         }
     }
 }

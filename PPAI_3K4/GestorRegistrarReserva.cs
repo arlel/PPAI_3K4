@@ -23,7 +23,10 @@ namespace PPAI_3K4
         IList<Exposicion> exposicionesSeleccionada { get; set; }
         DateTime fechaHoraReserva { get; set; }
 
+        int cantidadGuiasNecesarios { get; set; }
+
         TimeSpan duracionReserva { get; set; }
+        public IList<Empleado> guiasSeleccionados { get; private set; }
 
         public void nuevaReservaGuiada(PantallaRegistrarReserva pantallaRegistrarReserva)
         {
@@ -91,7 +94,7 @@ namespace PPAI_3K4
         public void tomarSeleccionTipoVisita(TipoVisita tipoVisita)
         {
             this.tipoVisitaSeleccionada = tipoVisita;
-            this.horaFechaActual = obtenerFechaHoraActual();
+            // this.horaFechaActual = obtenerFechaHoraActual(); esto hay que borrarlo del diagrama de sucuencia no va
             exposiciones = buscarExposicionesTemporalesVigentes();
 
             pantallaRegistrarReserva.mostrarExposiciones(exposiciones);
@@ -161,12 +164,25 @@ namespace PPAI_3K4
                     }
                 }
 
-                int cantidadGuiasNecesarios = sedeSeleccionada.calcularCantidadGuias(cantidadParticipantes);
+                cantidadGuiasNecesarios = sedeSeleccionada.calcularCantidadGuias(cantidadParticipantes);
+
+                pantallaRegistrarReserva.mostrarCantidadGuiasNecesarias(cantidadGuiasNecesarios); // agregar al diagrama de secuencia
                 pantallaRegistrarReserva.mostrarGuias(guias);
             }
 
         }
 
+        public void tomarSeleccionGuias(IList<Empleado> guias)
+        {
+            this.guiasSeleccionados = guias;
+
+            pantallaRegistrarReserva.solicitarConfirmacion();
+        }
+
+        public bool validarCantidadGuiasSeleccionados(int cantidadGuias)
+        {
+            return cantidadGuias == cantidadGuiasNecesarios;
+        }
 
         public List<ReservaVisita> obtenerReservaVisitasSedeSeleccionada() { 
             using(ppaiContext context = new ppaiContext())
@@ -200,6 +216,46 @@ namespace PPAI_3K4
             } 
 
             return duracionReserva;
+        }
+
+        public void tomarConfirmacion()
+        {
+            using(ppaiContext context = new ppaiContext())
+            {
+                List<Estado> estados = obtenerEstados();
+
+                foreach(Estado estado in estados)
+                {
+                    if (estado.esAmbitoReserva() && estado.esPendienteConfirmacion())
+                    {
+                        this.horaFechaActual = obtenerFechaHoraActual();
+                        ReservaVisita reservaVisita = new ReservaVisita(cantidadParticipantes, null, duracionReserva, horaFechaActual, fechaHoraReserva, null, null, null, escuelaSeleccionada, sedeSeleccionada, null);
+
+                        context.ReservaVisita.Add(reservaVisita);
+                        context.SaveChanges();
+
+                        List<AsignacionVisita> asignacionVisitas = new List<AsignacionVisita>();
+                        foreach(Empleado guia in guiasSeleccionados)
+                        {
+                            AsignacionVisita asignacionVisita = new AsignacionVisita(fechaHoraReserva, fechaHoraReserva.Add(duracionReserva), guia, reservaVisita);
+                            context.Add(asignacionVisita);
+                        }
+
+                        CambioEstadoReservaVisita cambioEstadoReservaVisita = new CambioEstadoReservaVisita(null, horaFechaActual, reservaVisita, estado);
+
+                        context.Add(cambioEstadoReservaVisita);
+                        context.SaveChanges();
+                    }
+                }
+            }
+        }
+
+        public List<Estado> obtenerEstados()
+        {
+            using (ppaiContext context = new ppaiContext()) 
+            {
+                return context.Estado.ToList();
+            }
         }
     }
  

@@ -73,6 +73,8 @@ namespace PPAI_3K4
             this.dtpFechaReserva = new System.Windows.Forms.DateTimePicker();
             this.label6 = new System.Windows.Forms.Label();
             this.pnlSelGuias = new System.Windows.Forms.Panel();
+            this.lblCantidadGuiasNecesarios = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.btnSigSelGuia = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.dgGuias = new System.Windows.Forms.DataGridView();
@@ -81,6 +83,10 @@ namespace PPAI_3K4
             this.telefono = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sexo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pnlConfirmacion = new System.Windows.Forms.Panel();
+            this.button2 = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
+            this.button4 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgEscuelas)).BeginInit();
             this.panelSelEscuela.SuspendLayout();
             this.pnlCantidadVisitantes.SuspendLayout();
@@ -93,6 +99,7 @@ namespace PPAI_3K4
             this.pnlFechaHoraReserva.SuspendLayout();
             this.pnlSelGuias.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgGuias)).BeginInit();
+            this.pnlConfirmacion.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgEscuelas
@@ -173,7 +180,7 @@ namespace PPAI_3K4
             this.panelSelEscuela.Controls.Add(this.label1);
             this.panelSelEscuela.Location = new System.Drawing.Point(3, 12);
             this.panelSelEscuela.Name = "panelSelEscuela";
-            this.panelSelEscuela.Size = new System.Drawing.Size(29, 29);
+            this.panelSelEscuela.Size = new System.Drawing.Size(29, 26);
             this.panelSelEscuela.TabIndex = 3;
             // 
             // pnlCantidadVisitantes
@@ -183,7 +190,7 @@ namespace PPAI_3K4
             this.pnlCantidadVisitantes.Controls.Add(this.txtCantVisitantes);
             this.pnlCantidadVisitantes.Location = new System.Drawing.Point(51, 12);
             this.pnlCantidadVisitantes.Name = "pnlCantidadVisitantes";
-            this.pnlCantidadVisitantes.Size = new System.Drawing.Size(39, 26);
+            this.pnlCantidadVisitantes.Size = new System.Drawing.Size(35, 44);
             this.pnlCantidadVisitantes.TabIndex = 3;
             this.pnlCantidadVisitantes.Visible = false;
             // 
@@ -222,7 +229,7 @@ namespace PPAI_3K4
             this.pnlTipoVisita.Controls.Add(this.label3);
             this.pnlTipoVisita.Location = new System.Drawing.Point(158, 12);
             this.pnlTipoVisita.Name = "pnlTipoVisita";
-            this.pnlTipoVisita.Size = new System.Drawing.Size(22, 29);
+            this.pnlTipoVisita.Size = new System.Drawing.Size(25, 29);
             this.pnlTipoVisita.TabIndex = 3;
             this.pnlTipoVisita.Visible = false;
             // 
@@ -272,7 +279,7 @@ namespace PPAI_3K4
             this.pnlSelSedes.Controls.Add(this.button3);
             this.pnlSelSedes.Location = new System.Drawing.Point(115, 12);
             this.pnlSelSedes.Name = "pnlSelSedes";
-            this.pnlSelSedes.Size = new System.Drawing.Size(20, 29);
+            this.pnlSelSedes.Size = new System.Drawing.Size(25, 44);
             this.pnlSelSedes.TabIndex = 4;
             this.pnlSelSedes.Visible = false;
             // 
@@ -344,17 +351,17 @@ namespace PPAI_3K4
             this.pnlExposiciones.Controls.Add(this.btnSelExposicion);
             this.pnlExposiciones.Controls.Add(this.dgExposiciones);
             this.pnlExposiciones.Controls.Add(this.label5);
-            this.pnlExposiciones.Location = new System.Drawing.Point(186, 14);
+            this.pnlExposiciones.Location = new System.Drawing.Point(322, 12);
             this.pnlExposiciones.Name = "pnlExposiciones";
-            this.pnlExposiciones.Size = new System.Drawing.Size(28, 27);
+            this.pnlExposiciones.Size = new System.Drawing.Size(23, 44);
             this.pnlExposiciones.TabIndex = 5;
             this.pnlExposiciones.Visible = false;
             // 
             // btnSelExposicion
             // 
-            this.btnSelExposicion.Location = new System.Drawing.Point(512, 328);
+            this.btnSelExposicion.Location = new System.Drawing.Point(547, 309);
             this.btnSelExposicion.Name = "btnSelExposicion";
-            this.btnSelExposicion.Size = new System.Drawing.Size(119, 36);
+            this.btnSelExposicion.Size = new System.Drawing.Size(107, 34);
             this.btnSelExposicion.TabIndex = 5;
             this.btnSelExposicion.Text = "Siguiente";
             this.btnSelExposicion.UseVisualStyleBackColor = true;
@@ -450,7 +457,7 @@ namespace PPAI_3K4
             this.pnlFechaHoraReserva.Controls.Add(this.label6);
             this.pnlFechaHoraReserva.Location = new System.Drawing.Point(220, 12);
             this.pnlFechaHoraReserva.Name = "pnlFechaHoraReserva";
-            this.pnlFechaHoraReserva.Size = new System.Drawing.Size(53, 40);
+            this.pnlFechaHoraReserva.Size = new System.Drawing.Size(27, 26);
             this.pnlFechaHoraReserva.TabIndex = 6;
             this.pnlFechaHoraReserva.Visible = false;
             // 
@@ -495,14 +502,35 @@ namespace PPAI_3K4
             // 
             // pnlSelGuias
             // 
+            this.pnlSelGuias.Controls.Add(this.lblCantidadGuiasNecesarios);
+            this.pnlSelGuias.Controls.Add(this.label7);
             this.pnlSelGuias.Controls.Add(this.btnSigSelGuia);
             this.pnlSelGuias.Controls.Add(this.label8);
             this.pnlSelGuias.Controls.Add(this.dgGuias);
-            this.pnlSelGuias.Location = new System.Drawing.Point(351, 14);
+            this.pnlSelGuias.Location = new System.Drawing.Point(253, 12);
             this.pnlSelGuias.Name = "pnlSelGuias";
-            this.pnlSelGuias.Size = new System.Drawing.Size(29, 27);
+            this.pnlSelGuias.Size = new System.Drawing.Size(44, 29);
             this.pnlSelGuias.TabIndex = 7;
             this.pnlSelGuias.Visible = false;
+            // 
+            // lblCantidadGuiasNecesarios
+            // 
+            this.lblCantidadGuiasNecesarios.AutoSize = true;
+            this.lblCantidadGuiasNecesarios.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblCantidadGuiasNecesarios.Location = new System.Drawing.Point(357, 311);
+            this.lblCantidadGuiasNecesarios.Name = "lblCantidadGuiasNecesarios";
+            this.lblCantidadGuiasNecesarios.Size = new System.Drawing.Size(0, 28);
+            this.lblCantidadGuiasNecesarios.TabIndex = 8;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label7.Location = new System.Drawing.Point(61, 311);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(297, 28);
+            this.label7.TabIndex = 7;
+            this.label7.Text = "Cantidad de guias necesarios: ";
             // 
             // btnSigSelGuia
             // 
@@ -512,6 +540,7 @@ namespace PPAI_3K4
             this.btnSigSelGuia.TabIndex = 6;
             this.btnSigSelGuia.Text = "Siguiente";
             this.btnSigSelGuia.UseVisualStyleBackColor = true;
+            this.btnSigSelGuia.Click += new System.EventHandler(this.tomarSeleccionGuia);
             // 
             // label8
             // 
@@ -573,11 +602,52 @@ namespace PPAI_3K4
             this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
             this.dataGridViewTextBoxColumn10.ReadOnly = true;
             // 
+            // pnlConfirmacion
+            // 
+            this.pnlConfirmacion.Controls.Add(this.button2);
+            this.pnlConfirmacion.Controls.Add(this.label9);
+            this.pnlConfirmacion.Controls.Add(this.button4);
+            this.pnlConfirmacion.Location = new System.Drawing.Point(80, 79);
+            this.pnlConfirmacion.Name = "pnlConfirmacion";
+            this.pnlConfirmacion.Size = new System.Drawing.Size(368, 380);
+            this.pnlConfirmacion.TabIndex = 8;
+            this.pnlConfirmacion.Visible = false;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(201, 202);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(119, 36);
+            this.button2.TabIndex = 8;
+            this.button2.Text = "Cancelar";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label9.Location = new System.Drawing.Point(139, 145);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(424, 28);
+            this.label9.TabIndex = 4;
+            this.label9.Text = "Por favor, confirme el registro de la reserva";
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(343, 202);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(119, 36);
+            this.button4.TabIndex = 7;
+            this.button4.Text = "Aceptar";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.tomarConfirmacion);
+            // 
             // PantallaRegistrarReserva
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(696, 430);
+            this.Controls.Add(this.pnlConfirmacion);
             this.Controls.Add(this.pnlSelGuias);
             this.Controls.Add(this.pnlFechaHoraReserva);
             this.Controls.Add(this.pnlExposiciones);
@@ -606,6 +676,8 @@ namespace PPAI_3K4
             this.pnlSelGuias.ResumeLayout(false);
             this.pnlSelGuias.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgGuias)).EndInit();
+            this.pnlConfirmacion.ResumeLayout(false);
+            this.pnlConfirmacion.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -664,5 +736,11 @@ namespace PPAI_3K4
         private System.Windows.Forms.DataGridViewTextBoxColumn telefono;
         private System.Windows.Forms.DataGridViewTextBoxColumn sexo;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
+        private System.Windows.Forms.Label lblCantidadGuiasNecesarios;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Panel pnlConfirmacion;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button4;
     }
 }
