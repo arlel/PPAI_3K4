@@ -41,5 +41,6 @@ namespace PPAI_3K4.Models
         {
             return this.IdCargoNavigation.esGuia();
         }
+        
     }
 }

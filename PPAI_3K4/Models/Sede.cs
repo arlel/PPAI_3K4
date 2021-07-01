@@ -41,6 +41,11 @@ namespace PPAI_3K4.Models
             return expocionesTemporalesVigentes;
         }
 
+        public int calcularCantidadGuias(int cantidadVisitantes)
+        {
+            return cantidadVisitantes / CantMaxPorGuia.Value;
+        }
+
 
         public bool verificarCapacidadMaxima(int visitantes) 
         {

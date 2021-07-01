@@ -72,6 +72,15 @@ namespace PPAI_3K4
             this.btnSigSelFechaYHora = new System.Windows.Forms.Button();
             this.dtpFechaReserva = new System.Windows.Forms.DateTimePicker();
             this.label6 = new System.Windows.Forms.Label();
+            this.pnlSelGuias = new System.Windows.Forms.Panel();
+            this.btnSigSelGuia = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
+            this.dgGuias = new System.Windows.Forms.DataGridView();
+            this.Apellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.telefono = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sexo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgEscuelas)).BeginInit();
             this.panelSelEscuela.SuspendLayout();
             this.pnlCantidadVisitantes.SuspendLayout();
@@ -82,6 +91,8 @@ namespace PPAI_3K4
             this.pnlExposiciones.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgExposiciones)).BeginInit();
             this.pnlFechaHoraReserva.SuspendLayout();
+            this.pnlSelGuias.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgGuias)).BeginInit();
             this.SuspendLayout();
             // 
             // dgEscuelas
@@ -333,9 +344,9 @@ namespace PPAI_3K4
             this.pnlExposiciones.Controls.Add(this.btnSelExposicion);
             this.pnlExposiciones.Controls.Add(this.dgExposiciones);
             this.pnlExposiciones.Controls.Add(this.label5);
-            this.pnlExposiciones.Location = new System.Drawing.Point(226, 15);
+            this.pnlExposiciones.Location = new System.Drawing.Point(186, 14);
             this.pnlExposiciones.Name = "pnlExposiciones";
-            this.pnlExposiciones.Size = new System.Drawing.Size(34, 26);
+            this.pnlExposiciones.Size = new System.Drawing.Size(28, 27);
             this.pnlExposiciones.TabIndex = 5;
             this.pnlExposiciones.Visible = false;
             // 
@@ -437,7 +448,7 @@ namespace PPAI_3K4
             this.pnlFechaHoraReserva.Controls.Add(this.btnSigSelFechaYHora);
             this.pnlFechaHoraReserva.Controls.Add(this.dtpFechaReserva);
             this.pnlFechaHoraReserva.Controls.Add(this.label6);
-            this.pnlFechaHoraReserva.Location = new System.Drawing.Point(292, 15);
+            this.pnlFechaHoraReserva.Location = new System.Drawing.Point(220, 12);
             this.pnlFechaHoraReserva.Name = "pnlFechaHoraReserva";
             this.pnlFechaHoraReserva.Size = new System.Drawing.Size(53, 40);
             this.pnlFechaHoraReserva.TabIndex = 6;
@@ -482,11 +493,92 @@ namespace PPAI_3K4
             this.label6.TabIndex = 6;
             this.label6.Text = "Ingrese fecha y hora de la reserva";
             // 
+            // pnlSelGuias
+            // 
+            this.pnlSelGuias.Controls.Add(this.btnSigSelGuia);
+            this.pnlSelGuias.Controls.Add(this.label8);
+            this.pnlSelGuias.Controls.Add(this.dgGuias);
+            this.pnlSelGuias.Location = new System.Drawing.Point(351, 14);
+            this.pnlSelGuias.Name = "pnlSelGuias";
+            this.pnlSelGuias.Size = new System.Drawing.Size(29, 27);
+            this.pnlSelGuias.TabIndex = 7;
+            this.pnlSelGuias.Visible = false;
+            // 
+            // btnSigSelGuia
+            // 
+            this.btnSigSelGuia.Location = new System.Drawing.Point(524, 371);
+            this.btnSigSelGuia.Name = "btnSigSelGuia";
+            this.btnSigSelGuia.Size = new System.Drawing.Size(119, 36);
+            this.btnSigSelGuia.TabIndex = 6;
+            this.btnSigSelGuia.Text = "Siguiente";
+            this.btnSigSelGuia.UseVisualStyleBackColor = true;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label8.Location = new System.Drawing.Point(61, 58);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(200, 28);
+            this.label8.TabIndex = 4;
+            this.label8.Text = "Seleccione una guia";
+            // 
+            // dgGuias
+            // 
+            this.dgGuias.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgGuias.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Apellido,
+            this.dataGridViewTextBoxColumn9,
+            this.telefono,
+            this.sexo,
+            this.dataGridViewTextBoxColumn10});
+            this.dgGuias.Location = new System.Drawing.Point(61, 120);
+            this.dgGuias.Name = "dgGuias";
+            this.dgGuias.RowTemplate.Height = 25;
+            this.dgGuias.Size = new System.Drawing.Size(545, 169);
+            this.dgGuias.TabIndex = 0;
+            // 
+            // Apellido
+            // 
+            this.Apellido.DataPropertyName = "Apellido";
+            this.Apellido.HeaderText = "Apellido";
+            this.Apellido.Name = "Apellido";
+            this.Apellido.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn9
+            // 
+            this.dataGridViewTextBoxColumn9.DataPropertyName = "Nombre";
+            this.dataGridViewTextBoxColumn9.HeaderText = "Nombre";
+            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
+            this.dataGridViewTextBoxColumn9.ReadOnly = true;
+            // 
+            // telefono
+            // 
+            this.telefono.DataPropertyName = "Telefono";
+            this.telefono.HeaderText = "Telefono";
+            this.telefono.Name = "telefono";
+            this.telefono.ReadOnly = true;
+            // 
+            // sexo
+            // 
+            this.sexo.DataPropertyName = "Sexo";
+            this.sexo.HeaderText = "Sexo";
+            this.sexo.Name = "sexo";
+            this.sexo.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn10
+            // 
+            this.dataGridViewTextBoxColumn10.DataPropertyName = "Mail";
+            this.dataGridViewTextBoxColumn10.HeaderText = "Mail";
+            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
+            this.dataGridViewTextBoxColumn10.ReadOnly = true;
+            // 
             // PantallaRegistrarReserva
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(696, 430);
+            this.Controls.Add(this.pnlSelGuias);
             this.Controls.Add(this.pnlFechaHoraReserva);
             this.Controls.Add(this.pnlExposiciones);
             this.Controls.Add(this.pnlCantidadVisitantes);
@@ -511,6 +603,9 @@ namespace PPAI_3K4
             ((System.ComponentModel.ISupportInitialize)(this.dgExposiciones)).EndInit();
             this.pnlFechaHoraReserva.ResumeLayout(false);
             this.pnlFechaHoraReserva.PerformLayout();
+            this.pnlSelGuias.ResumeLayout(false);
+            this.pnlSelGuias.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgGuias)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -560,5 +655,14 @@ namespace PPAI_3K4
         private System.Windows.Forms.DateTimePicker dtpFechaReserva;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.DateTimePicker dtpHoraReserva;
+        private System.Windows.Forms.Panel pnlSelGuias;
+        private System.Windows.Forms.Button btnSigSelGuia;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.DataGridView dgGuias;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Apellido;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
+        private System.Windows.Forms.DataGridViewTextBoxColumn telefono;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sexo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
     }
 }

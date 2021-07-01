@@ -17,5 +17,27 @@ namespace PPAI_3K4.Models
 
         public virtual Empleado IdEmpleadoNavigation { get; set; }
         public virtual ReservaVisita IdReservaNavigation { get; set; }
+
+        public bool checkearValidezGuia(Empleado empleado, DateTime fechaInicio, DateTime fechaFin)
+        {
+            return esTuGuia(empleado) && estaEnReservaEnHorario(fechaInicio, fechaFin);
+        }
+
+        public bool esTuGuia(Empleado empleado)
+        {
+            // Al hacer empleado.Id se accede al campo Id mediante un get
+            return IdEmpleado.Value == empleado.Id;
+        }
+
+        public bool estaEnReservaEnHorario(DateTime fechaInicio, DateTime fechaFin)
+        {
+            if(FechaHoraInicio?.Date != fechaInicio.Date)
+            {
+                return false;
+            }
+
+            return FechaHoraInicio?.TimeOfDay <= fechaInicio.TimeOfDay && FechaHoraFin?.TimeOfDay >= fechaInicio.TimeOfDay
+                || FechaHoraInicio?.TimeOfDay <= fechaFin.TimeOfDay && FechaHoraFin?.TimeOfDay >= fechaFin.TimeOfDay;
+        }
     }
 }

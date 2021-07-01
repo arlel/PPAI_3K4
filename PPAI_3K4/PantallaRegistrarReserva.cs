@@ -136,5 +136,13 @@ namespace PPAI_3K4
             ocultarPanel(pnlFechaHoraReserva);
             oGestor.tomarSeleccionFechaHora(fechaHoraReserva);
         }
+
+        public void mostrarGuias(List<Empleado> guias)
+        {
+            mostrarPanel(pnlSelGuias);
+
+            dgGuias.AutoGenerateColumns = false;
+            dgGuias.DataSource = guias;
+        }
     }
 }

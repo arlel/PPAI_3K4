@@ -137,34 +137,51 @@ namespace PPAI_3K4
         {
             this.fechaHoraReserva = fechaHoraReserva;
 
+
             duracionReserva = calcularDuracionEstimadaReserva();
+
+            DateTime fechaFinEstimada = fechaHoraReserva.Add(duracionReserva);
 
             if (sedeSeleccionada.verificarCapacidadMaxima(cantidadParticipantes)) // revisar paso 15
             {
-                List<Empleado> empleados = obtenerGuiasSedeSeleccionada(sedeSeleccionada);
+                List<Empleado> empleados = obtenerGuiasSedeSeleccionada();
+                List<ReservaVisita> reservaVisitas = obtenerReservaVisitasSedeSeleccionada();
                 List<Empleado> guias = new List<Empleado>();
                 foreach(Empleado empleado in empleados)
                 {
                     if(empleado.sosGuia())
                     {
-                        // buscaremos todas las instancias de asignaciones de reserva y verificaremos si es de nuestro empleado
-                        // si lo es: verifico si la asignacion NO ES durante el tiempo de nuestra reserva, de ser el caso
-                        // guias.add(empleado)
+                        foreach(ReservaVisita reservaVisita in reservaVisitas)
+                        {
+                            if(!reservaVisita.tenesUnGuiaEntreHorarios(empleado, fechaHoraReserva, fechaFinEstimada)) {
+                                guias.Add(empleado);
+                            }
 
-                        // O hacemos que el empleado conozca sus asignaciones?????
-                        // en ese caso deberiamos explicitarlo en el diagrama de clases
+                        }
                     }
                 }
-                
+
+                int cantidadGuiasNecesarios = sedeSeleccionada.calcularCantidadGuias(cantidadParticipantes);
+                pantallaRegistrarReserva.mostrarGuias(guias);
             }
 
         }
 
-        public List<Empleado> obtenerGuiasSedeSeleccionada(Sede sede)
+
+        public List<ReservaVisita> obtenerReservaVisitasSedeSeleccionada() { 
+            using(ppaiContext context = new ppaiContext())
+            {
+                return context.ReservaVisita.Include("AsignacionVisita").Where(e => e.IdSede == sedeSeleccionada.Id).ToList();
+            }
+        
+        }
+
+        public List<Empleado> obtenerGuiasSedeSeleccionada()
         {
             using(ppaiContext context = new ppaiContext())
             {
-                empleados = context.Empleado.Include(e => e.IdCargoNavigation).Where(e => e.IdSede == sede.Id).ToList();
+                // A traves de Entity framework consultamos a la base los empleados de la sede, de esta manera se le pregunta al empleado su sede a nivel de base
+                empleados = context.Empleado.Include(e => e.IdCargoNavigation).Where(e => e.IdSede == sedeSeleccionada.Id).ToList();
 
                 return empleados;
             }
