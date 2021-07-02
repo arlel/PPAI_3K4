@@ -15,11 +15,12 @@ namespace PPAI_3K4
             InitializeComponent();
         }
 
-        private void btnRegistrarReservaVisitasGuiadas_Click(object sender, EventArgs e)
+        private void iniciarCuRegistrarReservaDeVisitaGuiada(object sender, EventArgs e)
         {
             var pantalla = new PantallaRegistrarReserva();
+            var gestorRegistrarReserva = new GestorRegistrarReserva();
 
-            pantalla.opcionRegistrarReservaDeVisitasGuiadas();
+            pantalla.opcionRegistrarReservaDeVisitasGuiadas(gestorRegistrarReserva);
         }
     }
 }

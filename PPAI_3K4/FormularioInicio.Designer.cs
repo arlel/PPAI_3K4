@@ -41,7 +41,7 @@ namespace PPAI_3K4
             this.btnRegistrarReservaVisitasGuiadas.TabIndex = 0;
             this.btnRegistrarReservaVisitasGuiadas.Text = "Registrar Reserva de Visitas Guiadas";
             this.btnRegistrarReservaVisitasGuiadas.UseVisualStyleBackColor = true;
-            this.btnRegistrarReservaVisitasGuiadas.Click += new System.EventHandler(this.btnRegistrarReservaVisitasGuiadas_Click);
+            this.btnRegistrarReservaVisitasGuiadas.Click += new System.EventHandler(this.iniciarCuRegistrarReservaDeVisitaGuiada);
             // 
             // label5
             // 

@@ -15,18 +15,20 @@ namespace PPAI_3K4
         {
             InitializeComponent();
         }
-        GestorRegistrarReserva oGestor { get; set; }
+        GestorRegistrarReserva gestorRegistrarReserva { get; set; }
 
-        public void opcionRegistrarReservaDeVisitasGuiadas()
+        public void opcionRegistrarReservaDeVisitasGuiadas(GestorRegistrarReserva gestorRegistrarReserva)
         {
             this.habilitarPantalla();
             mostrarPanel(panelSelEscuela);
-            oGestor = new GestorRegistrarReserva();
-            oGestor.nuevaReservaGuiada(this);
+
+            this.gestorRegistrarReserva = gestorRegistrarReserva;
+            this.gestorRegistrarReserva.nuevaReservaGuiada(this);
         }
 
         public void mostrarEscuelas(IList<Escuela> escuelas)
         {
+            // Se muestra en la tabla de escuela el listado de escuela que recibimos como parametro
             dgEscuelas.AutoGenerateColumns = false;
             dgEscuelas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgEscuelas.DataSource = escuelas;
@@ -35,6 +37,7 @@ namespace PPAI_3K4
 
         public void habilitarPantalla()
         {
+            // Muestra la ventana
             this.Show();
         }
 
@@ -53,7 +56,7 @@ namespace PPAI_3K4
         {
             Escuela escuelaSeleccionada = (Escuela)dgEscuelas.SelectedRows[0].DataBoundItem;
             ocultarPanel(panelSelEscuela);
-            oGestor.tomarSeleccionEscuela(escuelaSeleccionada);
+            gestorRegistrarReserva.tomarSeleccionEscuela(escuelaSeleccionada);
         }
 
         public void solicitarCantidadVisitantes()
@@ -64,12 +67,11 @@ namespace PPAI_3K4
         private void seleccionarCantidadVisitantes(object sender, EventArgs e)
         {
             ocultarPanel(pnlCantidadVisitantes);
-            oGestor.tomarCantidadVisitantes(Int32.Parse(txtCantVisitantes.Text));
+            gestorRegistrarReserva.tomarCantidadVisitantes(Int32.Parse(txtCantVisitantes.Text));
         }
 
         public void mostrarSedes(IList<Sede> sede)
         {
-
             dgSedes.AutoGenerateColumns = false;
             dgSedes.DataSource = sede;
             mostrarPanel(pnlSelSedes);
@@ -79,7 +81,7 @@ namespace PPAI_3K4
         {
             Sede sedeSeleccionada = (Sede)dgSedes.SelectedRows[0].DataBoundItem;
             ocultarPanel(pnlSelSedes);
-            oGestor.tomarSeleccionSede(sedeSeleccionada);
+            gestorRegistrarReserva.tomarSeleccionSede(sedeSeleccionada);
         }
 
         public void mostrarTipoVisita(IList<TipoVisita> tipoVisitas)
@@ -112,7 +114,7 @@ namespace PPAI_3K4
         {
             TipoVisita tipoVisitaSel = (TipoVisita)dgTipoVisita.SelectedRows[0].DataBoundItem;
             ocultarPanel(pnlTipoVisita);
-            oGestor.tomarSeleccionTipoVisita(tipoVisitaSel);
+            gestorRegistrarReserva.tomarSeleccionTipoVisita(tipoVisitaSel);
         }
 
         public void mostrarExposiciones(IList<Exposicion> exposicion)
@@ -127,12 +129,14 @@ namespace PPAI_3K4
         {
             IList<Exposicion> exposicionesSeleccionadas = new List<Exposicion>();
 
+            // Se consulta a la tabla de exposiciones las filas seleccionadas y se agregan a la lista exposicionesSeleccionadas
             foreach (DataGridViewRow row in dgExposiciones.SelectedRows)
             {
                 exposicionesSeleccionadas.Add((Exposicion)row.DataBoundItem);
             }
+
             ocultarPanel(pnlExposiciones);
-            oGestor.tomarSeleccionExposiciones(exposicionesSeleccionadas);
+            gestorRegistrarReserva.tomarSeleccionExposiciones(exposicionesSeleccionadas);
         }
 
         public void solicitarFechaHoraReserva()
@@ -142,10 +146,11 @@ namespace PPAI_3K4
 
         private void seleccionarFechaYHora(object sender, EventArgs e)
         {
+            // Se consulta la fecha y hora a los objetos correspondientes y se agrupa en el mismo objeto DateTime
             DateTime fechaHoraReserva = dtpFechaReserva.Value.Date + dtpHoraReserva.Value.TimeOfDay;
 
             ocultarPanel(pnlFechaHoraReserva);
-            oGestor.tomarSeleccionFechaHora(fechaHoraReserva);
+            gestorRegistrarReserva.tomarSeleccionFechaHora(fechaHoraReserva);
         }
 
         public void mostrarCantidadGuiasNecesarias(int cantidadGuiasNecesarios)
@@ -167,12 +172,13 @@ namespace PPAI_3K4
 
             IList<Empleado> guiasSeleccionados = new List<Empleado>();
 
+            // Se consulta a la tabla de guias los guias seleccionados y se los agrega a la lista guiasSeleccionados
             foreach (DataGridViewRow row in dgGuias.SelectedRows)
             {
                 guiasSeleccionados.Add((Empleado)row.DataBoundItem);
             }
 
-            oGestor.tomarSeleccionGuias(guiasSeleccionados);
+            gestorRegistrarReserva.tomarSeleccionGuias(guiasSeleccionados);
         }
 
         public void solicitarConfirmacion()
@@ -182,7 +188,7 @@ namespace PPAI_3K4
 
         private void tomarConfirmacion(object sender, EventArgs e)
         {
-            oGestor.tomarConfirmacion();
+            gestorRegistrarReserva.tomarConfirmacion();
         }
     }
 }

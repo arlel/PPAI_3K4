@@ -174,7 +174,7 @@ namespace PPAI_3K4
             if (sedeSeleccionada.verificarCapacidadMaxima(cantidadVisitantesAcumulados + cantidadVisitantes))
             {
                 // Se consulta a la BD la lista de empleados
-                List<Empleado> empleados = obtenerEmpleadosSedeSeleccionada(); // ACTUALIZAR EN EL DIAGRAMA DE CLASES y DE SECUENCIA
+                List<Empleado> empleados = obtenerEmpleadosSedeSeleccionada();
 
                 // Se inicializa una lista vacia de guias a mostrar
                 List<Empleado> guias = new List<Empleado>();
