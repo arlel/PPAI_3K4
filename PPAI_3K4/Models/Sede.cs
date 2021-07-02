@@ -50,7 +50,7 @@ namespace PPAI_3K4.Models
         {
             using (ppaiContext context = new ppaiContext())
             {
-                this.Exposicion = context.Exposicion.Include(e => e.IdTipoExposicionNavigation).Include(e => e.DetalleExposicion).Include("PublicoDestino").Where(e => e.IdSede == this.Id).ToList();
+                this.Exposicion = context.Exposicion.Include(e => e.IdTipoExposicionNavigation).Include("PublicoDestino").Where(e => e.IdSede == this.Id).ToList();
             }
         }
 
