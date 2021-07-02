@@ -202,7 +202,7 @@ namespace PPAI_3K4
             this.btnSiguienteCantVisitantes.TabIndex = 4;
             this.btnSiguienteCantVisitantes.Text = "Siguiente";
             this.btnSiguienteCantVisitantes.UseVisualStyleBackColor = true;
-            this.btnSiguienteCantVisitantes.Click += new System.EventHandler(this.tomarCantidadParticipantes);
+            this.btnSiguienteCantVisitantes.Click += new System.EventHandler(this.seleccionarCantidadVisitantes);
             // 
             // label2
             // 

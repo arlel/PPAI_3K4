@@ -22,6 +22,7 @@ namespace PPAI_3K4.Models
 
         public bool esTemporal()
         {
+            // En caso de que el nombre de tipo exposicion sea Temporal devuelve true
             return Nombre.Equals("Temporal", StringComparison.OrdinalIgnoreCase);
         }
     }

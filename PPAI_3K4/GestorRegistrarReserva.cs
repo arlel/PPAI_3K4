@@ -19,14 +19,12 @@ namespace PPAI_3K4
         IList<Exposicion> exposiciones { get; set; }
         List<Empleado> empleados { get; set; }
         TipoVisita tipoVisitaSeleccionada { get; set; }
-        int cantidadParticipantes { get; set; }
+        int cantidadVisitantes { get; set; }
         DateTime horaFechaActual { get; set; }
         DateTime fechaFinEstimada { get; set; }
         IList<Exposicion> exposicionesSeleccionada { get; set; }
         DateTime fechaHoraReserva { get; set; }
-
         int cantidadGuiasNecesarios { get; set; }
-
         TimeSpan duracionReserva { get; set; }
         public IList<Empleado> guiasSeleccionados { get; private set; }
 
@@ -42,6 +40,7 @@ namespace PPAI_3K4
             // Obtenemos una lista de escuelas de la base de datos
             this.escuelas = obtenerEscuelas();
 
+            // Se solicita a la pantalla mostrar el listado de escuelas
             this.pantallaRegistrarReserva.mostrarEscuelas(escuelas);
         }
 
@@ -56,17 +55,23 @@ namespace PPAI_3K4
 
         public void tomarSeleccionEscuela(Escuela escuela)
         {
+            // Se establece el atributo con la escuela seleccionada
             this.escuelaSeleccionada = escuela;
 
+            // Se pide a la pantalla que solicite la cantidad de visitantes
             pantallaRegistrarReserva.solicitarCantidadVisitantes();
         }
 
 
-        public void tomarCantidadParticipantes(int cantidadParticipantes)
+        public void tomarCantidadVisitantes(int cantidadVisitantes)
         {
-            this.cantidadParticipantes = cantidadParticipantes;
+            // Se establece la cantidad de visitantes
+            this.cantidadVisitantes = cantidadVisitantes;
+
+            // Se solicita un listado de sedes de la base de datos
             sede = obtenerSedes();
 
+            // Se solicita a la pantalla mostrar las sedes
             pantallaRegistrarReserva.mostrarSedes(sede);
         }
 
@@ -82,10 +87,13 @@ namespace PPAI_3K4
 
         public void tomarSeleccionSede(Sede sedeSel)
         {
+            // Se establece la sede seleccionada
             this.sedeSeleccionada = sedeSel;
 
+            // Se obtiene de la base de datos un listado de tipo de visita
             tipoVisitas = obtenerTiposVisita();
 
+            // Se solicita a la pantalla mostrar los tipo de visita
             this.pantallaRegistrarReserva.mostrarTipoVisita(tipoVisitas);
 
         }
@@ -100,9 +108,13 @@ namespace PPAI_3K4
 
         public void tomarSeleccionTipoVisita(TipoVisita tipoVisita)
         {
+            // Se establece el tipo de visita seleccionado
             this.tipoVisitaSeleccionada = tipoVisita;
+
+            // Se solicita a la sede seleccionada las exposiciones temporales vigentes
             exposiciones = sedeSeleccionada.mostrarExposicionesTemporalesVigentes();
 
+            // Si la cantidad de exposiciones es mayor a cero se le pide a la pantalla mostrarlas, sino se muestra un mensaje de error
             if (exposiciones.Count > 0)
             {
                 pantallaRegistrarReserva.mostrarExposiciones(exposiciones);
@@ -152,7 +164,7 @@ namespace PPAI_3K4
 
             int cantidadParticipantesAcumulado = obtenerAcumuladoReserva(reservaVisitas);
 
-            if (sedeSeleccionada.verificarCapacidadMaxima(cantidadParticipantesAcumulado + cantidadParticipantes)) // revisar paso 15
+            if (sedeSeleccionada.verificarCapacidadMaxima(cantidadParticipantesAcumulado + cantidadVisitantes)) // revisar paso 15
             {
                 List<Empleado> empleados = obtenerGuiasSedeSeleccionada();
                 List<Empleado> guias = new List<Empleado>();
@@ -178,7 +190,7 @@ namespace PPAI_3K4
 
                 if(guias.Count > 0)
                 {
-                    cantidadGuiasNecesarios = sedeSeleccionada.calcularCantidadGuias(cantidadParticipantes);
+                    cantidadGuiasNecesarios = sedeSeleccionada.calcularCantidadGuias(cantidadVisitantes);
 
                     pantallaRegistrarReserva.mostrarCantidadGuiasNecesarias(cantidadGuiasNecesarios); // agregar al diagrama de secuencia
                     pantallaRegistrarReserva.mostrarGuias(guias);
@@ -250,7 +262,7 @@ namespace PPAI_3K4
                     if (estado.esAmbitoReserva() && estado.esPendienteConfirmacion())
                     {
                         this.horaFechaActual = obtenerFechaHoraActual();
-                        ReservaVisita reservaVisita = new ReservaVisita(cantidadParticipantes, null, duracionReserva, horaFechaActual, fechaHoraReserva, null, null, null, escuelaSeleccionada, sedeSeleccionada, null, guiasSeleccionados, fechaFinEstimada, estado, horaFechaActual);
+                        ReservaVisita reservaVisita = new ReservaVisita(cantidadVisitantes, null, duracionReserva, horaFechaActual, fechaHoraReserva, null, null, null, escuelaSeleccionada, sedeSeleccionada, null, guiasSeleccionados, fechaFinEstimada, estado, horaFechaActual);
 
                         context.ReservaVisita.Add(reservaVisita);
                         context.SaveChanges();

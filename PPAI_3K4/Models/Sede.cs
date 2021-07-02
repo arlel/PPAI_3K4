@@ -31,9 +31,11 @@ namespace PPAI_3K4.Models
 
         public IList<Exposicion> mostrarExposicionesTemporalesVigentes()
         {
+            // En caso de que no tengamos las exposiciones de la sede se las consulta a la BD
             if (this.Exposicion.Count == 0)
                 obtenerExposiciones();
 
+            // Se arma una lista vacia y la vamos rellenando con las exposiciones que son temporales y son vigentes
             IList<Exposicion> expocionesTemporalesVigentes = new List<Exposicion>() { };
             foreach (Exposicion exposicion in this.Exposicion)
             {

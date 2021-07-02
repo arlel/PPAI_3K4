@@ -34,11 +34,13 @@ namespace PPAI_3K4.Models
 
         public bool sosTemporal()
         {
+            // Le consulta al tipo de exposicion si es temporal
             return this.IdTipoExposicionNavigation.esTemporal();
         }
 
         public bool sosVigente()
         {
+            // En caso de que la fecha actual este entre la fecha de Inicio y Fin consideramos la exposicion como vigente
             DateTime fechaActual = DateTime.Now;
             return FechaInicio <= fechaActual && FechaFin >= fechaActual;
         }

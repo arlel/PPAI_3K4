@@ -61,10 +61,10 @@ namespace PPAI_3K4
             mostrarPanel(pnlCantidadVisitantes);
         }
 
-        private void tomarCantidadParticipantes(object sender, EventArgs e)
+        private void seleccionarCantidadVisitantes(object sender, EventArgs e)
         {
             ocultarPanel(pnlCantidadVisitantes);
-            oGestor.tomarCantidadParticipantes(Int32.Parse(txtCantVisitantes.Text));
+            oGestor.tomarCantidadVisitantes(Int32.Parse(txtCantVisitantes.Text));
         }
 
         public void mostrarSedes(IList<Sede> sede)
