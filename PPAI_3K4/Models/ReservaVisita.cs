@@ -15,7 +15,7 @@ namespace PPAI_3K4.Models
             CambioEstadoReservaVisita = new HashSet<CambioEstadoReservaVisita>();
         }
 
-        public ReservaVisita(int? cantidadAlumnos, int? cantidadAlumnosConfirmada, TimeSpan? duracionEstimada, DateTime? fechaHoraCreacion, DateTime? fechaHoraReserva, TimeSpan? horaFinReal, TimeSpan? horaInicioReal, long? numeroReserva, Escuela escuela, Sede sede, Empleado empleado)
+        public ReservaVisita(int? cantidadAlumnos, int? cantidadAlumnosConfirmada, TimeSpan? duracionEstimada, DateTime? fechaHoraCreacion, DateTime? fechaHoraReserva, TimeSpan? horaFinReal, TimeSpan? horaInicioReal, long? numeroReserva, Escuela escuela, Sede sede, Empleado empleado, IList<Empleado> guiasSeleccionados, DateTime fechaFinEstimada, Estado estadoInicio, DateTime fechaActual)
         {
             CantidadAlumnos = cantidadAlumnos;
             CantidadAlumnosConfirmada = cantidadAlumnosConfirmada;
@@ -28,6 +28,39 @@ namespace PPAI_3K4.Models
             IdEscuela = escuela.Id;
             IdSede = sede.Id;
             IdEmpleado = 1;
+            AsignacionVisita = new List<AsignacionVisita>();
+            CambioEstadoReservaVisita = new List<CambioEstadoReservaVisita>();
+
+            crearCambioDeEstado(estadoInicio, fechaActual);
+            crearAsignacionesVisitas(fechaHoraReserva.Value, fechaFinEstimada, guiasSeleccionados);
+        }
+
+        private void crearCambioDeEstado(Estado estadoInicio, DateTime fechaActual)
+        {
+            this.CambioEstadoReservaVisita.Add(new CambioEstadoReservaVisita(null, fechaActual, this, estadoInicio));
+        }
+
+        private void crearAsignacionesVisitas(DateTime fechaHoraReserva, DateTime fechaHoraFin, IList<Empleado> guiasSeleccionados)
+        {
+
+            foreach (Empleado guia in guiasSeleccionados)
+            {
+                this.AsignacionVisita.Add(new AsignacionVisita(fechaHoraReserva, fechaHoraFin, guia, this));
+            }
+        }
+
+        public bool estasEntreFechas(DateTime fechaInicio, DateTime fechaFin)
+        {
+            DateTime FechaHoraFinEstimada = FechaHoraReserva.Value.Add(DuracionEstimada.Value);
+
+            if (FechaHoraReserva?.Date != fechaInicio.Date)
+            {
+                return false;
+            }
+
+            // Se valida que las fechas no se solapen
+            return FechaHoraReserva?.TimeOfDay <= fechaInicio.TimeOfDay && FechaHoraFinEstimada.TimeOfDay >= fechaInicio.TimeOfDay
+                || FechaHoraReserva?.TimeOfDay <= fechaFin.TimeOfDay && FechaHoraFinEstimada.TimeOfDay >= fechaFin.TimeOfDay;
         }
 
         public long Id { get; set; }

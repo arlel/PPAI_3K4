@@ -353,7 +353,7 @@ namespace PPAI_3K4
             this.pnlExposiciones.Controls.Add(this.label5);
             this.pnlExposiciones.Location = new System.Drawing.Point(322, 12);
             this.pnlExposiciones.Name = "pnlExposiciones";
-            this.pnlExposiciones.Size = new System.Drawing.Size(23, 44);
+            this.pnlExposiciones.Size = new System.Drawing.Size(36, 33);
             this.pnlExposiciones.TabIndex = 5;
             this.pnlExposiciones.Visible = false;
             // 
@@ -607,9 +607,9 @@ namespace PPAI_3K4
             this.pnlConfirmacion.Controls.Add(this.button2);
             this.pnlConfirmacion.Controls.Add(this.label9);
             this.pnlConfirmacion.Controls.Add(this.button4);
-            this.pnlConfirmacion.Location = new System.Drawing.Point(80, 79);
+            this.pnlConfirmacion.Location = new System.Drawing.Point(382, 12);
             this.pnlConfirmacion.Name = "pnlConfirmacion";
-            this.pnlConfirmacion.Size = new System.Drawing.Size(574, 340);
+            this.pnlConfirmacion.Size = new System.Drawing.Size(49, 33);
             this.pnlConfirmacion.TabIndex = 8;
             this.pnlConfirmacion.Visible = false;
             // 

@@ -18,7 +18,7 @@ namespace PPAI_3K4.Models
             FechaHoraInicio = fechaHoraInicio;
             FechaHoraFin = fechaHoraFin;
             IdEmpleado = empleado.Id;
-            IdReserva = reserva.Id;
+            IdReservaNavigation = reserva;
         }
 
         public long Id { get; set; }

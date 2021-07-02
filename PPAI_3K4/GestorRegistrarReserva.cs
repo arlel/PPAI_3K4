@@ -21,6 +21,7 @@ namespace PPAI_3K4
         TipoVisita tipoVisitaSeleccionada { get; set; }
         int cantidadParticipantes { get; set; }
         DateTime horaFechaActual { get; set; }
+        DateTime fechaFinEstimada { get; set; }
         IList<Exposicion> exposicionesSeleccionada { get; set; }
         DateTime fechaHoraReserva { get; set; }
 
@@ -28,6 +29,11 @@ namespace PPAI_3K4
 
         TimeSpan duracionReserva { get; set; }
         public IList<Empleado> guiasSeleccionados { get; private set; }
+
+        public GestorRegistrarReserva()
+        {
+
+        }
 
         public void nuevaReservaGuiada(PantallaRegistrarReserva pantallaRegistrarReserva)
         {
@@ -95,32 +101,17 @@ namespace PPAI_3K4
         public void tomarSeleccionTipoVisita(TipoVisita tipoVisita)
         {
             this.tipoVisitaSeleccionada = tipoVisita;
-            // this.horaFechaActual = obtenerFechaHoraActual(); esto hay que borrarlo del diagrama de sucuencia no va
-            exposiciones = buscarExposicionesTemporalesVigentes();
+            exposiciones = sedeSeleccionada.mostrarExposicionesTemporalesVigentes();
 
-            pantallaRegistrarReserva.mostrarExposiciones(exposiciones);
-        }
-
-        public IList<Exposicion> buscarExposicionesTemporalesVigentes()
-        {
-            obtenerExposicionesPorSede(sedeSeleccionada);
-            return sedeSeleccionada.mostrarExposicionesTemporalesVigentes();
-        }
-
-        public void obtenerExposicionesPorSede(Sede sede)
-        {
-            using(ppaiContext context = new ppaiContext())
+            if (exposiciones.Count > 0)
             {
-                sede.Exposicion = context.Exposicion.Include(e => e.IdTipoExposicionNavigation).Include(e => e.DetalleExposicion).Include("PublicoDestino").Where(e => e.IdSede == sede.Id).ToList();
+                pantallaRegistrarReserva.mostrarExposiciones(exposiciones);
 
-                foreach(Exposicion expo in sede.Exposicion)
-                {
-                    foreach(DetalleExposicion detalle in expo.DetalleExposicion)
-                    {
-                        detalle.IdObraNavigation = context.Obra.Where(o => o.Id == detalle.IdObra).FirstOrDefault();
-                    }
-                }
+            } else
+            {
+                pantallaRegistrarReserva.mostrarMensaje("No hay exposiciones temporales vigentes en la sede seleccionada.");
             }
+
         }
 
 
@@ -136,20 +127,34 @@ namespace PPAI_3K4
             pantallaRegistrarReserva.solicitarFechaHoraReserva();
         }
 
+        public int obtenerAcumuladoReserva(List<ReservaVisita> reservaVisitas)
+        {
+            int visitantesAcumulados = 0;
+            foreach(ReservaVisita reservaVisita in reservaVisitas)
+            {
+                if(reservaVisita.estasEntreFechas(fechaHoraReserva, fechaFinEstimada))
+                {
+                    visitantesAcumulados += reservaVisita.CantidadAlumnos.Value;
+                }
+            }
+
+            return visitantesAcumulados;
+        }
+
 
         public void tomarSeleccionFechaHora(DateTime fechaHoraReserva)
         {
             this.fechaHoraReserva = fechaHoraReserva;
-
-
             duracionReserva = calcularDuracionEstimadaReserva();
+            fechaFinEstimada = fechaHoraReserva.Add(duracionReserva);
 
-            DateTime fechaFinEstimada = fechaHoraReserva.Add(duracionReserva);
+            List<ReservaVisita> reservaVisitas = obtenerReservaVisitasSedeSeleccionada();
 
-            if (sedeSeleccionada.verificarCapacidadMaxima(cantidadParticipantes)) // revisar paso 15
+            int cantidadParticipantesAcumulado = obtenerAcumuladoReserva(reservaVisitas);
+
+            if (sedeSeleccionada.verificarCapacidadMaxima(cantidadParticipantesAcumulado + cantidadParticipantes)) // revisar paso 15
             {
                 List<Empleado> empleados = obtenerGuiasSedeSeleccionada();
-                List<ReservaVisita> reservaVisitas = obtenerReservaVisitasSedeSeleccionada();
                 List<Empleado> guias = new List<Empleado>();
                 foreach(Empleado empleado in empleados)
                 {
@@ -171,10 +176,19 @@ namespace PPAI_3K4
                     }
                 }
 
-                cantidadGuiasNecesarios = sedeSeleccionada.calcularCantidadGuias(cantidadParticipantes);
+                if(guias.Count > 0)
+                {
+                    cantidadGuiasNecesarios = sedeSeleccionada.calcularCantidadGuias(cantidadParticipantes);
 
-                pantallaRegistrarReserva.mostrarCantidadGuiasNecesarias(cantidadGuiasNecesarios); // agregar al diagrama de secuencia
-                pantallaRegistrarReserva.mostrarGuias(guias);
+                    pantallaRegistrarReserva.mostrarCantidadGuiasNecesarias(cantidadGuiasNecesarios); // agregar al diagrama de secuencia
+                    pantallaRegistrarReserva.mostrarGuias(guias);
+                } else
+                {
+                    pantallaRegistrarReserva.mostrarMensaje("No hay guías disponibles para asignar a la visita");
+                }
+            } else
+            {
+                pantallaRegistrarReserva.mostrarMensaje("La capacidad máxima de visitantes por sede se sobrepasa para la duración de la visita.");
             }
 
         }
@@ -236,21 +250,9 @@ namespace PPAI_3K4
                     if (estado.esAmbitoReserva() && estado.esPendienteConfirmacion())
                     {
                         this.horaFechaActual = obtenerFechaHoraActual();
-                        ReservaVisita reservaVisita = new ReservaVisita(cantidadParticipantes, null, duracionReserva, horaFechaActual, fechaHoraReserva, null, null, null, escuelaSeleccionada, sedeSeleccionada, null);
+                        ReservaVisita reservaVisita = new ReservaVisita(cantidadParticipantes, null, duracionReserva, horaFechaActual, fechaHoraReserva, null, null, null, escuelaSeleccionada, sedeSeleccionada, null, guiasSeleccionados, fechaFinEstimada, estado, horaFechaActual);
 
                         context.ReservaVisita.Add(reservaVisita);
-                        context.SaveChanges();
-
-                        List<AsignacionVisita> asignacionVisitas = new List<AsignacionVisita>();
-                        foreach(Empleado guia in guiasSeleccionados)
-                        {
-                            AsignacionVisita asignacionVisita = new AsignacionVisita(fechaHoraReserva, fechaHoraReserva.Add(duracionReserva), guia, reservaVisita);
-                            context.Add(asignacionVisita);
-                        }
-
-                        CambioEstadoReservaVisita cambioEstadoReservaVisita = new CambioEstadoReservaVisita(null, horaFechaActual, reservaVisita, estado);
-
-                        context.Add(cambioEstadoReservaVisita);
                         context.SaveChanges();
 
                         break;
@@ -263,8 +265,7 @@ namespace PPAI_3K4
 
         public void finCU()
         {
-            MessageBox.Show("La reserva ha sido creada con exito", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            pantallaRegistrarReserva.ocultarPantalla();
+            pantallaRegistrarReserva.mostrarMensaje("La reserva ha sido creada con exito");
         }
 
         public List<Estado> obtenerEstados()

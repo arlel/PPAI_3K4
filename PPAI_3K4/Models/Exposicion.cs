@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 // Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
 // If you have enabled NRTs for your project, then un-comment the following line:
@@ -42,9 +43,21 @@ namespace PPAI_3K4.Models
             return FechaInicio <= fechaActual && FechaFin >= fechaActual;
         }
 
+        public void obtenerDetalleExposicion()
+        {
+            using(ppaiContext context = new ppaiContext())
+            {
+                this.DetalleExposicion = context.DetalleExposicion.Where(d => d.IdExposicion.Value == this.Id).ToList();
+            }
+        }
+
         public TimeSpan calcularDuracionObrasExpuestas()
         {
             TimeSpan duracionSumada = new TimeSpan();
+
+            if (DetalleExposicion == null || DetalleExposicion.Count == 0)
+                obtenerDetalleExposicion();
+
 
             foreach(DetalleExposicion detalle in DetalleExposicion)
             {

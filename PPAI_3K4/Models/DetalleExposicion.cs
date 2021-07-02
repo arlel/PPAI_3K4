@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 // Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
 // If you have enabled NRTs for your project, then un-comment the following line:
@@ -19,7 +20,18 @@ namespace PPAI_3K4.Models
 
         public TimeSpan buscarDuracExtObra()
         {
+            if (IdObraNavigation == null)
+                obtenerObra();
+
             return IdObraNavigation.getDuracionExtendida();
+        }
+
+        public void obtenerObra()
+        {
+            using(ppaiContext context = new ppaiContext())
+            {
+                this.IdObraNavigation = context.Obra.Where(o => o.Id == this.IdObra).FirstOrDefault();
+            }
         }
     }
 }

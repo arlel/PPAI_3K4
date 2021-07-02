@@ -43,6 +43,12 @@ namespace PPAI_3K4
             this.Dispose();
         }
 
+        public void mostrarMensaje(string mensaje)
+        {
+            MessageBox.Show(mensaje, "Alerta", MessageBoxButtons.OK);
+            ocultarPantalla();
+        }
+
         private void seleccionarEscuela(object sender, EventArgs e)
         {
             Escuela escuelaSeleccionada = (Escuela)dgEscuelas.SelectedRows[0].DataBoundItem;

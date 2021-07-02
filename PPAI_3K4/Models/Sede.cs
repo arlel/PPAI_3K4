@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 // Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
 // If you have enabled NRTs for your project, then un-comment the following line:
@@ -29,6 +31,9 @@ namespace PPAI_3K4.Models
 
         public IList<Exposicion> mostrarExposicionesTemporalesVigentes()
         {
+            if (this.Exposicion.Count == 0)
+                obtenerExposiciones();
+
             IList<Exposicion> expocionesTemporalesVigentes = new List<Exposicion>() { };
             foreach (Exposicion exposicion in this.Exposicion)
             {
@@ -39,6 +44,14 @@ namespace PPAI_3K4.Models
             }
 
             return expocionesTemporalesVigentes;
+        }
+
+        public void obtenerExposiciones()
+        {
+            using (ppaiContext context = new ppaiContext())
+            {
+                this.Exposicion = context.Exposicion.Include(e => e.IdTipoExposicionNavigation).Include(e => e.DetalleExposicion).Include("PublicoDestino").Where(e => e.IdSede == this.Id).ToList();
+            }
         }
 
         public int calcularCantidadGuias(int cantidadVisitantes)
