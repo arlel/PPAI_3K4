@@ -22,6 +22,7 @@ namespace PPAI_3K4.Models
 
         public bool esGuia()
         {
+            // Se valida si el nombre del cargo es "Guia"
             return Nombre.Equals("Guia", StringComparison.OrdinalIgnoreCase);
         }
     }

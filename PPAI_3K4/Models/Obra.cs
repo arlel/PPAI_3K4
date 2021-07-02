@@ -31,6 +31,7 @@ namespace PPAI_3K4.Models
 
         public TimeSpan getDuracionExtendida()
         {
+            // Retorna la duracion extendida de la obra
             return this.DuracionExtendida.Value;
         }
     }

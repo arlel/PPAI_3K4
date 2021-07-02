@@ -43,11 +43,13 @@ namespace PPAI_3K4.Models
 
         public bool estaEnReservaEnHorario(DateTime fechaInicio, DateTime fechaFin)
         {
+            // Valida que la fecha de la asignacion sea distinta que la fecha de la reserva
             if(FechaHoraInicio?.Date != fechaInicio.Date)
             {
                 return false;
             }
 
+            // Valida que la fecha de inicio y fecha fin de la reserva no se solape con las fechas de la asignacion
             return FechaHoraInicio?.TimeOfDay <= fechaInicio.TimeOfDay && FechaHoraFin?.TimeOfDay >= fechaInicio.TimeOfDay
                 || FechaHoraInicio?.TimeOfDay <= fechaFin.TimeOfDay && FechaHoraFin?.TimeOfDay >= fechaFin.TimeOfDay;
         }

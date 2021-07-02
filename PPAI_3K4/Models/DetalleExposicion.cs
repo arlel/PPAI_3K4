@@ -20,9 +20,11 @@ namespace PPAI_3K4.Models
 
         public TimeSpan buscarDuracExtObra()
         {
+            // En caso de que no tengamos la obra, se la consulta a la base de datos
             if (IdObraNavigation == null)
                 obtenerObra();
 
+            // Se le consulta a la obra la duracion extendida
             return IdObraNavigation.getDuracionExtendida();
         }
 

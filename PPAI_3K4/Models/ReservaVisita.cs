@@ -52,7 +52,7 @@ namespace PPAI_3K4.Models
         public bool estasEntreFechas(DateTime fechaInicio, DateTime fechaFin)
         {
             DateTime FechaHoraFinEstimada = FechaHoraReserva.Value.Add(DuracionEstimada.Value);
-
+            // Si la fecha de la reserva es distinta de la fechaInicio (reserva nueva) se devuelve false
             if (FechaHoraReserva?.Date != fechaInicio.Date)
             {
                 return false;
@@ -87,6 +87,7 @@ namespace PPAI_3K4.Models
         {
             foreach(AsignacionVisita asignacionVisita in this.AsignacionVisita)
             {
+                // Le consulta a la asignacion visita si la fecha de inicio o fecha fin de la reserva se solapa con la fecha de la asignacion de la visita
                 if(asignacionVisita.checkearValidezGuia(empleado, fechaInicio, fechaFin))
                 {
                     return true;

@@ -65,7 +65,6 @@ namespace PPAI_3K4
 
         public void tomarCantidadVisitantes(int cantidadVisitantes)
         {
-            // Se establece la cantidad de visitantes
             this.cantidadVisitantes = cantidadVisitantes;
 
             // Se solicita un listado de sedes de la base de datos
@@ -87,7 +86,6 @@ namespace PPAI_3K4
 
         public void tomarSeleccionSede(Sede sedeSel)
         {
-            // Se establece la sede seleccionada
             this.sedeSeleccionada = sedeSel;
 
             // Se obtiene de la base de datos un listado de tipo de visita
@@ -108,7 +106,6 @@ namespace PPAI_3K4
 
         public void tomarSeleccionTipoVisita(TipoVisita tipoVisita)
         {
-            // Se establece el tipo de visita seleccionado
             this.tipoVisitaSeleccionada = tipoVisita;
 
             // Se solicita a la sede seleccionada las exposiciones temporales vigentes
@@ -129,6 +126,7 @@ namespace PPAI_3K4
 
         public DateTime obtenerFechaHoraActual()
         {
+            // Retorna un objeto datetime con la fecha de hoy
             return DateTime.Now;
         }
 
@@ -144,6 +142,7 @@ namespace PPAI_3K4
             int visitantesAcumulados = 0;
             foreach(ReservaVisita reservaVisita in reservaVisitas)
             {
+                // Las reservas que intercedan entre la fechaHoraReserva y fechaFinEstimada se obtiene la cantidad de alumnos y se los suma al acumulador
                 if(reservaVisita.estasEntreFechas(fechaHoraReserva, fechaFinEstimada))
                 {
                     visitantesAcumulados += reservaVisita.CantidadAlumnos.Value;
@@ -157,23 +156,38 @@ namespace PPAI_3K4
         public void tomarSeleccionFechaHora(DateTime fechaHoraReserva)
         {
             this.fechaHoraReserva = fechaHoraReserva;
+
+            // Se calcula la duracion de la reserva
             duracionReserva = calcularDuracionEstimadaReserva();
+
+            // Se calcula la fecha fin estimada, sumandole a la fecha y hora de la reserva, la duracion calculada
             fechaFinEstimada = fechaHoraReserva.Add(duracionReserva);
 
+            // Se solicita a la BD las ReservaVisitas de la sede seleccionada
             List<ReservaVisita> reservaVisitas = obtenerReservaVisitasSedeSeleccionada();
 
-            int cantidadParticipantesAcumulado = obtenerAcumuladoReserva(reservaVisitas);
+            // Se consulta por el acumulado de visitantes de las reservas que interceden con los horarios de la nueva reserva
+            int cantidadVisitantesAcumulados = obtenerAcumuladoReserva(reservaVisitas);
 
-            if (sedeSeleccionada.verificarCapacidadMaxima(cantidadParticipantesAcumulado + cantidadVisitantes)) // revisar paso 15
+            // Se verifica si la cantidad de visitantes acumulados más la cantidad de visitantes (de la reserva nueva)
+            // No sobrepasa la cantidad maxima de visitantes de la sede
+            if (sedeSeleccionada.verificarCapacidadMaxima(cantidadVisitantesAcumulados + cantidadVisitantes))
             {
-                List<Empleado> empleados = obtenerGuiasSedeSeleccionada();
+                // Se consulta a la BD la lista de empleados
+                List<Empleado> empleados = obtenerEmpleadosSedeSeleccionada(); // ACTUALIZAR EN EL DIAGRAMA DE CLASES y DE SECUENCIA
+
+                // Se inicializa una lista vacia de guias a mostrar
                 List<Empleado> guias = new List<Empleado>();
+
                 foreach(Empleado empleado in empleados)
                 {
+                    // consulta al objeto empleado si es un empleado con cargo Guia
                     if(empleado.sosGuia())
                     {
                         bool esValido = true;
 
+                        // Recorre la lista de reservas y consulta si el guia tiene un horario que se solapa en la fecha de la nueva reserva
+                        // En ese caso no incluimos al guia en la lista de guias
                         foreach(ReservaVisita reservaVisita in reservaVisitas)
                         {
                             if(reservaVisita.tenesUnGuiaEntreHorarios(empleado, fechaHoraReserva, fechaFinEstimada)) {
@@ -188,6 +202,8 @@ namespace PPAI_3K4
                     }
                 }
 
+                // En caso de que hayan guias disponibles se muestran los guias y la cantidad de guias necesarios
+                // En caso contrario se muestra un mensaje de error
                 if(guias.Count > 0)
                 {
                     cantidadGuiasNecesarios = sedeSeleccionada.calcularCantidadGuias(cantidadVisitantes);
@@ -209,23 +225,21 @@ namespace PPAI_3K4
         {
             this.guiasSeleccionados = guias;
 
+            // Se solicita a la pantalla la confirmacion de la reserva
             pantallaRegistrarReserva.solicitarConfirmacion();
-        }
-
-        public bool validarCantidadGuiasSeleccionados(int cantidadGuias)
-        {
-            return cantidadGuias == cantidadGuiasNecesarios;
         }
 
         public List<ReservaVisita> obtenerReservaVisitasSedeSeleccionada() { 
             using(ppaiContext context = new ppaiContext())
             {
+                // Internamente en la consulta a base se obtienen las Asignaciones
+                // por consiguiente se sustituye el lamado al metodo con esta consulta en base
                 return context.ReservaVisita.Include("AsignacionVisita").Where(e => e.IdSede == sedeSeleccionada.Id).ToList();
             }
         
         }
 
-        public List<Empleado> obtenerGuiasSedeSeleccionada()
+        public List<Empleado> obtenerEmpleadosSedeSeleccionada()
         {
             using(ppaiContext context = new ppaiContext())
             {
@@ -242,8 +256,10 @@ namespace PPAI_3K4
             TimeSpan duracionReserva = new TimeSpan();
             if (tipoVisitaSeleccionada.esPorExposicion())
             {
+                // Se recorre todas las exposiciones y se le consulta sumatoria de la duracion de sus obras
                 foreach(Exposicion exposicion in exposicionesSeleccionada)
                 {
+                    // La sumatoria de la duracion de las exposiciones se acumula en duracionReserva
                     duracionReserva = duracionReserva.Add(exposicion.calcularDuracionObrasExpuestas());
                 }
             } 
@@ -255,6 +271,7 @@ namespace PPAI_3K4
         {
             using(ppaiContext context = new ppaiContext())
             {
+                // Se obtiene de la BD el listado de todos los objetos
                 List<Estado> estados = obtenerEstados();
 
                 foreach(Estado estado in estados)
@@ -262,8 +279,11 @@ namespace PPAI_3K4
                     if (estado.esAmbitoReserva() && estado.esPendienteConfirmacion())
                     {
                         this.horaFechaActual = obtenerFechaHoraActual();
+
+                        // Se instancia un nuevo objeto ReservaVisita, y este a su vez va a crear las Asignaciones de las reservas y el cambio de estado
                         ReservaVisita reservaVisita = new ReservaVisita(cantidadVisitantes, null, duracionReserva, horaFechaActual, fechaHoraReserva, null, null, null, escuelaSeleccionada, sedeSeleccionada, null, guiasSeleccionados, fechaFinEstimada, estado, horaFechaActual);
 
+                        // Se inserta en la BD la reserva, el cambio de estado y las asignaciones
                         context.ReservaVisita.Add(reservaVisita);
                         context.SaveChanges();
 

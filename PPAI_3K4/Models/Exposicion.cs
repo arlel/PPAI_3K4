@@ -57,12 +57,14 @@ namespace PPAI_3K4.Models
         {
             TimeSpan duracionSumada = new TimeSpan();
 
+            // En caso de que no tengamos DetalleExposicion se lo consultamos a la BD
             if (DetalleExposicion == null || DetalleExposicion.Count == 0)
                 obtenerDetalleExposicion();
 
-
+            // Se recorre los detalle de la exposicion, consultandole la duracion de la obra
             foreach(DetalleExposicion detalle in DetalleExposicion)
             {
+                // La duracion de la obra se la añade al acumulador duracionSumada
                 duracionSumada = duracionSumada.Add(detalle.buscarDuracExtObra());
             }
 

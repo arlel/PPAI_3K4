@@ -39,6 +39,7 @@ namespace PPAI_3K4.Models
 
         public bool sosGuia()
         {
+            // Se consulta al objeto Cargo si es guia
             return this.IdCargoNavigation.esGuia();
         }
         
