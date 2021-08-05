@@ -52,6 +52,7 @@ namespace PPAI_3K4.Models
                 if(exposicion.sosTemporal() && exposicion.sosVigente())
                 {
                     exposicionesTemporalesVigentes.Add(exposicion);
+                    //Devuelve una lista de exposiciones con los datos en un string de cada exposicion
                     listaExposiciones.Add(exposicion.getExposicion());
                 }
             }
@@ -80,7 +81,7 @@ namespace PPAI_3K4.Models
 
         public void setExposicionesSeleccionadas(List<int> indicesExps)
         {
-            //Agrego todas las exposiciones
+            //Agrego todas las exposiciones que fueron seleccionadas
             foreach (int i in indicesExps)
             {
                 exposicionesSeleccionadas.Add(exposicionesTemporalesVigentes[i]);
