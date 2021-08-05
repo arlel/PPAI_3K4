@@ -21,5 +21,10 @@ namespace PPAI_3K4.Models
         {
             return Nombre.Equals("Completa", StringComparison.OrdinalIgnoreCase);
         }
+
+        public string getNombre()
+        {
+            return this.Nombre;
+        }
     }
 }

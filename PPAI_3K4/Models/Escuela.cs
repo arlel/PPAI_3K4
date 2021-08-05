@@ -22,5 +22,10 @@ namespace PPAI_3K4.Models
         public string Mail { get; set; }
 
         public virtual ICollection<ReservaVisita> ReservaVisita { get; set; }
+
+        public string getNombre()
+        {
+            return this.Nombre;
+        }
     }
 }

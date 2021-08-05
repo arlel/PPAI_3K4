@@ -16,7 +16,7 @@ namespace PPAI_3K4
         IList<Escuela> escuelas { get; set; }
         IList<Sede> sede { get; set; }
         IList<TipoVisita> tipoVisitas { get; set; }
-        IList<Exposicion> exposiciones { get; set; }
+        String[] exposiciones { get; set; }
         List<Empleado> empleados { get; set; }
         TipoVisita tipoVisitaSeleccionada { get; set; }
         int cantidadVisitantes { get; set; }
@@ -39,9 +39,12 @@ namespace PPAI_3K4
 
             // Obtenemos una lista de escuelas de la base de datos
             this.escuelas = obtenerEscuelas();
-
+            List<String> vectorEscuelas = new List<string>();
+            foreach (Escuela e in this.escuelas){
+                vectorEscuelas.Add(e.getNombre());
+            }
             // Se solicita a la pantalla mostrar el listado de escuelas
-            this.pantallaRegistrarReserva.mostrarEscuelas(escuelas);
+            this.pantallaRegistrarReserva.mostrarEscuelas(vectorEscuelas.ToArray());
         }
 
         public IList<Escuela> obtenerEscuelas()
@@ -53,10 +56,10 @@ namespace PPAI_3K4
             }
         }
 
-        public void tomarSeleccionEscuela(Escuela escuela)
+        public void tomarSeleccionEscuela(int indiceEscuela)
         {
             // Se establece el atributo con la escuela seleccionada
-            this.escuelaSeleccionada = escuela;
+            this.escuelaSeleccionada = escuelas[indiceEscuela];
 
             // Se pide a la pantalla que solicite la cantidad de visitantes
             pantallaRegistrarReserva.solicitarCantidadVisitantes();
@@ -68,10 +71,15 @@ namespace PPAI_3K4
             this.cantidadVisitantes = cantidadVisitantes;
 
             // Se solicita un listado de sedes de la base de datos
+            List<String> vecSedes = new List<String>();
             sede = obtenerSedes();
+            foreach (Sede s in this.sede)
+            {
+                vecSedes.Add(s.getNombre());
+            }
 
             // Se solicita a la pantalla mostrar las sedes
-            pantallaRegistrarReserva.mostrarSedes(sede);
+            pantallaRegistrarReserva.mostrarSedes(vecSedes.ToArray());
         }
 
         public IList<Sede> obtenerSedes()
@@ -84,15 +92,20 @@ namespace PPAI_3K4
 
 
 
-        public void tomarSeleccionSede(Sede sedeSel)
+        public void tomarSeleccionSede(int iSedeSel)
         {
-            this.sedeSeleccionada = sedeSel;
+            this.sedeSeleccionada = sede[iSedeSel];
 
             // Se obtiene de la base de datos un listado de tipo de visita
             tipoVisitas = obtenerTiposVisita();
+            List<string> strTipoVisitas = new List<string>();
+            foreach (TipoVisita t in tipoVisitas)
+            {
+                strTipoVisitas.Add(t.getNombre());
+            }
 
             // Se solicita a la pantalla mostrar los tipo de visita
-            this.pantallaRegistrarReserva.mostrarTipoVisita(tipoVisitas);
+            this.pantallaRegistrarReserva.mostrarTipoVisita(strTipoVisitas.ToArray());
 
         }
 
@@ -104,15 +117,15 @@ namespace PPAI_3K4
             }
         }
 
-        public void tomarSeleccionTipoVisita(TipoVisita tipoVisita)
+        public void tomarSeleccionTipoVisita(int iTipoVisita)
         {
-            this.tipoVisitaSeleccionada = tipoVisita;
+            this.tipoVisitaSeleccionada = tipoVisitas[iTipoVisita];
 
             // Se solicita a la sede seleccionada las exposiciones temporales vigentes
             exposiciones = sedeSeleccionada.mostrarExposicionesTemporalesVigentes();
 
             // Si la cantidad de exposiciones es mayor a cero se le pide a la pantalla mostrarlas, sino se muestra un mensaje de error
-            if (exposiciones.Count > 0)
+            if (exposiciones.Length > 0)
             {
                 pantallaRegistrarReserva.mostrarExposiciones(exposiciones);
 
@@ -130,9 +143,9 @@ namespace PPAI_3K4
             return DateTime.Now;
         }
 
-        public void tomarSeleccionExposiciones(IList<Exposicion> exposicionesSel)
+        public void tomarSeleccionExposiciones(List<int> exposicionesSel)
         {
-            exposicionesSeleccionada = exposicionesSel;
+            sedeSeleccionada.setExposicionesSeleccionadas(exposicionesSel);
 
             pantallaRegistrarReserva.solicitarFechaHoraReserva();
         }

@@ -29,23 +29,34 @@ namespace PPAI_3K4.Models
         public virtual ICollection<HorarioSede> HorarioSede { get; set; }
         public virtual ICollection<ReservaVisita> ReservaVisita { get; set; }
 
-        public IList<Exposicion> mostrarExposicionesTemporalesVigentes()
+        public virtual IList<Exposicion> exposicionesTemporalesVigentes { get; set; }
+        public virtual IList<Exposicion> exposicionesSeleccionadas { get; set; }
+        
+
+        public string getNombre() {
+            return this.Nombre;
+        }
+
+        public string[] mostrarExposicionesTemporalesVigentes()
         {
             // En caso de que no tengamos las exposiciones de la sede se las consulta a la BD
             if (this.Exposicion.Count == 0)
                 obtenerExposiciones();
 
             // Se arma una lista vacia y la vamos rellenando con las exposiciones que son temporales y son vigentes
-            IList<Exposicion> expocionesTemporalesVigentes = new List<Exposicion>() { };
+            exposicionesTemporalesVigentes = new List<Exposicion>();
+            //Ver como mejorar esto:
+            List<String> listaExposiciones = new List<string>();
             foreach (Exposicion exposicion in this.Exposicion)
             {
                 if(exposicion.sosTemporal() && exposicion.sosVigente())
                 {
-                    expocionesTemporalesVigentes.Add(exposicion);
+                    exposicionesTemporalesVigentes.Add(exposicion);
+                    listaExposiciones.Add(exposicion.getExposicion());
                 }
             }
 
-            return expocionesTemporalesVigentes;
+            return listaExposiciones.ToArray();
         }
 
         public void obtenerExposiciones()
@@ -67,5 +78,13 @@ namespace PPAI_3K4.Models
             return CantMaximaVisitantes >= visitantes;
         }
 
+        public void setExposicionesSeleccionadas(List<int> indicesExps)
+        {
+            //Agrego todas las exposiciones
+            foreach (int i in indicesExps)
+            {
+                exposicionesSeleccionadas.Add(exposicionesTemporalesVigentes[i]);
+            }
+        }
     }
 }

@@ -71,6 +71,9 @@ namespace PPAI_3K4.Models
             return duracionSumada;
         }
 
-
+        public string getExposicion()
+        {
+            return "Nombre: " + PublicoDestino.getNombre() + " - Apertura: " + HoraApertura.ToString() + " - Cierre: " + HoraCierre.ToString();
+        }
     }
 }

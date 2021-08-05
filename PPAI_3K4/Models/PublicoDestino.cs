@@ -15,5 +15,10 @@ namespace PPAI_3K4.Models
         public long? IdExposicion { get; set; }
 
         public virtual Exposicion IdExposicionNavigation { get; set; }
+
+        public string getNombre()
+        {
+            return this.Nombre;
+        }
     }
 }
