@@ -73,7 +73,18 @@ namespace PPAI_3K4.Models
 
         public string getExposicion()
         {
-            return "Nombre: " + PublicoDestino.getNombre() + " - Apertura: " + HoraApertura.ToString() + " - Cierre: " + HoraCierre.ToString();
+            string publicosDestino ="";
+            PublicoDestino[] pds = { };
+            this.PublicoDestino.CopyTo(pds, 0);
+            for(int i=0; i< pds.Count();i++)
+            {
+                publicosDestino += pds[i].getNombre();
+                if (i != pds.Count() - 1)
+                {
+                    publicosDestino += ", ";
+                }
+            }
+            return "Nombre: " + Nombre + "Publico: " + publicosDestino + " - Apertura: " + HoraApertura.ToString() + " - Cierre: " + HoraCierre.ToString();
         }
     }
 }

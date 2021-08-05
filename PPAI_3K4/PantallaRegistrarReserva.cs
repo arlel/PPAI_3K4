@@ -126,7 +126,7 @@ namespace PPAI_3K4
         {
             List<int> checkeds = new List<int>();
                         // Se consulta a la tabla de exposiciones las filas seleccionadas y se agregan a la lista exposicionesSeleccionadas
-            foreach (Object item in listboxExpos.Items)
+            foreach (Object item in listboxExpos.CheckedItems)
             {
                 checkeds.Add(listboxExpos.Items.IndexOf(item));
             }

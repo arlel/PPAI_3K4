@@ -269,6 +269,8 @@ namespace PPAI_3K4
             TimeSpan duracionReserva = new TimeSpan();
             if (tipoVisitaSeleccionada.esPorExposicion())
             {
+                //Aca, le tenemos que decir a la sede, que calcule, la sede, hace una sumatoria de las
+                // duraciones (extendidas en este caso) que le de cada una de las exposiciones.
                 // Se recorre todas las exposiciones y se le consulta sumatoria de la duracion de sus obras
                 foreach(Exposicion exposicion in exposicionesSeleccionada)
                 {
