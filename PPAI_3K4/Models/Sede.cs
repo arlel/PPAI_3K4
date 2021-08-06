@@ -112,5 +112,10 @@ namespace PPAI_3K4.Models
             }
             return duracionReserva;
         }
+
+        public List<Exposicion> getExposicionesSeleccionadas()
+        {
+            return (List<Exposicion>) exposicionesSeleccionadas;
+        }
     }
 }

@@ -451,6 +451,18 @@ namespace PPAI_3K4.Models
                     .HasForeignKey(d => d.IdSede)
                     .HasConstraintName("FK_ReservaVisita_Sede");
             });
+            modelBuilder.Entity<ReservaXExposicion>()
+                .HasKey(x => new { x.ReservaId, x.ExposicionId });
+
+            modelBuilder.Entity<ReservaXExposicion>()
+                .HasOne(x => x.ReservaVisita)
+                .WithMany(y => y.ReservaXExposicion)
+                .HasForeignKey(y => y.ReservaId);
+
+            modelBuilder.Entity<ReservaXExposicion>()
+                .HasOne(x => x.Exposicion)
+                .WithMany(y => y.ReservaXExposicion)
+                .HasForeignKey(y => y.ExposicionId);
 
             modelBuilder.Entity<Sede>(entity =>
             {

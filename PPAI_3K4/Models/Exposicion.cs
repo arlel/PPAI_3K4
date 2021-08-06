@@ -14,6 +14,7 @@ namespace PPAI_3K4.Models
         {
             DetalleExposicion = new HashSet<DetalleExposicion>();
             PublicoDestino = new HashSet<PublicoDestino>();
+            ReservaXExposicion = new HashSet<ReservaXExposicion>();
         }
 
         public long Id { get; set; }
@@ -31,6 +32,7 @@ namespace PPAI_3K4.Models
         public virtual TipoExposicion IdTipoExposicionNavigation { get; set; }
         public virtual ICollection<DetalleExposicion> DetalleExposicion { get; set; }
         public virtual ICollection<PublicoDestino> PublicoDestino { get; set; }
+        public virtual ICollection<ReservaXExposicion> ReservaXExposicion { get; set; }
 
         public bool sosTemporal()
         {

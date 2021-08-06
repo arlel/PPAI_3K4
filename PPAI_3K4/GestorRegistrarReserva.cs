@@ -326,7 +326,9 @@ namespace PPAI_3K4
                         // Se inserta en la BD la reserva, el cambio de estado y las asignaciones
                         context.ReservaVisita.Add(reservaVisita);
                         context.SaveChanges();
-
+                        reservaVisita.guardarExposReserva(sedeSeleccionada);
+                        context.ReservaVisita.Update(reservaVisita);
+                        context.SaveChanges();
                         break;
                     }
                 }

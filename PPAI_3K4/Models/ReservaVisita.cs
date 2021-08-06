@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 // Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
 // If you have enabled NRTs for your project, then un-comment the following line:
@@ -9,10 +10,35 @@ namespace PPAI_3K4.Models
 {
     public partial class ReservaVisita
     {
+        public long Id { get; set; }
+        public int? CantidadAlumnos { get; set; }
+        public int? CantidadAlumnosConfirmada { get; set; }
+        public TimeSpan? DuracionEstimada { get; set; }
+        public DateTime? FechaHoraCreacion { get; set; }
+        public DateTime? FechaHoraReserva { get; set; }
+        public TimeSpan? HoraFinReal { get; set; }
+        public TimeSpan? HoraInicioReal { get; set; }
+        public long? NumeroReserva { get; set; }
+        public long? IdEscuela { get; set; }
+        public long? IdSede { get; set; }
+        public long? IdEmpleado { get; set; }
+
+        public virtual Empleado IdEmpleadoNavigation { get; set; }
+        public virtual Escuela IdEscuelaNavigation { get; set; }
+        public virtual Sede IdSedeNavigation { get; set; }
+        public virtual ICollection<AsignacionVisita> AsignacionVisita { get; set; }
+        public virtual ICollection<CambioEstadoReservaVisita> CambioEstadoReservaVisita { get; set; }
+        public virtual ICollection<ReservaXExposicion> ReservaXExposicion { get; set; }
+        [NotMapped]
+        public virtual IList<Exposicion> Exposiciones { get; set; }
+
+
         public ReservaVisita()
         {
             AsignacionVisita = new HashSet<AsignacionVisita>();
             CambioEstadoReservaVisita = new HashSet<CambioEstadoReservaVisita>();
+            Exposiciones = new List<Exposicion>();
+            ReservaXExposicion = new HashSet<ReservaXExposicion>();
         }
 
         public ReservaVisita(int? cantidadAlumnos, int? cantidadAlumnosConfirmada, TimeSpan? duracionEstimada, DateTime? fechaHoraCreacion, DateTime? fechaHoraReserva, TimeSpan? horaFinReal, TimeSpan? horaInicioReal, long? numeroReserva, Escuela escuela, Sede sede, Empleado empleado, IList<Empleado> guiasSeleccionados, DateTime fechaFinEstimada, Estado estadoInicio, DateTime fechaActual)
@@ -30,9 +56,12 @@ namespace PPAI_3K4.Models
             IdEmpleado = 1;
             AsignacionVisita = new List<AsignacionVisita>();
             CambioEstadoReservaVisita = new List<CambioEstadoReservaVisita>();
+            ReservaXExposicion = new HashSet<ReservaXExposicion>();
 
             crearCambioDeEstado(estadoInicio, fechaActual);
             crearAsignacionesVisitas(fechaHoraReserva.Value, fechaFinEstimada, guiasSeleccionados);
+            
+            
         }
 
         private void crearCambioDeEstado(Estado estadoInicio, DateTime fechaActual)
@@ -63,25 +92,7 @@ namespace PPAI_3K4.Models
                 || FechaHoraReserva?.TimeOfDay <= fechaFin.TimeOfDay && FechaHoraFinEstimada.TimeOfDay >= fechaFin.TimeOfDay;
         }
 
-        public long Id { get; set; }
-        public int? CantidadAlumnos { get; set; }
-        public int? CantidadAlumnosConfirmada { get; set; }
-        public TimeSpan? DuracionEstimada { get; set; }
-        public DateTime? FechaHoraCreacion { get; set; }
-        public DateTime? FechaHoraReserva { get; set; }
-        public TimeSpan? HoraFinReal { get; set; }
-        public TimeSpan? HoraInicioReal { get; set; }
-        public long? NumeroReserva { get; set; }
-        public long? IdEscuela { get; set; }
-        public long? IdSede { get; set; }
-        public long? IdEmpleado { get; set; }
-
-        public virtual Empleado IdEmpleadoNavigation { get; set; }
-        public virtual Escuela IdEscuelaNavigation { get; set; }
-        public virtual Sede IdSedeNavigation { get; set; }
-        public virtual ICollection<AsignacionVisita> AsignacionVisita { get; set; }
-        public virtual ICollection<CambioEstadoReservaVisita> CambioEstadoReservaVisita { get; set; }
-
+        
 
         public bool tenesUnGuiaEntreHorarios(Empleado empleado, DateTime fechaInicio, DateTime fechaFin)
         {
@@ -101,6 +112,20 @@ namespace PPAI_3K4.Models
         public int getCantidadAlumnos()
         {
             return CantidadAlumnos.Value;
+        }
+
+        public void guardarExposReserva(Sede sede)
+        {
+            List<Exposicion> exposicions = sede.getExposicionesSeleccionadas();
+            foreach (Exposicion e in exposicions)
+            {
+                crearReservaXExposicion(e);
+            }
+        }
+        private void crearReservaXExposicion(Exposicion e)
+        {
+            ReservaXExposicion r = new ReservaXExposicion(this, e);
+            this.ReservaXExposicion.Add(r);
         }
     }
 }
