@@ -85,7 +85,7 @@ namespace PPAI_3K4.Models
                     publicosDestino += ", ";
                 }
             }
-            return "Nombre: " + Nombre + "Publico: " + publicosDestino + " - Apertura: " + HoraApertura.ToString() + " - Cierre: " + HoraCierre.ToString();
+            return "Nombre: " + Nombre + " - Publico: " + publicosDestino + " - Apertura: " + HoraApertura.ToString() + " - Cierre: " + HoraCierre.ToString();
         }
     }
 }
