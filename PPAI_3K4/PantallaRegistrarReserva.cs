@@ -185,5 +185,10 @@ namespace PPAI_3K4
         {
             gestorRegistrarReserva.tomarConfirmacion();
         }
+
+        public void mostrarPanelGuias()
+        {
+            mostrarPanel(pnlSelGuias);
+        }
     }
 }

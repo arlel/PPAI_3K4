@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 
 // Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
@@ -28,9 +29,10 @@ namespace PPAI_3K4.Models
         public virtual ICollection<Exposicion> Exposicion { get; set; }
         public virtual ICollection<HorarioSede> HorarioSede { get; set; }
         public virtual ICollection<ReservaVisita> ReservaVisita { get; set; }
-
-        public virtual IList<Exposicion> exposicionesTemporalesVigentes { get; set; }
-        public virtual IList<Exposicion> exposicionesSeleccionadas { get; set; }
+        [NotMapped]
+        public  IList<Exposicion> exposicionesTemporalesVigentes { get; set; }
+        [NotMapped]
+        public  IList<Exposicion> exposicionesSeleccionadas { get; set; }
         
 
         public string getNombre() {
@@ -70,7 +72,7 @@ namespace PPAI_3K4.Models
 
         public int calcularCantidadGuias(int cantidadVisitantes)
         {
-            float cantidadGuias = cantidadVisitantes / CantMaxPorGuia.Value;
+            double cantidadGuias = (double)cantidadVisitantes / CantMaxPorGuia.Value;
             return (int)Math.Ceiling(cantidadGuias);
         }
 
@@ -82,6 +84,7 @@ namespace PPAI_3K4.Models
 
         public void setExposicionesSeleccionadas(List<int> indicesExps)
         {
+            exposicionesSeleccionadas = new List<Exposicion>();
             //Agrego todas las exposiciones que fueron seleccionadas
             foreach (int i in indicesExps)
             {

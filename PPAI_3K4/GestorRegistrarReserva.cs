@@ -166,6 +166,7 @@ namespace PPAI_3K4
             }
 
             cantidadVisitantesAcumulados = visitantesAcumulados;
+            verificarCapacidadMaxima();
         }
 
         public void obtenerGuiasSedeSeleccionada()
@@ -239,6 +240,7 @@ namespace PPAI_3K4
 
         public void tomarSeleccionGuias(List<int> indicesGuias) // HASTA ACA ESTA TODO BIEN
         {
+            guiasSeleccionados = new List<Empleado>();
             if (indicesGuias.Count == cantidadGuiasNecesarios)
             {
                 foreach (int i in indicesGuias)
@@ -251,6 +253,8 @@ namespace PPAI_3K4
             } else
             {
                 MessageBox.Show("Debe seleccionar " + cantidadGuiasNecesarios.ToString() + " guías.");
+                pantallaRegistrarReserva.mostrarPanelGuias();
+
             }
         }
 

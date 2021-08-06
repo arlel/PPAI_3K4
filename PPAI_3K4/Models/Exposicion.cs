@@ -74,8 +74,7 @@ namespace PPAI_3K4.Models
         public string getExposicion()
         {
             string publicosDestino ="";
-            PublicoDestino[] pds = { };
-            this.PublicoDestino.CopyTo(pds, 0);
+            PublicoDestino[] pds=  this.PublicoDestino.ToArray();
             for(int i=0; i< pds.Count();i++)
             {
                 publicosDestino += pds[i].getNombre();
