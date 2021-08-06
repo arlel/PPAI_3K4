@@ -70,7 +70,8 @@ namespace PPAI_3K4.Models
 
         public int calcularCantidadGuias(int cantidadVisitantes)
         {
-            return cantidadVisitantes / CantMaxPorGuia.Value;
+            float cantidadGuias = cantidadVisitantes / CantMaxPorGuia.Value;
+            return (int)Math.Ceiling(cantidadGuias);
         }
 
 
@@ -86,6 +87,27 @@ namespace PPAI_3K4.Models
             {
                 exposicionesSeleccionadas.Add(exposicionesTemporalesVigentes[i]);
             }
+        }
+
+        public TimeSpan calcularDuracionEstimadaReserva(bool esPorExposicion)
+        {
+            TimeSpan duracionReserva = new TimeSpan();
+            if (esPorExposicion)
+            {
+                //Aca, le tenemos que decir a la sede, que calcule, la sede, hace una sumatoria de las
+                // duraciones (extendidas en este caso) que le de cada una de las exposiciones.
+                // Se recorre todas las exposiciones y se le consulta sumatoria de la duracion de sus obras
+                foreach (Exposicion exposicion in exposicionesSeleccionadas)
+                {
+                    // La sumatoria de la duracion de las exposiciones se acumula en duracionReserva
+                    duracionReserva = duracionReserva.Add(exposicion.calcularDuracionObrasExpuestas());
+                }
+
+            } else
+            {
+                throw new NotImplementedException();
+            }
+            return duracionReserva;
         }
     }
 }

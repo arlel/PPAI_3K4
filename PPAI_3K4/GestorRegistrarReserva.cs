@@ -27,6 +27,9 @@ namespace PPAI_3K4
         int cantidadGuiasNecesarios { get; set; }
         TimeSpan duracionReserva { get; set; }
         public IList<Empleado> guiasSeleccionados { get; private set; }
+        int cantidadVisitantesAcumulados { get; set; }
+        List<ReservaVisita> reservaVisitas { get; set; }
+        List<Empleado> guias { get; set; }
 
         public GestorRegistrarReserva()
         {
@@ -150,7 +153,7 @@ namespace PPAI_3K4
             pantallaRegistrarReserva.solicitarFechaHoraReserva();
         }
 
-        public int obtenerAcumuladoReserva(List<ReservaVisita> reservaVisitas)
+        public void obtenerAcumuladoReserva(List<ReservaVisita> reservaVisitas)
         {
             int visitantesAcumulados = 0;
             foreach(ReservaVisita reservaVisita in reservaVisitas)
@@ -158,11 +161,71 @@ namespace PPAI_3K4
                 // Las reservas que intercedan entre la fechaHoraReserva y fechaFinEstimada se obtiene la cantidad de alumnos y se los suma al acumulador
                 if(reservaVisita.estasEntreFechas(fechaHoraReserva, fechaFinEstimada))
                 {
-                    visitantesAcumulados += reservaVisita.CantidadAlumnos.Value;
+                    visitantesAcumulados += reservaVisita.getCantidadAlumnos();
                 }
             }
 
-            return visitantesAcumulados;
+            cantidadVisitantesAcumulados = visitantesAcumulados;
+        }
+
+        public void obtenerGuiasSedeSeleccionada()
+        {
+            // Se consulta a la BD la lista de empleados
+            List<Empleado> empleados = obtenerEmpleadosSedeSeleccionada();
+
+            // Se inicializa una lista vacia de guias a mostrar
+            guias = new List<Empleado>();
+
+            foreach (Empleado empleado in empleados)
+            {
+                // consulta al objeto empleado si es un empleado con cargo Guia
+                if (empleado.sosGuia())
+                {
+                    bool esValido = true;
+
+                    // Recorre la lista de reservas y consulta si el guia tiene un horario que se solapa en la fecha de la nueva reserva
+                    // En ese caso no incluimos al guia en la lista de guias
+                    foreach (ReservaVisita reservaVisita in reservaVisitas)
+                    {
+                        if (reservaVisita.tenesUnGuiaEntreHorarios(empleado, fechaHoraReserva, fechaFinEstimada))
+                        {
+                            esValido = false;
+                            break;
+                        }
+                    }
+
+                    if (esValido)
+                        guias.Add(empleado);
+                }
+            }
+
+            // En caso de que hayan guias disponibles se muestran los guias y la cantidad de guias necesarios
+            // En caso contrario se muestra un mensaje de error
+            if (guias.Count > 0)
+            {
+                calcularGuiasNecesarios(guias);
+            }
+            else
+            {
+                pantallaRegistrarReserva.mostrarMensaje("No hay guías disponibles para asignar a la visita");
+            }
+        }
+
+        public void verificarCapacidadMaxima()
+        {
+            // Se calcula la fecha fin estimada, sumandole a la fecha y hora de la reserva, la duracion calculada
+            fechaFinEstimada = fechaHoraReserva.Add(duracionReserva);
+
+            // Se verifica si la cantidad de visitantes acumulados más la cantidad de visitantes (de la reserva nueva)
+            // No sobrepasa la cantidad maxima de visitantes de la sede
+            if (sedeSeleccionada.verificarCapacidadMaxima(cantidadVisitantesAcumulados + cantidadVisitantes))
+            {
+                obtenerGuiasSedeSeleccionada();
+            }
+            else
+            {
+                pantallaRegistrarReserva.mostrarMensaje("La capacidad máxima de visitantes por sede se sobrepasa para la duración de la visita.");
+            }
         }
 
 
@@ -171,85 +234,35 @@ namespace PPAI_3K4
             this.fechaHoraReserva = fechaHoraReserva;
 
             // Se calcula la duracion de la reserva
-            duracionReserva = calcularDuracionEstimadaReserva();
+            calcularDuracionEstimadaReserva();
+        }
 
-            // Se calcula la fecha fin estimada, sumandole a la fecha y hora de la reserva, la duracion calculada
-            fechaFinEstimada = fechaHoraReserva.Add(duracionReserva);
-
-            // Se solicita a la BD las ReservaVisitas de la sede seleccionada
-            List<ReservaVisita> reservaVisitas = obtenerReservaVisitasSedeSeleccionada();
-
-            // Se consulta por el acumulado de visitantes de las reservas que interceden con los horarios de la nueva reserva
-            int cantidadVisitantesAcumulados = obtenerAcumuladoReserva(reservaVisitas);
-
-            // Se verifica si la cantidad de visitantes acumulados más la cantidad de visitantes (de la reserva nueva)
-            // No sobrepasa la cantidad maxima de visitantes de la sede
-            if (sedeSeleccionada.verificarCapacidadMaxima(cantidadVisitantesAcumulados + cantidadVisitantes))
+        public void tomarSeleccionGuias(List<int> indicesGuias) // HASTA ACA ESTA TODO BIEN
+        {
+            if (indicesGuias.Count == cantidadGuiasNecesarios)
             {
-                // Se consulta a la BD la lista de empleados
-                List<Empleado> empleados = obtenerEmpleadosSedeSeleccionada();
-
-                // Se inicializa una lista vacia de guias a mostrar
-                List<Empleado> guias = new List<Empleado>();
-
-                foreach(Empleado empleado in empleados)
+                foreach (int i in indicesGuias)
                 {
-                    // consulta al objeto empleado si es un empleado con cargo Guia
-                    if(empleado.sosGuia())
-                    {
-                        bool esValido = true;
-
-                        // Recorre la lista de reservas y consulta si el guia tiene un horario que se solapa en la fecha de la nueva reserva
-                        // En ese caso no incluimos al guia en la lista de guias
-                        foreach(ReservaVisita reservaVisita in reservaVisitas)
-                        {
-                            if(reservaVisita.tenesUnGuiaEntreHorarios(empleado, fechaHoraReserva, fechaFinEstimada)) {
-                                esValido = false;
-                            }
-
-                        }
-
-                        if(esValido)
-                            guias.Add(empleado);
-
-                    }
+                    guiasSeleccionados.Add(guias[i]);
                 }
 
-                // En caso de que hayan guias disponibles se muestran los guias y la cantidad de guias necesarios
-                // En caso contrario se muestra un mensaje de error
-                if(guias.Count > 0)
-                {
-                    cantidadGuiasNecesarios = sedeSeleccionada.calcularCantidadGuias(cantidadVisitantes);
-
-                    pantallaRegistrarReserva.mostrarCantidadGuiasNecesarias(cantidadGuiasNecesarios); // agregar al diagrama de secuencia
-                    pantallaRegistrarReserva.mostrarGuias(guias);
-                } else
-                {
-                    pantallaRegistrarReserva.mostrarMensaje("No hay guías disponibles para asignar a la visita");
-                }
+                // Se solicita a la pantalla la confirmacion de la reserva
+                pantallaRegistrarReserva.solicitarConfirmacion();
             } else
             {
-                pantallaRegistrarReserva.mostrarMensaje("La capacidad máxima de visitantes por sede se sobrepasa para la duración de la visita.");
+                MessageBox.Show("Debe seleccionar " + cantidadGuiasNecesarios.ToString() + " guías.");
             }
-
         }
 
-        public void tomarSeleccionGuias(IList<Empleado> guias)
-        {
-            this.guiasSeleccionados = guias;
-
-            // Se solicita a la pantalla la confirmacion de la reserva
-            pantallaRegistrarReserva.solicitarConfirmacion();
-        }
-
-        public List<ReservaVisita> obtenerReservaVisitasSedeSeleccionada() { 
+        public void obtenerReservaVisitasSedeSeleccionada() { 
             using(ppaiContext context = new ppaiContext())
             {
                 // Internamente en la consulta a base se obtienen las Asignaciones
                 // por consiguiente se sustituye el lamado al metodo con esta consulta en base
-                return context.ReservaVisita.Include("AsignacionVisita").Where(e => e.IdSede == sedeSeleccionada.Id).ToList();
+                reservaVisitas =  context.ReservaVisita.Include("AsignacionVisita").Where(e => e.IdSede == sedeSeleccionada.Id).ToList();
             }
-        
+
+            obtenerAcumuladoReserva(reservaVisitas);
         }
 
         public List<Empleado> obtenerEmpleadosSedeSeleccionada()
@@ -264,22 +277,30 @@ namespace PPAI_3K4
         }
 
 
-        public TimeSpan calcularDuracionEstimadaReserva()
+        public void calcularDuracionEstimadaReserva()
         {
-            TimeSpan duracionReserva = new TimeSpan();
             if (tipoVisitaSeleccionada.esPorExposicion())
             {
-                //Aca, le tenemos que decir a la sede, que calcule, la sede, hace una sumatoria de las
-                // duraciones (extendidas en este caso) que le de cada una de las exposiciones.
-                // Se recorre todas las exposiciones y se le consulta sumatoria de la duracion de sus obras
-                foreach(Exposicion exposicion in exposicionesSeleccionada)
-                {
-                    // La sumatoria de la duracion de las exposiciones se acumula en duracionReserva
-                    duracionReserva = duracionReserva.Add(exposicion.calcularDuracionObrasExpuestas());
-                }
-            } 
+                duracionReserva = sedeSeleccionada.calcularDuracionEstimadaReserva(tipoVisitaSeleccionada.esPorExposicion());
+            }
 
-            return duracionReserva;
+            // Se solicita a la BD las ReservaVisitas de la sede seleccionada
+            obtenerReservaVisitasSedeSeleccionada();
+
+        }
+
+        public void calcularGuiasNecesarios(List<Empleado> guias)
+        {
+            cantidadGuiasNecesarios = sedeSeleccionada.calcularCantidadGuias(cantidadVisitantes);
+
+            pantallaRegistrarReserva.mostrarCantidadGuiasNecesarias(cantidadGuiasNecesarios); // agregar al diagrama de secuencia
+            List<String> guiasAMostrar = new List<string>();
+            foreach (Empleado guia in guias)
+            {
+                guiasAMostrar.Add(guia.getNombre());
+            }
+
+            pantallaRegistrarReserva.mostrarGuias(guiasAMostrar.ToArray());
         }
 
         public void tomarConfirmacion()

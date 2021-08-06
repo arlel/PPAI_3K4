@@ -97,5 +97,10 @@ namespace PPAI_3K4.Models
 
             return false;
         }
+
+        public int getCantidadAlumnos()
+        {
+            return CantidadAlumnos.Value;
+        }
     }
 }

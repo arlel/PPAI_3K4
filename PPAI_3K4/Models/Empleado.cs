@@ -42,6 +42,11 @@ namespace PPAI_3K4.Models
             // Se consulta al objeto Cargo si es guia
             return this.IdCargoNavigation.esGuia();
         }
+
+        public string getNombre()
+        {
+            return Nombre + ' ' + Apellido;
+        }
         
     }
 }

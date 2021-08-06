@@ -154,27 +154,26 @@ namespace PPAI_3K4
             lblCantidadGuiasNecesarios.Text = cantidadGuiasNecesarios.ToString();
         }
 
-        public void mostrarGuias(List<Empleado> guias)
+        public void mostrarGuias(String[] guias)
         {
             mostrarPanel(pnlSelGuias);
 
-            dgGuias.AutoGenerateColumns = false;
-            dgGuias.DataSource = guias;
+            listboxGuias.Items.AddRange(guias);
+            listboxGuias.Refresh();
         }
 
         private void tomarSeleccionGuia(object sender, EventArgs e)
         {
             ocultarPanel(pnlSelGuias);
 
-            IList<Empleado> guiasSeleccionados = new List<Empleado>();
-
-            // Se consulta a la tabla de guias los guias seleccionados y se los agrega a la lista guiasSeleccionados
-            foreach (DataGridViewRow row in dgGuias.SelectedRows)
+            List<int> checkeds = new List<int>();
+            // Se consulta a la tabla de exposiciones las filas seleccionadas y se agregan a la lista exposicionesSeleccionadas
+            foreach (Object item in listboxGuias.CheckedItems)
             {
-                guiasSeleccionados.Add((Empleado)row.DataBoundItem);
+                checkeds.Add(listboxGuias.Items.IndexOf(item));
             }
 
-            gestorRegistrarReserva.tomarSeleccionGuias(guiasSeleccionados);
+            gestorRegistrarReserva.tomarSeleccionGuias(checkeds);
         }
 
         public void solicitarConfirmacion()
