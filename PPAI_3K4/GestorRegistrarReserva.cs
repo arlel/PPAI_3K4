@@ -135,6 +135,7 @@ namespace PPAI_3K4
             } else
             {
                 pantallaRegistrarReserva.mostrarMensaje("No hay exposiciones temporales vigentes en la sede seleccionada.");
+                pantallaRegistrarReserva.atrasPnlTipoVisita();
             }
 
         }
@@ -209,6 +210,7 @@ namespace PPAI_3K4
             else
             {
                 pantallaRegistrarReserva.mostrarMensaje("No hay guías disponibles para asignar a la visita");
+                pantallaRegistrarReserva.atrasPnlGuia();
             }
         }
 
@@ -340,6 +342,7 @@ namespace PPAI_3K4
         public void finCU()
         {
             pantallaRegistrarReserva.mostrarMensaje("La reserva ha sido creada con exito");
+            pantallaRegistrarReserva.ocultarPantalla();
         }
 
         public List<Estado> obtenerEstados()

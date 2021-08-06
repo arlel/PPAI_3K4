@@ -63,9 +63,16 @@ namespace PPAI_3K4
             this.btnSigSelGuia = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.pnlConfirmacion = new System.Windows.Forms.Panel();
-            this.button2 = new System.Windows.Forms.Button();
+            this.atrasConfirmar = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
+            this.atrasGuia = new System.Windows.Forms.Button();
+            this.cancelarEscuela = new System.Windows.Forms.Button();
+            this.atrasExpo = new System.Windows.Forms.Button();
+            this.atrasVisitantes = new System.Windows.Forms.Button();
+            this.atrasSede = new System.Windows.Forms.Button();
+            this.atrasVisita = new System.Windows.Forms.Button();
+            this.atrasFyH = new System.Windows.Forms.Button();
             this.panelSelEscuela.SuspendLayout();
             this.pnlCantidadVisitantes.SuspendLayout();
             this.pnlTipoVisita.SuspendLayout();
@@ -98,12 +105,13 @@ namespace PPAI_3K4
             // 
             // panelSelEscuela
             // 
+            this.panelSelEscuela.Controls.Add(this.cancelarEscuela);
             this.panelSelEscuela.Controls.Add(this.comboEscuelas);
             this.panelSelEscuela.Controls.Add(this.button1);
             this.panelSelEscuela.Controls.Add(this.label1);
             this.panelSelEscuela.Location = new System.Drawing.Point(3, 12);
             this.panelSelEscuela.Name = "panelSelEscuela";
-            this.panelSelEscuela.Size = new System.Drawing.Size(29, 30);
+            this.panelSelEscuela.Size = new System.Drawing.Size(28, 41);
             this.panelSelEscuela.TabIndex = 3;
             // 
             // comboEscuelas
@@ -117,20 +125,21 @@ namespace PPAI_3K4
             // 
             // pnlCantidadVisitantes
             // 
+            this.pnlCantidadVisitantes.Controls.Add(this.atrasVisitantes);
             this.pnlCantidadVisitantes.Controls.Add(this.btnSiguienteCantVisitantes);
             this.pnlCantidadVisitantes.Controls.Add(this.label2);
             this.pnlCantidadVisitantes.Controls.Add(this.txtCantVisitantes);
-            this.pnlCantidadVisitantes.Location = new System.Drawing.Point(51, 11);
+            this.pnlCantidadVisitantes.Location = new System.Drawing.Point(65, 10);
             this.pnlCantidadVisitantes.Name = "pnlCantidadVisitantes";
-            this.pnlCantidadVisitantes.Size = new System.Drawing.Size(35, 41);
+            this.pnlCantidadVisitantes.Size = new System.Drawing.Size(36, 43);
             this.pnlCantidadVisitantes.TabIndex = 3;
             this.pnlCantidadVisitantes.Visible = false;
             // 
             // btnSiguienteCantVisitantes
             // 
-            this.btnSiguienteCantVisitantes.Location = new System.Drawing.Point(271, 172);
+            this.btnSiguienteCantVisitantes.Location = new System.Drawing.Point(518, 295);
             this.btnSiguienteCantVisitantes.Name = "btnSiguienteCantVisitantes";
-            this.btnSiguienteCantVisitantes.Size = new System.Drawing.Size(126, 33);
+            this.btnSiguienteCantVisitantes.Size = new System.Drawing.Size(116, 39);
             this.btnSiguienteCantVisitantes.TabIndex = 4;
             this.btnSiguienteCantVisitantes.Text = "Siguiente";
             this.btnSiguienteCantVisitantes.UseVisualStyleBackColor = true;
@@ -140,7 +149,7 @@ namespace PPAI_3K4
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(220, 91);
+            this.label2.Location = new System.Drawing.Point(77, 83);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(339, 19);
             this.label2.TabIndex = 1;
@@ -149,19 +158,20 @@ namespace PPAI_3K4
             // txtCantVisitantes
             // 
             this.txtCantVisitantes.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtCantVisitantes.Location = new System.Drawing.Point(220, 123);
+            this.txtCantVisitantes.Location = new System.Drawing.Point(85, 114);
             this.txtCantVisitantes.Name = "txtCantVisitantes";
             this.txtCantVisitantes.Size = new System.Drawing.Size(240, 35);
             this.txtCantVisitantes.TabIndex = 0;
             // 
             // pnlTipoVisita
             // 
+            this.pnlTipoVisita.Controls.Add(this.atrasVisita);
             this.pnlTipoVisita.Controls.Add(this.comboTipoVisitas);
             this.pnlTipoVisita.Controls.Add(this.btnSigTipoVisita);
             this.pnlTipoVisita.Controls.Add(this.label3);
-            this.pnlTipoVisita.Location = new System.Drawing.Point(154, 11);
+            this.pnlTipoVisita.Location = new System.Drawing.Point(169, 10);
             this.pnlTipoVisita.Name = "pnlTipoVisita";
-            this.pnlTipoVisita.Size = new System.Drawing.Size(38, 39);
+            this.pnlTipoVisita.Size = new System.Drawing.Size(24, 64);
             this.pnlTipoVisita.TabIndex = 3;
             this.pnlTipoVisita.Visible = false;
             // 
@@ -176,7 +186,7 @@ namespace PPAI_3K4
             // 
             // btnSigTipoVisita
             // 
-            this.btnSigTipoVisita.Location = new System.Drawing.Point(285, 234);
+            this.btnSigTipoVisita.Location = new System.Drawing.Point(576, 349);
             this.btnSigTipoVisita.Name = "btnSigTipoVisita";
             this.btnSigTipoVisita.Size = new System.Drawing.Size(100, 30);
             this.btnSigTipoVisita.TabIndex = 4;
@@ -196,12 +206,13 @@ namespace PPAI_3K4
             // 
             // pnlSelSedes
             // 
+            this.pnlSelSedes.Controls.Add(this.atrasSede);
             this.pnlSelSedes.Controls.Add(this.comboSedes);
             this.pnlSelSedes.Controls.Add(this.label4);
             this.pnlSelSedes.Controls.Add(this.button3);
-            this.pnlSelSedes.Location = new System.Drawing.Point(115, 11);
+            this.pnlSelSedes.Location = new System.Drawing.Point(107, 10);
             this.pnlSelSedes.Name = "pnlSelSedes";
-            this.pnlSelSedes.Size = new System.Drawing.Size(19, 39);
+            this.pnlSelSedes.Size = new System.Drawing.Size(27, 55);
             this.pnlSelSedes.TabIndex = 4;
             this.pnlSelSedes.Visible = false;
             // 
@@ -210,7 +221,7 @@ namespace PPAI_3K4
             this.comboSedes.FormattingEnabled = true;
             this.comboSedes.Location = new System.Drawing.Point(138, 164);
             this.comboSedes.Name = "comboSedes";
-            this.comboSedes.Size = new System.Drawing.Size(310, 22);
+            this.comboSedes.Size = new System.Drawing.Size(407, 22);
             this.comboSedes.TabIndex = 3;
             this.comboSedes.Text = "Seleccione";
             // 
@@ -226,7 +237,7 @@ namespace PPAI_3K4
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(572, 343);
+            this.button3.Location = new System.Drawing.Point(568, 346);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(91, 26);
             this.button3.TabIndex = 1;
@@ -236,12 +247,13 @@ namespace PPAI_3K4
             // 
             // pnlExposiciones
             // 
+            this.pnlExposiciones.Controls.Add(this.atrasExpo);
             this.pnlExposiciones.Controls.Add(this.listboxExpos);
             this.pnlExposiciones.Controls.Add(this.btnSelExposicion);
             this.pnlExposiciones.Controls.Add(this.label5);
-            this.pnlExposiciones.Location = new System.Drawing.Point(12, 11);
+            this.pnlExposiciones.Location = new System.Drawing.Point(37, 14);
             this.pnlExposiciones.Name = "pnlExposiciones";
-            this.pnlExposiciones.Size = new System.Drawing.Size(33, 31);
+            this.pnlExposiciones.Size = new System.Drawing.Size(27, 37);
             this.pnlExposiciones.TabIndex = 5;
             this.pnlExposiciones.Visible = false;
             // 
@@ -250,9 +262,9 @@ namespace PPAI_3K4
             this.listboxExpos.BackColor = System.Drawing.SystemColors.Window;
             this.listboxExpos.CheckOnClick = true;
             this.listboxExpos.FormattingEnabled = true;
-            this.listboxExpos.Location = new System.Drawing.Point(68, 123);
+            this.listboxExpos.Location = new System.Drawing.Point(17, 123);
             this.listboxExpos.Name = "listboxExpos";
-            this.listboxExpos.Size = new System.Drawing.Size(522, 76);
+            this.listboxExpos.Size = new System.Drawing.Size(635, 76);
             this.listboxExpos.Sorted = true;
             this.listboxExpos.TabIndex = 6;
             // 
@@ -292,13 +304,14 @@ namespace PPAI_3K4
             // 
             // pnlFechaHoraReserva
             // 
+            this.pnlFechaHoraReserva.Controls.Add(this.atrasFyH);
             this.pnlFechaHoraReserva.Controls.Add(this.dtpHoraReserva);
             this.pnlFechaHoraReserva.Controls.Add(this.btnSigSelFechaYHora);
             this.pnlFechaHoraReserva.Controls.Add(this.dtpFechaReserva);
             this.pnlFechaHoraReserva.Controls.Add(this.label6);
-            this.pnlFechaHoraReserva.Location = new System.Drawing.Point(220, 11);
+            this.pnlFechaHoraReserva.Location = new System.Drawing.Point(208, 17);
             this.pnlFechaHoraReserva.Name = "pnlFechaHoraReserva";
-            this.pnlFechaHoraReserva.Size = new System.Drawing.Size(17, 31);
+            this.pnlFechaHoraReserva.Size = new System.Drawing.Size(51, 38);
             this.pnlFechaHoraReserva.TabIndex = 6;
             this.pnlFechaHoraReserva.Visible = false;
             // 
@@ -314,7 +327,7 @@ namespace PPAI_3K4
             // btnSigSelFechaYHora
             // 
             this.btnSigSelFechaYHora.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnSigSelFechaYHora.Location = new System.Drawing.Point(261, 192);
+            this.btnSigSelFechaYHora.Location = new System.Drawing.Point(525, 289);
             this.btnSigSelFechaYHora.Name = "btnSigSelFechaYHora";
             this.btnSigSelFechaYHora.Size = new System.Drawing.Size(157, 36);
             this.btnSigSelFechaYHora.TabIndex = 8;
@@ -343,14 +356,15 @@ namespace PPAI_3K4
             // 
             // pnlSelGuias
             // 
+            this.pnlSelGuias.Controls.Add(this.atrasGuia);
             this.pnlSelGuias.Controls.Add(this.listboxGuias);
             this.pnlSelGuias.Controls.Add(this.lblCantidadGuiasNecesarios);
             this.pnlSelGuias.Controls.Add(this.label7);
             this.pnlSelGuias.Controls.Add(this.btnSigSelGuia);
             this.pnlSelGuias.Controls.Add(this.label8);
-            this.pnlSelGuias.Location = new System.Drawing.Point(481, 29);
+            this.pnlSelGuias.Location = new System.Drawing.Point(278, 17);
             this.pnlSelGuias.Name = "pnlSelGuias";
-            this.pnlSelGuias.Size = new System.Drawing.Size(642, 379);
+            this.pnlSelGuias.Size = new System.Drawing.Size(52, 48);
             this.pnlSelGuias.TabIndex = 7;
             this.pnlSelGuias.Visible = false;
             // 
@@ -359,14 +373,14 @@ namespace PPAI_3K4
             this.listboxGuias.FormattingEnabled = true;
             this.listboxGuias.Location = new System.Drawing.Point(61, 99);
             this.listboxGuias.Name = "listboxGuias";
-            this.listboxGuias.Size = new System.Drawing.Size(522, 76);
+            this.listboxGuias.Size = new System.Drawing.Size(522, 130);
             this.listboxGuias.TabIndex = 9;
             // 
             // lblCantidadGuiasNecesarios
             // 
             this.lblCantidadGuiasNecesarios.AutoSize = true;
             this.lblCantidadGuiasNecesarios.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblCantidadGuiasNecesarios.Location = new System.Drawing.Point(357, 290);
+            this.lblCantidadGuiasNecesarios.Location = new System.Drawing.Point(388, 295);
             this.lblCantidadGuiasNecesarios.Name = "lblCantidadGuiasNecesarios";
             this.lblCantidadGuiasNecesarios.Size = new System.Drawing.Size(0, 24);
             this.lblCantidadGuiasNecesarios.TabIndex = 8;
@@ -375,11 +389,12 @@ namespace PPAI_3K4
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label7.Location = new System.Drawing.Point(61, 290);
+            this.label7.Location = new System.Drawing.Point(10, 295);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(370, 24);
             this.label7.TabIndex = 7;
             this.label7.Text = "Cantidad de guias necesarios: ";
+            this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
             // btnSigSelGuia
             // 
@@ -403,23 +418,24 @@ namespace PPAI_3K4
             // 
             // pnlConfirmacion
             // 
-            this.pnlConfirmacion.Controls.Add(this.button2);
+            this.pnlConfirmacion.Controls.Add(this.atrasConfirmar);
             this.pnlConfirmacion.Controls.Add(this.label9);
             this.pnlConfirmacion.Controls.Add(this.button4);
-            this.pnlConfirmacion.Location = new System.Drawing.Point(382, 11);
+            this.pnlConfirmacion.Location = new System.Drawing.Point(379, 29);
             this.pnlConfirmacion.Name = "pnlConfirmacion";
-            this.pnlConfirmacion.Size = new System.Drawing.Size(49, 31);
+            this.pnlConfirmacion.Size = new System.Drawing.Size(137, 45);
             this.pnlConfirmacion.TabIndex = 8;
             this.pnlConfirmacion.Visible = false;
             // 
-            // button2
+            // atrasConfirmar
             // 
-            this.button2.Location = new System.Drawing.Point(201, 189);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(119, 34);
-            this.button2.TabIndex = 8;
-            this.button2.Text = "Cancelar";
-            this.button2.UseVisualStyleBackColor = true;
+            this.atrasConfirmar.Location = new System.Drawing.Point(201, 189);
+            this.atrasConfirmar.Name = "atrasConfirmar";
+            this.atrasConfirmar.Size = new System.Drawing.Size(119, 34);
+            this.atrasConfirmar.TabIndex = 8;
+            this.atrasConfirmar.Text = "&Cancelar";
+            this.atrasConfirmar.UseVisualStyleBackColor = true;
+            this.atrasConfirmar.Click += new System.EventHandler(this.atrasConfirmar_Click);
             // 
             // label9
             // 
@@ -441,11 +457,82 @@ namespace PPAI_3K4
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.tomarConfirmacion);
             // 
+            // atrasGuia
+            // 
+            this.atrasGuia.Location = new System.Drawing.Point(42, 346);
+            this.atrasGuia.Name = "atrasGuia";
+            this.atrasGuia.Size = new System.Drawing.Size(119, 34);
+            this.atrasGuia.TabIndex = 10;
+            this.atrasGuia.Text = "&Atras";
+            this.atrasGuia.UseVisualStyleBackColor = true;
+            this.atrasGuia.Click += new System.EventHandler(this.atrasGuia_Click);
+            // 
+            // cancelarEscuela
+            // 
+            this.cancelarEscuela.Location = new System.Drawing.Point(28, 350);
+            this.cancelarEscuela.Name = "cancelarEscuela";
+            this.cancelarEscuela.Size = new System.Drawing.Size(103, 25);
+            this.cancelarEscuela.TabIndex = 4;
+            this.cancelarEscuela.Text = "Cancelar";
+            this.cancelarEscuela.UseVisualStyleBackColor = true;
+            this.cancelarEscuela.Click += new System.EventHandler(this.cancelarEscuela_Click);
+            // 
+            // atrasExpo
+            // 
+            this.atrasExpo.Location = new System.Drawing.Point(19, 288);
+            this.atrasExpo.Name = "atrasExpo";
+            this.atrasExpo.Size = new System.Drawing.Size(107, 32);
+            this.atrasExpo.TabIndex = 7;
+            this.atrasExpo.Text = "&Atras";
+            this.atrasExpo.UseVisualStyleBackColor = true;
+            this.atrasExpo.Click += new System.EventHandler(this.atrasExpo_Click);
+            // 
+            // atrasVisitantes
+            // 
+            this.atrasVisitantes.Location = new System.Drawing.Point(60, 295);
+            this.atrasVisitantes.Name = "atrasVisitantes";
+            this.atrasVisitantes.Size = new System.Drawing.Size(116, 39);
+            this.atrasVisitantes.TabIndex = 5;
+            this.atrasVisitantes.Text = "&Atras";
+            this.atrasVisitantes.UseVisualStyleBackColor = true;
+            this.atrasVisitantes.Click += new System.EventHandler(this.atrasVisitantes_Click);
+            // 
+            // atrasSede
+            // 
+            this.atrasSede.Location = new System.Drawing.Point(28, 346);
+            this.atrasSede.Name = "atrasSede";
+            this.atrasSede.Size = new System.Drawing.Size(84, 26);
+            this.atrasSede.TabIndex = 4;
+            this.atrasSede.Text = "&Atras";
+            this.atrasSede.UseVisualStyleBackColor = true;
+            this.atrasSede.Click += new System.EventHandler(this.atrasSede_Click);
+            // 
+            // atrasVisita
+            // 
+            this.atrasVisita.Location = new System.Drawing.Point(28, 349);
+            this.atrasVisita.Name = "atrasVisita";
+            this.atrasVisita.Size = new System.Drawing.Size(100, 30);
+            this.atrasVisita.TabIndex = 6;
+            this.atrasVisita.Text = "&Atras";
+            this.atrasVisita.UseVisualStyleBackColor = true;
+            this.atrasVisita.Click += new System.EventHandler(this.atrasVisita_Click);
+            // 
+            // atrasFyH
+            // 
+            this.atrasFyH.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.atrasFyH.Location = new System.Drawing.Point(47, 289);
+            this.atrasFyH.Name = "atrasFyH";
+            this.atrasFyH.Size = new System.Drawing.Size(157, 36);
+            this.atrasFyH.TabIndex = 10;
+            this.atrasFyH.Text = "&Atras";
+            this.atrasFyH.UseVisualStyleBackColor = true;
+            this.atrasFyH.Click += new System.EventHandler(this.atrasFyH_Click);
+            // 
             // PantallaRegistrarReserva
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1173, 644);
+            this.ClientSize = new System.Drawing.Size(770, 448);
             this.Controls.Add(this.pnlConfirmacion);
             this.Controls.Add(this.pnlSelGuias);
             this.Controls.Add(this.pnlFechaHoraReserva);
@@ -507,12 +594,19 @@ namespace PPAI_3K4
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Panel pnlConfirmacion;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button atrasConfirmar;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.ComboBox comboEscuelas;
         private System.Windows.Forms.ComboBox comboSedes;
         private System.Windows.Forms.ComboBox comboTipoVisitas;
         private System.Windows.Forms.CheckedListBox listboxExpos;
         private System.Windows.Forms.CheckedListBox listboxGuias;
+        private System.Windows.Forms.Button atrasGuia;
+        private System.Windows.Forms.Button cancelarEscuela;
+        private System.Windows.Forms.Button atrasVisitantes;
+        private System.Windows.Forms.Button atrasSede;
+        private System.Windows.Forms.Button atrasExpo;
+        private System.Windows.Forms.Button atrasVisita;
+        private System.Windows.Forms.Button atrasFyH;
     }
 }

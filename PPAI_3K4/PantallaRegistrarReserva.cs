@@ -47,7 +47,7 @@ namespace PPAI_3K4
         public void mostrarMensaje(string mensaje)
         {
             MessageBox.Show(mensaje, "Alerta", MessageBoxButtons.OK);
-            ocultarPantalla();
+            //ocultarPantalla();
         }
 
         private void seleccionarEscuela(object sender, EventArgs e)
@@ -70,6 +70,7 @@ namespace PPAI_3K4
 
         public void mostrarSedes(String[] sedes)
         {
+            comboSedes.Items.Clear();
             comboSedes.Items.AddRange(sedes);
             comboSedes.Refresh();
             mostrarPanel(pnlSelSedes);
@@ -84,6 +85,7 @@ namespace PPAI_3K4
 
         public void mostrarTipoVisita(String[] tipoVisitas)
         {
+            comboTipoVisitas.Items.Clear();
             comboTipoVisitas.Items.AddRange(tipoVisitas);
             comboTipoVisitas.Refresh();
             mostrarPanel(pnlTipoVisita);
@@ -117,7 +119,7 @@ namespace PPAI_3K4
         public void mostrarExposiciones(String[] expos)
         {
             mostrarPanel(pnlExposiciones);
-
+            listboxExpos.Items.Clear();
             listboxExpos.Items.AddRange(expos);
             listboxExpos.Refresh();
         }
@@ -157,7 +159,7 @@ namespace PPAI_3K4
         public void mostrarGuias(String[] guias)
         {
             mostrarPanel(pnlSelGuias);
-
+            listboxGuias.Items.Clear();
             listboxGuias.Items.AddRange(guias);
             listboxGuias.Refresh();
         }
@@ -190,5 +192,65 @@ namespace PPAI_3K4
         {
             mostrarPanel(pnlSelGuias);
         }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void cancelarEscuela_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
+        }
+        private void atrasVisitantes_Click(object sender, EventArgs e)
+        {
+            ocultarPanel(pnlCantidadVisitantes);
+            mostrarPanel(panelSelEscuela);
+        }
+
+        private void atrasSede_Click(object sender, EventArgs e)
+        {
+            ocultarPanel(pnlSelSedes);
+            mostrarPanel(pnlCantidadVisitantes);
+        }
+        private void atrasVisita_Click(object sender, EventArgs e)
+        {
+            ocultarPanel(pnlTipoVisita);
+            mostrarPanel(pnlSelSedes);
+        }
+
+        private void atrasExpo_Click(object sender, EventArgs e)
+        {
+            ocultarPanel(pnlExposiciones);
+            mostrarPanel(pnlTipoVisita);
+        }
+        private void atrasFyH_Click(object sender, EventArgs e)
+        {
+            ocultarPanel(pnlFechaHoraReserva);
+            mostrarPanel(pnlExposiciones);
+        }
+
+        private void atrasGuia_Click(object sender, EventArgs e)
+        {
+            ocultarPanel(pnlSelGuias);
+            mostrarPanel(pnlFechaHoraReserva);
+        }
+
+        private void atrasConfirmar_Click(object sender, EventArgs e)
+        {
+            ocultarPanel(pnlConfirmacion);
+            mostrarPanel(pnlSelGuias);
+        }
+
+        public void atrasPnlGuia()
+        {
+            mostrarPanel(pnlFechaHoraReserva);
+        }
+
+        public void atrasPnlTipoVisita()
+        {
+            mostrarPanel(pnlSelSedes);
+        }
+
+
     }
 }
