@@ -62,10 +62,10 @@ namespace PPAI_3K4
         public void tomarSeleccionEscuela(int indiceEscuela)
         {
             // Se establece el atributo con la escuela seleccionada
-            this.escuelaSeleccionada = escuelas[indiceEscuela];
-
-            // Se pide a la pantalla que solicite la cantidad de visitantes
-            pantallaRegistrarReserva.solicitarCantidadVisitantes();
+            
+                this.escuelaSeleccionada = escuelas[indiceEscuela];
+                // Se pide a la pantalla que solicite la cantidad de visitantes
+                pantallaRegistrarReserva.solicitarCantidadVisitantes();
         }
 
 

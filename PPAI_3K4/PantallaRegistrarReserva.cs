@@ -53,8 +53,17 @@ namespace PPAI_3K4
         private void seleccionarEscuela(object sender, EventArgs e)
         {
             int indiceEscuelaSeleccionada = comboEscuelas.SelectedIndex;
-            ocultarPanel(panelSelEscuela);
-            gestorRegistrarReserva.tomarSeleccionEscuela(indiceEscuelaSeleccionada);
+            //Validacion de dato seleccionado.
+            if (indiceEscuelaSeleccionada != -1)
+            {
+                ocultarPanel(panelSelEscuela);
+                gestorRegistrarReserva.tomarSeleccionEscuela(indiceEscuelaSeleccionada);
+            }
+            else
+            {
+                this.mostrarMensaje("Debe seleccionar una escuela.");
+            }
+            
         }
 
         public void solicitarCantidadVisitantes()
@@ -79,6 +88,7 @@ namespace PPAI_3K4
         private void seleccionarSede(object sender, EventArgs e)
         {
             int iSedeSeleccionada = comboSedes.SelectedIndex;
+
             ocultarPanel(pnlSelSedes);
             gestorRegistrarReserva.tomarSeleccionSede(iSedeSeleccionada);
         }
@@ -249,6 +259,11 @@ namespace PPAI_3K4
         public void atrasPnlTipoVisita()
         {
             mostrarPanel(pnlSelSedes);
+        }
+
+        public void atrasPnlVisitantes()
+        {
+            mostrarPanel(panelSelEscuela);
         }
 
 
