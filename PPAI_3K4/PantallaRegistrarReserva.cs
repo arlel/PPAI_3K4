@@ -73,8 +73,16 @@ namespace PPAI_3K4
 
         private void seleccionarCantidadVisitantes(object sender, EventArgs e)
         {
-            ocultarPanel(pnlCantidadVisitantes);
-            gestorRegistrarReserva.tomarCantidadVisitantes(Int32.Parse(txtCantVisitantes.Text));
+            int visitantes = Int32.Parse(txtCantVisitantes.Text);
+            if(visitantes < 1)
+            {
+                this.mostrarMensaje("No puede reservar para menos de 1 visitante");
+            }
+            else
+            {
+                ocultarPanel(pnlCantidadVisitantes);
+                gestorRegistrarReserva.tomarCantidadVisitantes(visitantes);
+            }
         }
 
         public void mostrarSedes(String[] sedes)
@@ -88,9 +96,16 @@ namespace PPAI_3K4
         private void seleccionarSede(object sender, EventArgs e)
         {
             int iSedeSeleccionada = comboSedes.SelectedIndex;
+            if (iSedeSeleccionada == -1)
+            {
+                this.mostrarMensaje("Seleccione una sede.");
+            }
+            else
+            {
+                ocultarPanel(pnlSelSedes);
+                gestorRegistrarReserva.tomarSeleccionSede(iSedeSeleccionada);
+            }
 
-            ocultarPanel(pnlSelSedes);
-            gestorRegistrarReserva.tomarSeleccionSede(iSedeSeleccionada);
         }
 
         public void mostrarTipoVisita(String[] tipoVisitas)
@@ -122,8 +137,15 @@ namespace PPAI_3K4
         private void seleccionarTipoVisita(object sender, EventArgs e)
         {
             int iTipoVisitaSel = comboTipoVisitas.SelectedIndex;
-            ocultarPanel(pnlTipoVisita);
-            gestorRegistrarReserva.tomarSeleccionTipoVisita(iTipoVisitaSel);
+            if(iTipoVisitaSel == -1)
+            {
+                this.mostrarMensaje("Seleccione un tipo de visita.");
+            }
+            else
+            {
+                ocultarPanel(pnlTipoVisita);
+                gestorRegistrarReserva.tomarSeleccionTipoVisita(iTipoVisitaSel);
+            }
         }
 
         public void mostrarExposiciones(String[] expos)
@@ -142,9 +164,16 @@ namespace PPAI_3K4
             {
                 checkeds.Add(listboxExpos.Items.IndexOf(item));
             }
-
-            ocultarPanel(pnlExposiciones);
-            gestorRegistrarReserva.tomarSeleccionExposiciones(checkeds);
+            if(checkeds.Count == 0)
+            {
+                this.mostrarMensaje("debe seleccionar almenos una exposicion");
+            }
+            else
+            {
+                ocultarPanel(pnlExposiciones);
+                gestorRegistrarReserva.tomarSeleccionExposiciones(checkeds);
+            }
+            
         }
 
         public void solicitarFechaHoraReserva()
@@ -156,7 +185,7 @@ namespace PPAI_3K4
         {
             // Se consulta la fecha y hora a los objetos correspondientes y se agrupa en el mismo objeto DateTime
             DateTime fechaHoraReserva = dtpFechaReserva.Value.Date + dtpHoraReserva.Value.TimeOfDay;
-
+            // No supe hacer la validacion para esto
             ocultarPanel(pnlFechaHoraReserva);
             gestorRegistrarReserva.tomarSeleccionFechaHora(fechaHoraReserva);
         }
@@ -184,7 +213,7 @@ namespace PPAI_3K4
             {
                 checkeds.Add(listboxGuias.Items.IndexOf(item));
             }
-
+            
             gestorRegistrarReserva.tomarSeleccionGuias(checkeds);
         }
 
