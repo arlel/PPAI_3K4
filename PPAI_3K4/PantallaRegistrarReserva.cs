@@ -73,15 +73,22 @@ namespace PPAI_3K4
 
         private void seleccionarCantidadVisitantes(object sender, EventArgs e)
         {
-            int visitantes = Int32.Parse(txtCantVisitantes.Text);
-            if(visitantes < 1)
+            try
             {
-                this.mostrarMensaje("No puede reservar para menos de 1 visitante");
+                int visitantes = Int32.Parse(txtCantVisitantes.Text);
+                if (visitantes < 1)
+                {
+                    this.mostrarMensaje("No puede reservar para menos de 1 visitante");
+                }
+                else
+                {
+                    ocultarPanel(pnlCantidadVisitantes);
+                    gestorRegistrarReserva.tomarCantidadVisitantes(visitantes);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                ocultarPanel(pnlCantidadVisitantes);
-                gestorRegistrarReserva.tomarCantidadVisitantes(visitantes);
+                this.mostrarMensaje("Debe ingresar informacion valida");
             }
         }
 
@@ -137,15 +144,23 @@ namespace PPAI_3K4
         private void seleccionarTipoVisita(object sender, EventArgs e)
         {
             int iTipoVisitaSel = comboTipoVisitas.SelectedIndex;
-            if(iTipoVisitaSel == -1)
+            if (iTipoVisitaSel == -1)
             {
                 this.mostrarMensaje("Seleccione un tipo de visita.");
             }
             else
             {
-                ocultarPanel(pnlTipoVisita);
-                gestorRegistrarReserva.tomarSeleccionTipoVisita(iTipoVisitaSel);
+                if (iTipoVisitaSel == 0)
+                {
+                    this.mostrarMensaje("Esta funcionalidad no esta implementada.");
+                }
+                else
+                {
+                    ocultarPanel(pnlTipoVisita);
+                    gestorRegistrarReserva.tomarSeleccionTipoVisita(iTipoVisitaSel);
+                }
             }
+
         }
 
         public void mostrarExposiciones(String[] expos)
